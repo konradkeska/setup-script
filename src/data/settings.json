@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Show all file extensions",
+    "cmd": "defaults write NSGlobalDomain AppleShowAllExtensions",
+    "type": "bool",
+    "value": true
+  },
+  {
+    "name": "Disable extension change warning",
+    "cmd": "defaults write com.apple.finder FXEnableExtensionChangeWarning",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Disable dock autohide delay",
+    "cmd": "defaults write com.apple.dock autohide-delay",
+    "type": "float",
+    "value": 0
+  },
+  {
+    "name": "Disable keyboard press and hold",
+    "cmd": "defaults write -g ApplePressAndHoldEnabled",
+    "type": "bool",
+    "value": false
+  },
+  {
+    "name": "Fast keyboard key repeat",
+    "cmd": "defaults write -g InitialKeyRepeat",
+    "type": "int",
+    "value": 10
+  }
+]

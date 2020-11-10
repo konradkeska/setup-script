@@ -1,18 +1,3 @@
-export interface IBaseCask extends BaseParams {
-  type: "cask";
-}
-
-export interface IBaseFormula extends BaseParams {
-  type: "formula";
-}
-
-export type BaseProperties = "token" | "url" | "version";
-
-export type BaseParams = { name: string } & Pick<
-  Cask | Formula,
-  BaseProperties
->;
-
 export type Setting = {
   name: string;
   cmd: string;
@@ -37,12 +22,16 @@ export type Cask = {
   auto_updates?: boolean;
 };
 
-export type Formula = {
+export interface Soft extends Omit<SoftData, "name"> {
+  name: string;
+}
+
+export type SoftData = {
   token: string;
-  name: string[];
   desc?: string;
   homepage: string;
   url: string;
+  name: string[];
   appcast?: string;
   version: string;
   sha256: string;
@@ -66,3 +55,16 @@ type Dependson = {
 type Macos = {
   ">=": string[];
 };
+
+export type RequiredListFields = {
+  name: string;
+};
+
+export interface ListActionParams<T> {
+  list: T[];
+  setList: React.Dispatch<React.SetStateAction<T[]>>;
+}
+
+export interface AddToListActionParams<T> extends ListActionParams<T> {
+  setQuery: React.Dispatch<React.SetStateAction<string>>;
+}

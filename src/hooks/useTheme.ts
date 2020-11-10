@@ -1,30 +1,34 @@
-export type Theme = {
-  colors: {
-    purple: string;
-    blue: string;
-    green: string;
-    red: string;
-    font1: string;
-    font2: string;
-    bg1: string;
-    bg2: string;
-    bg3: string;
+import { useMemo, useState } from "react";
+import { DefaultTheme } from "styled-components";
+
+const DEFAULT_THEME: Mode = "dark";
+
+export function useTheme() {
+  const initialTheme: Mode =
+    (window.localStorage.getItem("theme") as Mode) || DEFAULT_THEME;
+
+  const [theme, setTheme] = useState<Mode>(initialTheme);
+
+  const setMode = (mode: Mode) => {
+    window.localStorage.setItem("theme", mode);
+    setTheme(mode);
   };
-  paddings: {
-    xSmall: string;
-    small: string;
-    medium: string;
-    large: string;
-    xLarge: string;
+
+  const switchTheme = () => {
+    theme === "light" ? setMode("dark") : setMode("light");
   };
+
+  const currentTheme = useMemo(() => themes[theme], [theme]);
+
+  return { theme: currentTheme, switchTheme };
+}
+
+type Themes = {
+  light: DefaultTheme;
+  dark: DefaultTheme;
 };
 
 export type Mode = keyof Themes;
-
-type Themes = {
-  light: Theme;
-  dark: Theme;
-};
 
 const themes: Themes = {
   dark: {
@@ -49,10 +53,6 @@ const themes: Themes = {
   },
   light: {
     colors: {
-      // purple: "#7C89FF",
-      // blue: "#16DCFF",
-      // green: "#25FF80",
-      // red: "#FFA59E",
       purple: "#6875f5",
       blue: "#06b5d4",
       green: "#23CE6B",
@@ -72,5 +72,3 @@ const themes: Themes = {
     },
   },
 };
-
-export { themes };

@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
-import { Theme } from "../../themes";
-
 export const Wrapper = styled.div<{
-  theme: Theme;
   alignItems?: string;
   mt?: string;
   color?: string;

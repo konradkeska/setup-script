@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
-import { Theme } from "../../themes";
-
-export const Main = styled.main<{ theme: Theme }>`
+export const Main = styled.main`
   padding: 24px;
   width: 100%;
   display: flex;

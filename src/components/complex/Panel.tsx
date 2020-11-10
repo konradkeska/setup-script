@@ -1,24 +1,22 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import { Theme } from "../../themes";
-import { BaseParams } from "../../types";
+import { Soft } from "../../types";
+import { truncate } from "../../utils";
 import { Span } from "../base";
 
 export function Panel({
   title,
   items,
   onClick,
-  theme,
   count = 7,
   mt,
   operation = "add",
   width = "100%",
 }: {
   title: string;
-  items: BaseParams[];
-  onClick: (item: BaseParams) => () => void;
-  theme: Theme;
+  items: Soft[];
+  onClick: (item: Soft) => () => void;
   count?: number;
   mt?: boolean;
   operation?: "add" | "remove";
@@ -27,14 +25,13 @@ export function Panel({
   return (
     <PanelWrapper mt={mt} count={count} width={width}>
       <Title mt={mt}>
-        <Span color={theme.colors.purple}>#</Span> {title.toUpperCase()}
+        <Span color="purple">#</Span> {title.toUpperCase()}
       </Title>
       <UnorderedList count={count}>
         {items.map((record, index) => (
           <ListItem
             key={index}
             record={record}
-            theme={theme}
             operation={operation}
             onClick={onClick(record)}
           />
@@ -46,12 +43,10 @@ export function Panel({
 
 function ListItem({
   record,
-  theme,
   operation,
   onClick,
 }: {
-  record: BaseParams;
-  theme: Theme;
+  record: Soft;
   operation: "add" | "remove";
   onClick: () => void;
 }) {
@@ -59,7 +54,6 @@ function ListItem({
   return (
     <li>
       <StyledButton
-        theme={theme}
         operation={operation}
         onClick={onClick}
         onFocus={() => setFocused(true)}
@@ -68,8 +62,8 @@ function ListItem({
           if (focused && e.key === "Enter") onClick();
         }}
       >
-        <Span>{record.name}</Span>
-        {record.version && <Span>{record.version}</Span>}
+        <Span>{truncate(record.name, 60)}</Span>
+        {record.version && <Span>{truncate(record.version)}</Span>}
       </StyledButton>
     </li>
   );
@@ -100,7 +94,6 @@ const Title = styled.h5<{ mt?: boolean }>`
 `;
 
 const StyledButton = styled.button<{
-  theme: Theme;
   operation: "add" | "remove";
 }>`
   padding: 6px 10px;

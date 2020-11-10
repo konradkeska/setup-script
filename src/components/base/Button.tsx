@@ -1,16 +1,14 @@
-import styled from "styled-components";
-
-import { Theme } from "../../themes";
+import styled, { DefaultColors } from "styled-components";
 
 export const Button = styled.button<{
-  theme: Theme;
   small?: boolean;
-  bg?: string;
+  bgColor?: keyof DefaultColors;
   ml?: boolean;
 }>`
   color: ${({ theme }) => theme.colors.font1};
   margin-left: ${({ ml }) => (ml ? "12px" : "unset")};
-  background-color: ${({ theme, bg }) => (bg ? bg : theme.colors.blue)};
+  background-color: ${({ theme, bgColor }) =>
+    bgColor ? theme.colors[bgColor] : theme.colors.blue};
   padding: ${({ small }) => (small ? "2px 6.66px" : "8px 26px")};
   border-radius: 6px;
   font-size: 16px;

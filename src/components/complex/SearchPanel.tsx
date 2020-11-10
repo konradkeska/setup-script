@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Theme } from "../../themes";
-import { BaseParams, IBaseCask, IBaseFormula, Setting } from "../../types";
+import { Soft, Setting } from "../../types";
 import { prepareResults } from "../../utils";
 import { Wrapper } from "../base";
 import { Panel } from "./Panel";
@@ -15,30 +14,23 @@ export function SearchPanel({
   casks,
   formulas,
   settings,
-  theme,
   wasUserGuided,
   count = 7,
 }: {
-  addCask: (item: BaseParams) => () => void;
-  addFormula: (item: BaseParams) => () => void;
+  addCask: (item: Soft) => () => void;
+  addFormula: (item: Soft) => () => void;
   addSetting: (item: Setting) => () => void;
   query: string;
-  casks: IBaseCask[];
-  formulas: IBaseFormula[];
+  casks: Soft[];
+  formulas: Soft[];
   settings: Setting[];
-  theme: Theme;
   wasUserGuided: boolean;
   count?: number;
 }) {
   return (
-    <StyledDiv count={count} theme={theme} wasUserGuided={wasUserGuided}>
-      <Wrapper
-        theme={theme}
-        alignItems="flex-start"
-        mt={wasUserGuided ? "76px" : "106px"}
-      >
+    <StyledDiv count={count} wasUserGuided={wasUserGuided}>
+      <Wrapper alignItems="flex-start" mt={wasUserGuided ? "76px" : "106px"}>
         <Panel
-          theme={theme}
           title="casks"
           items={prepareResults(query, casks)}
           onClick={addCask}
@@ -47,7 +39,6 @@ export function SearchPanel({
           mt
         />
         <Panel
-          theme={theme}
           title="formulas"
           items={prepareResults(query, formulas)}
           onClick={addFormula}
@@ -56,7 +47,6 @@ export function SearchPanel({
           mt
         />
         <Panel
-          theme={theme}
           title="settings"
           items={prepareResults(query, settings) as any}
           onClick={addSetting as any}
@@ -71,7 +61,6 @@ export function SearchPanel({
 
 const StyledDiv = styled.div<{
   count: number;
-  theme: Theme;
   wasUserGuided: boolean;
 }>`
   z-index: 4;

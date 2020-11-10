@@ -1,10 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
-import { Theme } from "../../themes";
-
 export const GlobalStyle = createGlobalStyle<{
   wasUserGuided: boolean;
-  theme: Theme;
 }>`
   body {
     margin: 0;

@@ -2,7 +2,6 @@ import React from "react";
 
 import styled from "styled-components";
 
-import { Theme } from "../../themes";
 import { Button, Span, Wrapper } from "../base";
 
 export function Bar({
@@ -10,38 +9,28 @@ export function Bar({
   btnLabel,
   onClose,
   onClick,
-  theme,
 }: {
   label: string;
   btnLabel: string;
   onClick: () => void;
   onClose: () => void;
-  theme: Theme;
 }) {
   return (
-    <Aside theme={theme}>
-      <Wrapper theme={theme}>
+    <Aside>
+      <Wrapper>
         <div>
           {label}{" "}
-          <Button
-            theme={theme}
-            bg={theme.colors.green}
-            onClick={onClick}
-            small
-            ml
-          >
+          <Button bgColor={"green"} onClick={onClick} small ml>
             {btnLabel}
           </Button>
         </div>
-        <Span onClick={onClose} color={theme.colors.font1}>
-          ✖️
-        </Span>
+        <Span onClick={onClose}>✖️</Span>
       </Wrapper>
     </Aside>
   );
 }
 
-const Aside = styled.aside<{ theme: Theme }>`
+const Aside = styled.aside`
   background-color: ${({ theme }) => theme.colors.purple};
   width: 100%;
   padding: 10px 24px;

@@ -8,8 +8,7 @@ import React, {
 import { ThemeProvider } from "styled-components";
 
 import { Soft, Setting } from "./types";
-import { matches, notMatches } from "./utils";
-import { formatData } from "./mappers";
+import { formatResponse, matches, notMatches } from "./utils";
 import { loadBrewData, loadSettings } from "./api";
 import { useHotkeys, useTheme } from "./hooks";
 
@@ -50,8 +49,8 @@ function App() {
       await loadBrewData(),
       loadSettings(),
     ];
-    setCasks(formatData(casks.data));
-    setFormulas(formatData(formulas.data));
+    setCasks(formatResponse(casks.data));
+    setFormulas(formatResponse(formulas.data));
     setSettings(settings);
   }, []);
 

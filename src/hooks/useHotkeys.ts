@@ -5,7 +5,7 @@ export function useHotkeys(
   dependencies: unknown[],
   event: "keydown" | "keypress" | "keyup" = "keydown"
 ): void {
-  const hotkeys = useMemo(getHotkeys, dependencies);
+  const hotkeys = useMemo(getHotkeys, [getHotkeys, ...dependencies]);
 
   const onCallback = useCallback(
     ({ code }: KeyboardEvent) => hotkeys[code]?.(),
@@ -15,5 +15,5 @@ export function useHotkeys(
   useEffect(() => {
     document.addEventListener(event, onCallback);
     return () => document.removeEventListener(event, onCallback);
-  }, [onCallback]);
+  }, [event, onCallback]);
 }

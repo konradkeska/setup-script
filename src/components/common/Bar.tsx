@@ -4,34 +4,31 @@ import styled from "styled-components";
 
 import { Button, Span, Wrapper } from "../base";
 
-export function Bar({
-  label,
-  btnLabel,
-  onClose,
-  onClick,
-}: {
+type Props = {
   label: string;
   btnLabel: string;
-  onClick: () => void;
+  onConfirm: () => void;
   onClose: () => void;
-}) {
-  return (
+};
+
+export const Bar = React.memo(
+  ({ label, btnLabel, onClose, onConfirm }: Props) => (
     <Aside>
       <Wrapper>
         <div>
           {label}{" "}
-          <Button bgColor={"green"} onClick={onClick} small ml>
+          <Button bgColor="green" onClick={onConfirm} small ml>
             {btnLabel}
           </Button>
         </div>
         <Span onClick={onClose}>✖️</Span>
       </Wrapper>
     </Aside>
-  );
-}
+  )
+);
 
 const Aside = styled.aside`
-  background-color: ${({ theme }) => theme.colors.purple};
+  background-color: ${({ theme }) => theme.colors.bg3};
   width: 100%;
   padding: 10px 24px;
   position: fixed;

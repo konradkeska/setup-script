@@ -1,21 +1,25 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Span } from "../base";
+import { Row, Span } from "../base";
 import { Badge } from "./Badge";
 
-export function Brand({ onClick }: { onClick?: () => void }) {
-  return (
-    <>
-      <Logo onClick={onClick}>
+type Props = {
+  onClick?: () => void;
+};
+
+export const Brand = React.memo(({ onClick }: Props) => (
+  <Row>
+    <Logo onClick={onClick}>
+      <Span selectable clickable>
         <Span>🏗️</Span> <Span color="font1">setup</Span>
         <Span color="purple">-</Span>
         <Span color="font1">script</Span>
-      </Logo>
-      <Badge>MacOS BETA</Badge>
-    </>
-  );
-}
+      </Span>
+    </Logo>
+    <Badge>MacOS BETA</Badge>
+  </Row>
+));
 
 const Logo = styled.h4`
   user-select: none;

@@ -19,5 +19,5 @@ export const Grid = styled.div<{
   flex-wrap: wrap;
   height: 100%;
   transition: margin 700ms;
-  color: ${({ theme, color }) => color || theme.colors.font1};
+  color: ${({ theme, color }) => color || theme.colors.font.base};
 `;

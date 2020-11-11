@@ -12,6 +12,6 @@ export const Main = styled.main<Props>`
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.colors.bg1};
+  background-color: ${({ theme }) => theme.colors.material.background};
   transition: padding 700ms;
 `;

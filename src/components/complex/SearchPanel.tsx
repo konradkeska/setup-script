@@ -39,7 +39,7 @@ export const SearchPanel = React.memo(
           items={includesQuery(query, casks)}
           onClick={addCask}
           width="calc(66.666% - 12px)"
-          bgColor="bg3"
+          bgColor="input"
           mt={!wasUserGuided}
         />
         <Panel
@@ -47,7 +47,7 @@ export const SearchPanel = React.memo(
           items={includesQuery(query, formulas)}
           onClick={addFormula}
           width="calc(33.333% - 12px)"
-          bgColor="bg3"
+          bgColor="input"
           mt={!wasUserGuided}
         />
         <Panel
@@ -55,7 +55,7 @@ export const SearchPanel = React.memo(
           items={includesQuery(query, settings) as any}
           onClick={addSetting as any}
           width="100%"
-          bgColor="bg3"
+          bgColor="input"
         />
       </Wrapper>
     </Aside>
@@ -66,6 +66,6 @@ const Aside = styled.aside`
   z-index: 4;
   width: 100%;
   position: fixed;
-  background-color: ${({ theme }) => theme.colors.bg2};
-  box-shadow: ${({ theme }) => theme.shadows.searchPanel};
+  background-color: ${({ theme }) => theme.colors.material.overlay};
+  box-shadow: ${({ theme }) => theme.shadows.base};
 `;

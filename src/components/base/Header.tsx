@@ -14,12 +14,12 @@ export const Header = styled.header<Props>`
   justify-content: centerr;
   align-items: center;
   z-index: 5;
-  background-color: ${({ theme }) => theme.colors.bg2};
-  color: ${({ theme }) => theme.colors.font1};
+  background-color: ${({ theme }) => theme.colors.material.overlay};
+  color: ${({ theme }) => theme.colors.font.base};
   transition: margin 700ms;
   backdrop-filter: blur(5px);
   box-shadow: ${({ theme, hasShadow }) =>
-    hasShadow ? "unset" : theme.shadows.searchPanel};
-  border-bottom: ${({ theme }) => `1px solid ${theme.colors.bg3}`};
-  border-top: ${({ theme }) => `1px solid ${theme.colors.bg3}`};
+    hasShadow ? "unset" : theme.shadows.base};
+  border-bottom: ${({ theme }) => `1px solid ${theme.colors.material.input}`};
+  border-top: ${({ theme }) => `1px solid ${theme.colors.material.input}`};
 `;

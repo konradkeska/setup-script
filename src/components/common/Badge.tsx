@@ -1,16 +1,21 @@
 import React from "react";
-import { DefaultColors } from "styled-components";
+
+import { FontColors, MaterialColors } from "../../hooks/useTheme";
 
 import { Code } from "../base";
 
 type Props = {
   children: React.ReactNode;
-  color?: keyof DefaultColors;
-  bgColor?: keyof DefaultColors;
+  color?: FontColors;
+  bgColor?: MaterialColors;
 };
 
 export const Badge = React.memo(
-  ({ children, color = "font1", bgColor = "bg3" }: Props) => (
+  ({
+    children,
+    color = FontColors.BASE,
+    bgColor = MaterialColors.INPUT,
+  }: Props) => (
     <Code
       color={color}
       bgColor={bgColor}

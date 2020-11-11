@@ -1,3 +1,4 @@
+export { Author } from "./Author";
 export { Button } from "./Button";
 export { Code } from "./Code";
 export { Footer } from "./Footer";

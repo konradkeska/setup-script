@@ -1,7 +1,7 @@
 import React from "react";
-
 import styled from "styled-components";
 
+import { PrimaryColors } from "../../hooks/useTheme";
 import { Button, Span, Wrapper } from "../base";
 
 type Props = {
@@ -17,7 +17,7 @@ export const Bar = React.memo(
       <Wrapper>
         <div>
           {label}{" "}
-          <Button bgColor="green" onClick={onConfirm} small ml>
+          <Button bgColor={PrimaryColors.GREEN} onClick={onConfirm} small ml>
             {btnLabel}
           </Button>
         </div>
@@ -28,7 +28,7 @@ export const Bar = React.memo(
 );
 
 const Aside = styled.aside`
-  background-color: ${({ theme }) => theme.colors.bg3};
+  background-color: ${({ theme }) => theme.colors.material.input};
   width: 100%;
   padding: 10px 24px;
   position: fixed;
@@ -36,5 +36,5 @@ const Aside = styled.aside`
   display: flex;
   align-items: center;
   z-index: 5;
-  color: ${({ theme }) => theme.colors.font1};
+  color: ${({ theme }) => theme.colors.font.base};
 `;

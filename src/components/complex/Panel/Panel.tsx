@@ -1,6 +1,7 @@
 import React from "react";
-import styled, { DefaultColors } from "styled-components";
+import styled, { DefaultColorsMaterial } from "styled-components";
 
+import { PrimaryColors } from "../../../hooks/useTheme";
 import { PANEL_RECORD_COUNT } from "../../../config";
 import { Soft } from "../../../types";
 import { Span } from "../../base";
@@ -13,7 +14,7 @@ type Props = {
   title: string;
   items: Soft[];
   onClick: (item: Soft) => () => void;
-  bgColor?: keyof DefaultColors;
+  bgColor?: keyof DefaultColorsMaterial;
   mt?: boolean;
   operation?: "add" | "remove";
   width?: string;
@@ -24,14 +25,14 @@ export const Panel = React.memo(
     title,
     items,
     onClick,
-    bgColor = "bg2",
+    bgColor = "overlay",
     mt = false,
     operation = "add",
     width = "100%",
   }: Props) => (
     <Wrapper mt={mt} width={width}>
       <Title mt={mt}>
-        <Span color="purple">#</Span> {title.toUpperCase()}
+        <Span color={PrimaryColors.PURPLE}>#</Span> {title.toUpperCase()}
       </Title>
       <List bgColor={bgColor}>
         {items.map((record, index) => (

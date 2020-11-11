@@ -13,18 +13,19 @@ import { loadBrewData, loadSettings } from "./api";
 import { useHotkeys, useTheme } from "./hooks";
 
 import {
+  Author,
   Button,
+  Footer,
   GlobalStyle,
-  Row,
-  Wrapper,
-  Main,
   Header,
   Input,
-  Footer,
+  Main,
+  Row,
+  Wrapper,
 } from "./components/base";
 import { Bar, Brand } from "./components/common";
 import { ResultPanel, SearchPanel } from "./components/complex";
-import Author from "./components/base/Author";
+import { PrimaryColors } from "./hooks/useTheme";
 
 function App() {
   const [query, setQuery] = useState<string>("");
@@ -166,7 +167,7 @@ function App() {
               value={query}
               onChange={onChange}
             />
-            <Button id="download-button" bgColor="green">
+            <Button id="download-button" bgColor={PrimaryColors.GREEN}>
               Save
             </Button>
           </Wrapper>
@@ -195,7 +196,7 @@ function App() {
           />
         </Main>
         <Footer>
-          <Wrapper color={theme.colors.font2}>
+          <Wrapper color={theme.colors.font.sub}>
             <Author />
           </Wrapper>
         </Footer>

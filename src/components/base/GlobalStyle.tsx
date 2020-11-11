@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle<Props>`
       "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: ${({ theme }) => theme.colors.bg1};
+    background-color: ${({ theme }) => theme.colors.material.background};
     min-height:  ${({ wasUserGuided }) =>
       wasUserGuided ? "calc(100vh - 60px)" : "calc(100vh - 106px)"}
   }

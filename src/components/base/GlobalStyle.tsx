@@ -1,8 +1,10 @@
 import { createGlobalStyle } from "styled-components";
 
-export const GlobalStyle = createGlobalStyle<{
+type Props = {
   wasUserGuided: boolean;
-}>`
+};
+
+export const GlobalStyle = createGlobalStyle<Props>`
   body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
@@ -11,8 +13,8 @@ export const GlobalStyle = createGlobalStyle<{
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: ${({ theme }) => theme.colors.bg1};
-    max-height:  ${({ wasUserGuided }) =>
-      wasUserGuided ? "calc(100vh - 76px)" : "calc(100vh - 123px)"}
+    min-height:  ${({ wasUserGuided }) =>
+      wasUserGuided ? "calc(100vh - 60px)" : "calc(100vh - 106px)"}
   }
 
   code {

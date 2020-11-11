@@ -1,19 +1,23 @@
 import React from "react";
+import styled from "styled-components";
 
-export function Row({
-  children,
-  align = "center",
-  justify = "center",
-}: {
+type Props = {
   children: React.ReactNode;
-  align?: string;
-  justify?: string;
-}) {
-  return (
-    <div
-      style={{ display: "flex", alignItems: align, justifyContent: justify }}
-    >
-      {children}
-    </div>
-  );
-}
+  display?: string;
+  alignItems?: string;
+  justifyContent?: string;
+};
+
+export const Row = React.memo(({ children, ...props }: Props) => (
+  <StyledDiv {...props}>{children}</StyledDiv>
+));
+
+const StyledDiv = styled.div<{
+  display?: string;
+  alignItems?: string;
+  justifyContent?: string;
+}>`
+  display: ${({ display }) => display || "flex"};
+  align-items: ${({ alignItems }) => alignItems || "center"};
+  justify-content: ${({ justifyContent }) => justifyContent || "center"};
+`;

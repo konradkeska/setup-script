@@ -25,8 +25,13 @@ declare module "styled-components" {
     xLarge: string;
   }
 
+  export interface DefaultShadows {
+    searchPanel: string;
+  }
+
   export interface DefaultTheme {
     colors: DefaultColors;
     paddings: DefaultPaddings;
+    shadows: DefaultShadows;
   }
 }

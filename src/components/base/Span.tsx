@@ -1,6 +1,6 @@
 import styled, { DefaultColors } from "styled-components";
 
-export const Span = styled.span<{
+type Props = {
   color?: keyof DefaultColors;
   bgColor?: keyof DefaultColors;
   radius?: string;
@@ -8,7 +8,11 @@ export const Span = styled.span<{
   ml?: boolean;
   size?: string;
   h?: string;
-}>`
+  clickable?: boolean;
+  selectable?: boolean;
+};
+
+export const Span = styled.span<Props>`
   color: ${({ color, theme }) => (color ? theme.colors[color] : "inherit")};
   background-color: ${({ bgColor, theme }) =>
     bgColor ? theme.colors[bgColor] : "unset"};
@@ -22,6 +26,7 @@ export const Span = styled.span<{
   align-items: center;
 
   &:hover {
-    cursor: pointer;
+    cursor: ${(props) => (props.clickable ? "pointer" : "unset")};
+    user-select: ${(props) => (props.selectable ? "unset" : "none")};
   }
 `;

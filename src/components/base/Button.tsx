@@ -9,9 +9,9 @@ export const Button = styled.button<{
   margin-left: ${({ ml }) => (ml ? "12px" : "unset")};
   background-color: ${({ theme, bgColor }) =>
     bgColor ? theme.colors[bgColor] : theme.colors.blue};
-  padding: ${({ small }) => (small ? "2px 6.66px" : "8px 26px")};
+  padding: ${({ small }) => (small ? "4px 13px" : "8px 26px")};
   border-radius: 6px;
-  font-size: 16px;
+  font-size: ${({ small }) => (small ? "14px" : "16px")};
   font-weight: 700;
   border: 1px dashed transparent;
 

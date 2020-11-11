@@ -1,5 +1,8 @@
 ![setup-script logo](https://user-images.githubusercontent.com/29062983/98661184-71de2980-2346-11eb-89dd-9daf5ef7b9df.png)
 
+[![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/konradkeska/setup-script/blob/master/LICENSE)
+[![Cypress.io](https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg)](https://www.cypress.io/)
+
 # About
 
 Tired of setting your workstation twice a year? Create setup script and never do this again.

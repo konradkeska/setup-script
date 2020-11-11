@@ -2,14 +2,12 @@ import styled from "styled-components";
 
 import { APP_MAX_WIDTH } from "../../config";
 
-type Props = {
+export const Grid = styled.div<{
   alignItems?: string;
   mt?: string;
   color?: string;
   p?: string;
-};
-
-export const Wrapper = styled.div<Props>`
+}>`
   width: 100%;
   padding: ${({ p }) => p || "0px 16px"};
   margin: 0 auto;

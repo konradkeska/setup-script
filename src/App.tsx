@@ -8,7 +8,7 @@ import React, {
 import { ThemeProvider } from "styled-components";
 
 import { Soft, Setting } from "./types";
-import { addToListFactory, removeFromListFactory } from "./utils";
+import { matches, notMatches } from "./utils";
 import { formatData } from "./mappers";
 import { loadBrewData, loadSettings } from "./api";
 import { useHotkeys, useTheme } from "./hooks";
@@ -19,18 +19,17 @@ import {
   Row,
   Wrapper,
   Main,
-  Link,
   Header,
   Input,
   Footer,
-  Span,
 } from "./components/base";
-import { Brand } from "./components/common";
-import { Bar, ResultPanel, SearchPanel } from "./components/complex";
+import { Bar, Brand } from "./components/common";
+import { ResultPanel, SearchPanel } from "./components/complex";
+import Author from "./components/base/Author";
 
 function App() {
   const [query, setQuery] = useState<string>("");
-  const inputRef = useRef<HTMLInputElement | null>(null);
+  const searchInputRef = useRef<HTMLInputElement | null>(null);
 
   const { theme, switchTheme } = useTheme();
 
@@ -61,13 +60,13 @@ function App() {
   }, [loadData]);
 
   useEffect(() => {
-    if (!hasValidQuery) inputRef.current?.focus();
+    if (!hasValidQuery) searchInputRef.current?.focus();
   }, [hasValidQuery]);
 
   useHotkeys(
     () => ({
-      Backspace: () => inputRef.current?.focus(),
-      Enter: () => inputRef.current?.focus(),
+      Backspace: () => searchInputRef.current?.focus(),
+      Enter: () => searchInputRef.current?.focus(),
     }),
     []
   );
@@ -77,54 +76,83 @@ function App() {
     []
   );
 
-  // const switchTheme = useCallback(
-  //   () => setMode((prevState) => (prevState === "dark" ? "light" : "dark")),
-  //   [mode]
-  // );
+  const cancelGuide = useCallback(() => {
+    // TODO
+    setWasUserGuided(true);
+  }, []);
 
-  const addCask = addToListFactory({
-    list: addedCasks,
-    setList: setAddedCasks,
-    setQuery,
-  });
+  const startGuide = useCallback(() => {
+    // TODO
+    setWasUserGuided(true);
+  }, []);
 
-  const addFormula = addToListFactory({
-    list: addedFormulas,
-    setList: setAddedFormulas,
-    setQuery,
-  });
+  const addCask = useCallback(
+    (record: Soft) => () => {
+      if (!addedCasks.find(matches(record))) {
+        setAddedCasks([...addedCasks, record]);
+        setCasks(casks.filter(notMatches(record)));
+        setQuery("");
+      }
+    },
+    [addedCasks, casks]
+  );
 
-  const addSetting = addToListFactory({
-    list: addedSettings,
-    setList: setAddedSettings,
-    setQuery,
-  });
+  const addFormula = useCallback(
+    (record: Soft) => () => {
+      if (!addedFormulas.find(matches(record))) {
+        setAddedFormulas([...addedFormulas, record]);
+        setFormulas(formulas.filter(notMatches(record)));
+        setQuery("");
+      }
+    },
+    [addedFormulas, formulas]
+  );
 
-  const removeCask = removeFromListFactory({
-    list: addedCasks,
-    setList: setAddedCasks,
-  });
+  const addSetting = useCallback(
+    (record: Setting) => () => {
+      if (!addedSettings.find(matches(record))) {
+        setAddedSettings([...addedSettings, record]);
+        setSettings(settings.filter(notMatches(record)));
+        setQuery("");
+      }
+    },
+    [addedSettings, settings]
+  );
 
-  const removeFormula = removeFromListFactory({
-    list: addedFormulas,
-    setList: setAddedFormulas,
-  });
+  const removeCask = useCallback(
+    (record: Soft) => () => {
+      setAddedCasks(addedCasks.filter(notMatches(record)));
+      setCasks([record, ...casks]);
+    },
+    [addedCasks, casks]
+  );
 
-  const removeSetting = removeFromListFactory({
-    list: addedSettings,
-    setList: setAddedSettings,
-  });
+  const removeFormula = useCallback(
+    (record: Soft) => () => {
+      setAddedFormulas(addedFormulas.filter(notMatches(record)));
+      setFormulas([record, ...formulas]);
+    },
+    [addedFormulas, formulas]
+  );
+
+  const removeSetting = useCallback(
+    (record: Setting) => () => {
+      setAddedSettings(addedSettings.filter(notMatches(record)));
+      setSettings([record, ...settings]);
+    },
+    [addedSettings, settings]
+  );
 
   return (
     <ThemeProvider theme={theme}>
+      <GlobalStyle wasUserGuided={wasUserGuided} />
       <>
-        <GlobalStyle wasUserGuided={wasUserGuided} />
         {!wasUserGuided && (
           <Bar
-            label={"Want a quick guide? 🚍"}
+            label={"Are you up for a quick tour?"}
             btnLabel={"Ok"}
-            onClose={() => setWasUserGuided(true)}
-            onClick={() => setWasUserGuided(true)}
+            onClose={cancelGuide}
+            onConfirm={startGuide}
           />
         )}
         <Header hasShadow={hasValidQuery} wasUserGuided={wasUserGuided}>
@@ -133,7 +161,7 @@ function App() {
               <Brand onClick={switchTheme} />
             </Row>
             <Input
-              ref={inputRef}
+              ref={searchInputRef}
               placeholder="Search.."
               type="text"
               value={query}
@@ -147,21 +175,21 @@ function App() {
         {hasValidQuery && (
           <SearchPanel
             wasUserGuided={wasUserGuided}
-            addCask={addCask}
-            addFormula={addFormula}
-            addSetting={addSetting}
             query={query}
             casks={casks}
             formulas={formulas}
             settings={settings}
+            addCask={addCask}
+            addFormula={addFormula}
+            addSetting={addSetting}
           />
         )}
-        <Main>
+        <Main wasUserGuided={wasUserGuided}>
           <ResultPanel
             wasUserGuided={wasUserGuided}
-            addedCasks={addedCasks}
-            addedFormulas={addedFormulas}
-            addedSettings={addedSettings}
+            casks={addedCasks}
+            formulas={addedFormulas}
+            settings={addedSettings}
             removeCask={removeCask}
             removeFormula={removeFormula}
             removeSetting={removeSetting}
@@ -169,17 +197,7 @@ function App() {
         </Main>
         <Footer>
           <Wrapper color={theme.colors.font2}>
-            <Span>
-              Made with ♥️ by&nbsp;
-              <Link
-                href="https://github.com/konradkeska"
-                rel="noopener noreferer"
-                target="_blank"
-              >
-                Konrad Kęska
-              </Link>
-              &nbsp;in 2020.
-            </Span>
+            <Author />
           </Wrapper>
         </Footer>
       </>

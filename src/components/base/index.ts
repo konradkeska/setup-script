@@ -1,4 +1,5 @@
 export { Button } from "./Button";
+export { Code } from "./Code";
 export { Footer } from "./Footer";
 export { GlobalStyle } from "./GlobalStyle";
 export { Header } from "./Header";

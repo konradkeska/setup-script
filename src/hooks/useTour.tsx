@@ -9,21 +9,15 @@ type Props = {
   theme: DefaultTheme;
 };
 
-type Returns = {
-  wasUserGuided: boolean;
-  GuideTourBar: () => JSX.Element;
-  GuideTour: () => JSX.Element;
-};
-
-export function useTour({ theme }: Props): Returns {
+export function useTour({ theme }: Props) {
   const [wasUserGuided, setWasUserGuided] = useState(false);
   const [isTourOpen, setIsTourOpen] = useState(false);
 
-  const cancelGuide = useCallback(() => {
+  const cancelTour = useCallback(() => {
     setWasUserGuided(true);
   }, []);
 
-  const startGuide = useCallback(() => {
+  const startTour = useCallback(() => {
     setTimeout(() => setIsTourOpen(true), 1000);
     setWasUserGuided(true);
   }, []);
@@ -32,8 +26,8 @@ export function useTour({ theme }: Props): Returns {
     <Bar
       label={"Are you up for a quick tour?"}
       btnLabel={"Ok"}
-      onClose={cancelGuide}
-      onConfirm={startGuide}
+      onClose={cancelTour}
+      onConfirm={startTour}
     />
   );
 

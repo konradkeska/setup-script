@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Input = styled.input`
-  padding: 8px 24px;
-  border-radius: 10px;
+  padding: ${({ theme }) => `${theme.paddings.xs}px ${theme.paddings.sm}px`};
+  border-radius: ${({ theme }) => `${theme.radiuses.md}px`};
   background-color: ${({ theme }) => theme.colors.material.input};
   color: ${({ theme }) => theme.colors.font.base};
   outline: none;

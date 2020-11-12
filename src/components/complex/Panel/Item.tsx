@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import { Soft } from "../../../types";
-import { truncate } from "../../../utils";
+import { truncate } from "../../../utils/helpers";
 import { Code } from "../../base";
 
 type Props = {
+  id: string;
   index: number;
   record: Soft;
   operation: "add" | "remove";
@@ -14,11 +15,12 @@ type Props = {
 };
 
 export const ListItem = React.memo(
-  ({ index, record, operation, onClick }: Props) => {
+  ({ id, index, record, operation, onClick }: Props) => {
     const [focused, setFocused] = useState(false);
     return (
       <li>
         <Button
+          id={id}
           index={index}
           operation={operation}
           onClick={onClick}

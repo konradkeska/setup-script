@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { PrimaryColors } from "../../hooks/useTheme";
+import { PrimaryColors } from "../../types";
 
 export const Button = styled.button<{
   small?: boolean;
@@ -11,8 +11,11 @@ export const Button = styled.button<{
   margin-left: ${({ ml }) => (ml ? "12px" : "unset")};
   background-color: ${({ theme, bgColor }) =>
     bgColor ? theme.colors.primary[bgColor] : theme.colors.primary.blue};
-  padding: ${({ small }) => (small ? "4px 13px" : "8px 26px")};
-  border-radius: 6px;
+  padding: ${({ theme, small }) =>
+    small
+      ? `${theme.paddings.xs / 2}px ${(theme.paddings.xs / 2) * 3.25}px`
+      : `${theme.paddings.xs}px ${theme.paddings.xs * 3.25}px`};
+  border-radius: ${({ theme }) => `${theme.radiuses.md}px`};
   font-size: ${({ small }) => (small ? "14px" : "16px")};
   font-weight: 700;
   border: 1px dashed transparent;

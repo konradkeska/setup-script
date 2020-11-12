@@ -9,4 +9,5 @@ export { Link } from "./Link";
 export { Main } from "./Main";
 export { Row } from "./Row";
 export { Span } from "./Span";
+export { ThemeToggle } from "./ThemeToggle";
 export { Wrapper } from "./Wrapper";

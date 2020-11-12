@@ -5,8 +5,10 @@ type Props = {
 };
 
 export const Main = styled.main<Props>`
-  padding: ${({ wasUserGuided }) =>
-    `${wasUserGuided ? 0 : 24}px 24px 24px 24px`};
+  padding: ${({ theme: { paddings }, wasUserGuided }) =>
+    `${wasUserGuided ? 0 : paddings.md}px ${paddings.md / 2}px ${
+      paddings.md
+    }px ${paddings.md / 2}px`};
   width: 100%;
   display: flex;
   justify-content: space-between;

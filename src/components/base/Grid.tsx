@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { APP_MAX_WIDTH } from "../../config";
+import { MAIN_PANEL_MAX_WIDTH } from "../../utils/config";
 
 export const Grid = styled.div<{
   alignItems?: string;
@@ -9,9 +9,9 @@ export const Grid = styled.div<{
   p?: string;
 }>`
   width: 100%;
-  padding: ${({ p }) => p || "0px 16px"};
+  padding: ${({ theme, p }) => p || `0px ${theme.paddings.sm}px`};
   margin: 0 auto;
-  max-width: ${APP_MAX_WIDTH}px;
+  max-width: ${MAIN_PANEL_MAX_WIDTH}px;
   display: flex;
   justify-content: space-between;
   align-items: ${({ alignItems }) => alignItems || "center"};

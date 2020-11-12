@@ -1,8 +1,14 @@
 import React from "react";
 
+import {
+  CASKS_PANEL_LABEL,
+  FORMULAS_PANEL_LABEL,
+  SETTINGS_PANEL_LABEL,
+} from "../../utils/config";
 import { Soft, Setting } from "../../types";
 import { Wrapper } from "../base";
-import { Panel } from "./Panel/Panel";
+
+import { Panel } from "./Panel";
 
 type Props = {
   wasUserGuided: boolean;
@@ -24,27 +30,24 @@ export const ResultPanel = React.memo(
     removeFormula,
     removeSetting,
   }: Props) => (
-    <Wrapper
-      alignItems="flex-start"
-      mt={wasUserGuided ? "80px" : "108px"}
-      p="0px"
-    >
+    <Wrapper align="flex-start" mt={wasUserGuided ? "80px" : "108px"} p="0px">
       <Panel
-        title="added casks"
+        id="added-casks"
+        title={`Added ${CASKS_PANEL_LABEL}`}
         items={casks}
         onClick={removeCask}
         operation="remove"
-        width="calc(66.666% - 12px)"
       />
       <Panel
-        title="added formulas"
+        id="added-formulas"
+        title={`Added ${FORMULAS_PANEL_LABEL}`}
         items={formulas}
         onClick={removeFormula}
         operation="remove"
-        width="calc(33.333% - 12px)"
       />
       <Panel
-        title="added settings"
+        id="added-settings"
+        title={`Added ${SETTINGS_PANEL_LABEL}`}
         items={settings as any}
         onClick={removeSetting as any}
         operation="remove"

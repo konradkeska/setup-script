@@ -41,3 +41,52 @@ type Dependson = {
 type Macos = {
   ">=": string[];
 };
+
+export enum PrimaryColors {
+  PURPLE = "purple",
+  BLUE = "blue",
+  GREEN = "green",
+  RED = "red",
+}
+
+export enum FontColors {
+  BASE = "base",
+  SUB = "sub",
+}
+
+export enum MaterialColors {
+  INPUT = "input",
+  OVERLAY = "overlay",
+  BACKGROUND = "background",
+}
+
+export enum Paddings {
+  XS = "xs",
+  SM = "sm",
+  MD = "md",
+  LG = "lg",
+  XL = "xl",
+}
+
+export enum Shadows {
+  BASE = "base",
+}
+
+export enum Radiuses {
+  PANEL = "panel",
+  BUTTON = "button",
+  INPUT = "input",
+}
+
+export const Colors = {
+  PRIMARY: PrimaryColors,
+  FONT: FontColors,
+  MATERIAL: MaterialColors,
+};
+
+export const Theme = {
+  COLORS: Colors,
+  PADDINGS: Paddings,
+  SHADOWS: Shadows,
+  RADIUSES: Radiuses,
+};

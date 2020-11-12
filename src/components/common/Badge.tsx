@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FontColors, MaterialColors } from "../../hooks/useTheme";
+import { FontColors, MaterialColors } from "../../types";
 
 import { Code } from "../base";
 

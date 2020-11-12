@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { HEADER_HEIGHT, WELCOME_BAR_HEIGHT } from "../../utils/config";
 
 type Props = {
   wasUserGuided: boolean;
@@ -14,7 +15,9 @@ export const GlobalStyle = createGlobalStyle<Props>`
     -moz-osx-font-smoothing: grayscale;
     background-color: ${({ theme }) => theme.colors.material.background};
     min-height:  ${({ wasUserGuided }) =>
-      wasUserGuided ? "calc(100vh - 60px)" : "calc(100vh - 106px)"}
+      wasUserGuided
+        ? `calc(100vh - ${HEADER_HEIGHT}px)`
+        : `calc(100vh - ${WELCOME_BAR_HEIGHT}px)`};
   }
 
   code {
@@ -90,5 +93,25 @@ export const GlobalStyle = createGlobalStyle<Props>`
   [type="reset"],
   [type="submit"] {
     -webkit-appearance: button;
+  }
+
+  input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    height: 1em;
+    width: 1em;
+    border-radius: 50em;
+    background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg) no-repeat 50% 50%;
+    background-size: contain;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  input[type="search"]:focus::-webkit-search-cancel-button {
+    opacity: .3;
+    pointer-events: all;
+  }
+
+  input[type="search"].dark::-webkit-search-cancel-button {
+    filter: invert(1);
   }
 `;

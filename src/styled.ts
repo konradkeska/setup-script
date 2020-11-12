@@ -27,15 +27,21 @@ declare module "styled-components" {
   }
 
   export interface DefaultPaddings {
-    xs: string;
-    sm: string;
-    md: string;
-    lg: string;
-    xl: string;
+    xs: number;
+    sm: number;
+    md: number;
+    lg: number;
+    xl: number;
   }
 
   export interface DefaultShadows {
     base: string;
+  }
+
+  export interface DefaultRadiuses {
+    xs: number;
+    sm: number;
+    md: number;
   }
 
   export type Themes = {
@@ -49,5 +55,6 @@ declare module "styled-components" {
     colors: DefaultColors;
     paddings: DefaultPaddings;
     shadows: DefaultShadows;
+    radiuses: DefaultRadiuses;
   }
 }

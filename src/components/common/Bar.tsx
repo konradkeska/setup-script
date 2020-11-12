@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { PrimaryColors } from "../../hooks/useTheme";
+import { PrimaryColors } from "../../types";
 import { Button, Span, Wrapper } from "../base";
 
 type Props = {
@@ -14,7 +14,7 @@ type Props = {
 export const Bar = React.memo(
   ({ label, btnLabel, onClose, onConfirm }: Props) => (
     <Aside>
-      <Wrapper>
+      <Wrapper maxW="100%">
         <div>
           {label}{" "}
           <Button bgColor={PrimaryColors.GREEN} onClick={onConfirm} small ml>
@@ -30,7 +30,7 @@ export const Bar = React.memo(
 const Aside = styled.aside`
   background-color: ${({ theme }) => theme.colors.material.input};
   width: 100%;
-  padding: 10px 24px;
+  padding: ${({ theme }) => `8px 0px`};
   position: fixed;
   justify-content: center;
   display: flex;

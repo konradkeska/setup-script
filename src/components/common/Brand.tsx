@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { FontColors, PrimaryColors } from "../../hooks/useTheme";
+import { FontColors, PrimaryColors } from "../../types";
 
 import { Row, Span } from "../base";
 import { Badge } from "./Badge";
@@ -11,7 +11,7 @@ type Props = {
 
 export const Brand = React.memo(({ onClick }: Props) => (
   <Row>
-    <Logo onClick={onClick}>
+    <Logo id="brand" onClick={onClick}>
       <Span selectable clickable>
         <Span>🏗️</Span> <Span color={FontColors.BASE}>setup</Span>
         <Span color={PrimaryColors.PURPLE}>-</Span>

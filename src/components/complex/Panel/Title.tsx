@@ -8,5 +8,6 @@ export const Title = styled.h5<Props>`
   margin: 0;
   font-weight: 700;
   font-size: 16px;
-  margin: ${({ mt }) => (mt ? "24px 0px" : "0px 0px 24px 0px")};
+  margin: ${({ theme: { paddings }, mt }) =>
+    mt ? `${paddings.md}px 0px` : `0px 0px ${paddings.md}px 0px`};
 `;

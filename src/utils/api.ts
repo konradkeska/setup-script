@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from "axios";
 
-import { Setting, SoftData } from "./types";
+import { Setting, SoftData } from "../types";
 
-import settingsData from "./data/settings.json";
+import settingsData from "../data/settings.json";
 
 const BREW_HOST = "https://formulae.brew.sh/";
 

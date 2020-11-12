@@ -1,3 +1,4 @@
+export { Author } from "./Author";
 export { Button } from "./Button";
 export { Code } from "./Code";
 export { Footer } from "./Footer";
@@ -8,4 +9,5 @@ export { Link } from "./Link";
 export { Main } from "./Main";
 export { Row } from "./Row";
 export { Span } from "./Span";
+export { ThemeToggle } from "./ThemeToggle";
 export { Wrapper } from "./Wrapper";

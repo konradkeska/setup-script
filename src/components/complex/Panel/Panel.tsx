@@ -1,8 +1,8 @@
 import React from "react";
-import styled, { DefaultColors } from "styled-components";
+import styled, { DefaultColorsMaterial } from "styled-components";
 
-import { PANEL_RECORD_COUNT } from "../../../config";
-import { Soft } from "../../../types";
+import { PANEL_RECORD_COUNT } from "../../../utils/config";
+import { Soft, PrimaryColors } from "../../../types";
 import { Span } from "../../base";
 
 import { ListItem } from "./Item";
@@ -13,7 +13,8 @@ type Props = {
   title: string;
   items: Soft[];
   onClick: (item: Soft) => () => void;
-  bgColor?: keyof DefaultColors;
+  id?: string;
+  bgColor?: keyof DefaultColorsMaterial;
   mt?: boolean;
   operation?: "add" | "remove";
   width?: string;
@@ -24,18 +25,20 @@ export const Panel = React.memo(
     title,
     items,
     onClick,
-    bgColor = "bg2",
+    id,
+    bgColor = "overlay",
     mt = false,
     operation = "add",
     width = "100%",
   }: Props) => (
     <Wrapper mt={mt} width={width}>
       <Title mt={mt}>
-        <Span color="purple">#</Span> {title.toUpperCase()}
+        <Span color={PrimaryColors.PURPLE}>#</Span> {title}
       </Title>
-      <List bgColor={bgColor}>
+      <List id={id} bgColor={bgColor}>
         {items.map((record, index) => (
           <ListItem
+            id={record.token}
             key={index}
             index={index}
             record={record}
@@ -49,7 +52,8 @@ export const Panel = React.memo(
 );
 
 const Wrapper = styled.div<{ width: string; mt?: boolean }>`
-  padding: 0px 16px 24px 16px;
+  padding: ${({ theme: { paddings } }) =>
+    `0px ${paddings.sm}px ${paddings.md}px ${paddings.sm}px`};
   width: ${({ width }) => width};
   min-height: ${({ mt }) =>
     `calc(${PANEL_RECORD_COUNT} * 32px + ${mt ? 24 + 66 : 66}px)`};

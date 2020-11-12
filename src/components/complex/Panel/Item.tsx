@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import { Soft } from "../../../types";
-import { truncate } from "../../../utils";
-import { Code, Span } from "../../base";
+import { truncate } from "../../../utils/helpers";
+import { Code } from "../../base";
 
 type Props = {
+  id: string;
   index: number;
   record: Soft;
   operation: "add" | "remove";
@@ -14,11 +15,12 @@ type Props = {
 };
 
 export const ListItem = React.memo(
-  ({ index, record, operation, onClick }: Props) => {
+  ({ id, index, record, operation, onClick }: Props) => {
     const [focused, setFocused] = useState(false);
     return (
       <li>
         <Button
+          id={id}
           index={index}
           operation={operation}
           onClick={onClick}
@@ -28,10 +30,8 @@ export const ListItem = React.memo(
             if (focused && e.key === "Enter") onClick();
           }}
         >
-          <Code>
-            <Span>{truncate(record.name, 60)}</Span>
-            {record.version && <Span>{truncate(record.version)}</Span>}
-          </Code>
+          <Code>{truncate(record.name, 60)}</Code>
+          {record.version && <Code>{truncate(record.version)}</Code>}
         </Button>
       </li>
     );
@@ -49,13 +49,14 @@ const Button = styled.button<{
   align-items: center;
   width: 100%;
   text-align: ellipsis;
-  background-color: ${({ theme }) => theme.colors.bg3};
-  color: ${({ theme }) => theme.colors.font1};
+  background-color: ${({ theme }) => theme.colors.material.input};
+  color: ${({ theme }) => theme.colors.font.base};
 
   &:hover {
     cursor: pointer;
-    border: 1px dashed
-      ${({ theme, operation }) =>
-        operation === "add" ? theme.colors.green : theme.colors.red};
+    border: ${({ theme, operation }) =>
+      operation === "add"
+        ? `1px dashed ${theme.colors.primary.green}`
+        : `1px dashed ${theme.colors.primary.red}`};
   }
 `;

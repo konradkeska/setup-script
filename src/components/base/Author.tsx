@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "./Link";
 import { Span } from "./Span";
 
-const Author = React.memo(() => (
+export const Author = React.memo(() => (
   <Span>
     Made with ♥️ by&nbsp;
     <Link
@@ -16,5 +16,3 @@ const Author = React.memo(() => (
     &nbsp;in 2020.
   </Span>
 ));
-
-export default Author;

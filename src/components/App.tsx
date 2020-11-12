@@ -7,10 +7,10 @@ import React, {
 } from "react";
 import { ThemeProvider } from "styled-components";
 
-import { Soft, Setting } from "./types";
-import { formatResponse, matches, notMatches } from "./utils";
-import { loadBrewData, loadSettings } from "./api";
-import { useHotkeys, useTheme } from "./hooks";
+import { Soft, Setting, PrimaryColors } from "../types";
+import { formatResponse, matches, notMatches } from "../utils/helpers";
+import { loadBrewData, loadSettings } from "../utils/api";
+import { useHotkeys, useTheme, useTour } from "../hooks";
 
 import {
   Author,
@@ -21,19 +21,18 @@ import {
   Input,
   Main,
   Row,
+  ThemeToggle,
   Wrapper,
-} from "./components/base";
-import { Bar, Brand } from "./components/common";
-import { ResultPanel, SearchPanel } from "./components/complex";
-import { PrimaryColors } from "./hooks/useTheme";
+} from "./base";
+import { Brand } from "./common";
+import { ResultPanel, SearchPanel } from "./complex";
 
 function App() {
   const [query, setQuery] = useState<string>("");
   const searchInputRef = useRef<HTMLInputElement | null>(null);
 
-  const { theme, switchTheme } = useTheme();
-
-  const [wasUserGuided, setWasUserGuided] = useState(false);
+  const { mode, theme, switchTheme } = useTheme();
+  const { wasUserGuided, GuideTourBar, GuideTour } = useTour({ theme });
 
   const [casks, setCasks] = useState<Soft[]>([]);
   const [formulas, setFormulas] = useState<Soft[]>([]);
@@ -76,22 +75,11 @@ function App() {
     []
   );
 
-  const cancelGuide = useCallback(() => {
-    // TODO
-    setWasUserGuided(true);
-  }, []);
-
-  const startGuide = useCallback(() => {
-    // TODO
-    setWasUserGuided(true);
-  }, []);
-
   const addCask = useCallback(
     (record: Soft) => () => {
       if (!addedCasks.find(matches(record))) {
-        setAddedCasks([...addedCasks, record]);
+        setAddedCasks([record, ...addedCasks]);
         setCasks(casks.filter(notMatches(record)));
-        setQuery("");
       }
     },
     [addedCasks, casks]
@@ -100,9 +88,8 @@ function App() {
   const addFormula = useCallback(
     (record: Soft) => () => {
       if (!addedFormulas.find(matches(record))) {
-        setAddedFormulas([...addedFormulas, record]);
+        setAddedFormulas([record, ...addedFormulas]);
         setFormulas(formulas.filter(notMatches(record)));
-        setQuery("");
       }
     },
     [addedFormulas, formulas]
@@ -111,9 +98,8 @@ function App() {
   const addSetting = useCallback(
     (record: Setting) => () => {
       if (!addedSettings.find(matches(record))) {
-        setAddedSettings([...addedSettings, record]);
+        setAddedSettings([record, ...addedSettings]);
         setSettings(settings.filter(notMatches(record)));
-        setQuery("");
       }
     },
     [addedSettings, settings]
@@ -147,28 +133,24 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyle wasUserGuided={wasUserGuided} />
       <>
-        {!wasUserGuided && (
-          <Bar
-            label={"Are you up for a quick tour?"}
-            btnLabel={"Ok"}
-            onClose={cancelGuide}
-            onConfirm={startGuide}
-          />
-        )}
+        {!wasUserGuided && <GuideTourBar />}
+        <GuideTour />
         <Header hasShadow={hasValidQuery} wasUserGuided={wasUserGuided}>
-          <Wrapper>
+          <Wrapper maxW="100%">
+            <Input
+              id="search-input"
+              ref={searchInputRef}
+              placeholder="Search.."
+              type="search"
+              value={query}
+              onChange={onChange}
+              autoComplete="off"
+            />
             <Row>
               <Brand onClick={switchTheme} />
             </Row>
-            <Input
-              ref={searchInputRef}
-              placeholder="Search.."
-              type="text"
-              value={query}
-              onChange={onChange}
-            />
             <Button id="download-button" bgColor={PrimaryColors.GREEN}>
-              Save
+              Download
             </Button>
           </Wrapper>
         </Header>
@@ -198,6 +180,7 @@ function App() {
         <Footer>
           <Wrapper color={theme.colors.font.sub}>
             <Author />
+            <ThemeToggle mode={mode} switchTheme={switchTheme} />
           </Wrapper>
         </Footer>
       </>

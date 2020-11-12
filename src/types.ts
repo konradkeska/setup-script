@@ -3,21 +3,17 @@ export type BaseFields = {
   token: string;
 };
 
+export type Filterable = keyof BaseFields;
+
 export interface Setting extends BaseFields {
   type: string;
   value: boolean | number;
 }
 
-export type Filterable = keyof BaseFields;
-
-export type Soft = Omit<SoftData, Filterable> & BaseFields;
-
-export type SoftData = {
-  token: string;
+export interface Soft extends BaseFields {
   desc?: string;
   homepage: string;
   url: string;
-  name: string[];
   appcast?: string;
   version: string;
   sha256: string;
@@ -27,7 +23,7 @@ export type SoftData = {
   conflicts_with?: Conflictswith;
   container?: string;
   auto_updates?: boolean;
-};
+}
 
 type Conflictswith = {
   cask: string[];

@@ -8,8 +8,7 @@ import React, {
 import { ThemeProvider } from "styled-components";
 
 import { Soft, Setting, PrimaryColors } from "../types";
-import { formatResponse, matches, notMatches } from "../utils/helpers";
-import { loadBrewData, loadSettings } from "../utils/api";
+import { loadCasks, loadFormulas, loadSettings } from "../utils/api";
 import { useHotkeys, useTheme, useTour } from "../hooks";
 
 import {
@@ -26,6 +25,7 @@ import {
 } from "./base";
 import { Brand } from "./common";
 import { ResultPanel, SearchPanel } from "./complex";
+import { useList } from "../hooks/useList";
 
 function App() {
   const [query, setQuery] = useState<string>("");
@@ -34,29 +34,16 @@ function App() {
   const { mode, theme, switchTheme } = useTheme();
   const { wasUserGuided, GuideTourBar, GuideTour } = useTour({ theme });
 
-  const [casks, setCasks] = useState<Soft[]>([]);
-  const [formulas, setFormulas] = useState<Soft[]>([]);
-  const [settings, setSettings] = useState<Setting[]>([]);
-
-  const [addedCasks, setAddedCasks] = useState<Soft[]>([]);
-  const [addedFormulas, setAddedFormulas] = useState<Soft[]>([]);
-  const [addedSettings, setAddedSettings] = useState<Setting[]>([]);
+  const [casks, addedCasks, addCask, removeCask] = useList<Soft>(loadCasks);
+  const [formulas, addedFormulas, addFormula, removeFormula] = useList<Soft>(
+    loadFormulas
+  );
+  const [settings, addedSettings, addSetting, removeSetting] = useList<Setting>(
+    loadSettings,
+    true
+  );
 
   const hasValidQuery = useMemo(() => query?.length > 1, [query]);
-
-  const loadData = useCallback(async () => {
-    const [[casks, formulas], settings] = [
-      await loadBrewData(),
-      loadSettings(),
-    ];
-    setCasks(formatResponse(casks.data));
-    setFormulas(formatResponse(formulas.data));
-    setSettings(settings);
-  }, []);
-
-  useEffect(() => {
-    loadData();
-  }, [loadData]);
 
   useEffect(() => {
     if (!hasValidQuery) searchInputRef.current?.focus();
@@ -73,60 +60,6 @@ function App() {
   const onChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.currentTarget.value),
     []
-  );
-
-  const addCask = useCallback(
-    (record: Soft) => () => {
-      if (!addedCasks.find(matches(record))) {
-        setAddedCasks([record, ...addedCasks]);
-        setCasks(casks.filter(notMatches(record)));
-      }
-    },
-    [addedCasks, casks]
-  );
-
-  const addFormula = useCallback(
-    (record: Soft) => () => {
-      if (!addedFormulas.find(matches(record))) {
-        setAddedFormulas([record, ...addedFormulas]);
-        setFormulas(formulas.filter(notMatches(record)));
-      }
-    },
-    [addedFormulas, formulas]
-  );
-
-  const addSetting = useCallback(
-    (record: Setting) => () => {
-      if (!addedSettings.find(matches(record))) {
-        setAddedSettings([record, ...addedSettings]);
-        setSettings(settings.filter(notMatches(record)));
-      }
-    },
-    [addedSettings, settings]
-  );
-
-  const removeCask = useCallback(
-    (record: Soft) => () => {
-      setAddedCasks(addedCasks.filter(notMatches(record)));
-      setCasks([record, ...casks]);
-    },
-    [addedCasks, casks]
-  );
-
-  const removeFormula = useCallback(
-    (record: Soft) => () => {
-      setAddedFormulas(addedFormulas.filter(notMatches(record)));
-      setFormulas([record, ...formulas]);
-    },
-    [addedFormulas, formulas]
-  );
-
-  const removeSetting = useCallback(
-    (record: Setting) => () => {
-      setAddedSettings(addedSettings.filter(notMatches(record)));
-      setSettings([record, ...settings]);
-    },
-    [addedSettings, settings]
   );
 
   return (

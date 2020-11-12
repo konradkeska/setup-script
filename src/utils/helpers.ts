@@ -1,12 +1,15 @@
 import { DefaultTheme } from "styled-components";
 
 import { FontColors, MaterialColors, PrimaryColors } from "../types";
-import { BaseFields, Filterable, Setting, Soft, SoftData } from "../types";
+import { BaseFields, Filterable, Setting, Soft } from "../types";
 
-const formatResponse = (records: SoftData[]): Soft[] =>
+const formatResponse = (records: Soft[]): Soft[] =>
   records.map((record) => ({
     ...record,
-    name: typeof record.name === "string" ? record.name : record.name.join(" "),
+    name:
+      typeof record.name === "string"
+        ? record.name
+        : (record.name as string[]).join(" "),
   }));
 
 const includesQuery = <T extends BaseFields>(query: string, records: T[]) =>

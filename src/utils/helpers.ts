@@ -20,6 +20,9 @@ const includesQuery = <T extends BaseFields>(query: string, records: T[]) =>
       false
   );
 
+const sort = <T>(arr: T[], callback: (a: T, b: T) => number) =>
+  [...arr].sort(callback);
+
 const truncate = (value: string, limit = 18) =>
   value.length > limit ? `${value.slice(0, limit - 3)}...` : value;
 
@@ -69,6 +72,7 @@ function setNativeValue(element: HTMLElement, value: string | number) {
 export {
   formatResponse,
   includesQuery,
+  sort,
   truncate,
   matches,
   notMatches,

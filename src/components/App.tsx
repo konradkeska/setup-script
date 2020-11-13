@@ -26,6 +26,7 @@ import {
 import { Brand } from "./common";
 import { ResultPanel, SearchPanel } from "./complex";
 import { useList } from "../hooks/useList";
+import { MaxMd, MinMd, MinSm } from "../utils/rwd";
 
 function App() {
   const [query, setQuery] = useState<string>("");
@@ -52,7 +53,6 @@ function App() {
   useHotkeys(
     () => ({
       Backspace: () => searchInputRef.current?.focus(),
-      Enter: () => searchInputRef.current?.focus(),
     }),
     []
   );
@@ -79,9 +79,11 @@ function App() {
               onChange={onChange}
               autoComplete="off"
             />
-            <Row>
-              <Brand onClick={switchTheme} />
-            </Row>
+            <MinSm>
+              <Row>
+                <Brand onClick={switchTheme} />
+              </Row>
+            </MinSm>
             <Button id="download-button" bgColor={PrimaryColors.GREEN}>
               Download
             </Button>

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { FontColors, PrimaryColors } from "../../types";
 
-import { Row, Span } from "../base";
+import { Link, Row, Span } from "../base";
 import { Badge } from "./Badge";
 
 type Props = {
@@ -18,9 +18,22 @@ export const Brand = React.memo(({ onClick }: Props) => (
         <Span color={FontColors.BASE}>script</Span>
       </Span>
     </Logo>
-    <Badge>MacOS BETA</Badge>
+
+    <Badge>
+      <IssueLink href="https://github.com/konradkeska/setup-script/issues">
+        MacOS BETA
+      </IssueLink>
+    </Badge>
   </Row>
 ));
+
+const IssueLink = styled(Link)`
+  text-decoration: none;
+  color: ${({ theme }) => theme.colors.font.base};
+  &:hover {
+    color: ${({ theme }) => theme.colors.primary.purple};
+  }
+`;
 
 const Logo = styled.h4`
   user-select: none;

@@ -1,37 +1,42 @@
 import { DefaultTheme } from "styled-components";
 
-import { FontColors, MaterialColors, PrimaryColors } from "../types";
-import { BaseFields, Filterable, Setting, Soft } from "../types";
+import {
+  SoftType,
+  FontColors,
+  MaterialColors,
+  PrimaryColors,
+  SoftApiRecord,
+} from "../types";
+import { Soft } from "../types";
 
-const formatResponse = (records: Soft[]): Soft[] =>
-  records.map((record) => ({
+const formatResponse = (records: SoftApiRecord[], type: SoftType): Soft[] =>
+  records.map(({ name, ...record }) => ({
     ...record,
-    name:
-      typeof record.name === "string"
-        ? record.name
-        : (record.name as string[]).join(" "),
+    name: typeof name === "string" ? name : name[0],
+    type,
   }));
 
-const includesQuery = <T extends BaseFields>(query: string, records: T[]) =>
+const includesQuery = (query: string, records: Soft[]) =>
   records.filter(
-    (item: T) =>
+    (item: Soft) =>
       (query?.length > 1 &&
-        item.name.toLowerCase().includes(query.toLowerCase())) ||
+        ((item.name as string)?.toLowerCase().includes(query.toLowerCase()) ||
+          item.token?.toLowerCase().includes(query.toLowerCase()))) ||
       false
   );
 
 const sort = <T>(arr: T[], callback: (a: T, b: T) => number) =>
   [...arr].sort(callback);
 
-const truncate = (value: string, limit = 18) =>
-  value.length > limit ? `${value.slice(0, limit - 3)}...` : value;
+const truncate = (value: string, limit = 10) =>
+  value.length > limit ? `${value.slice(0, limit - 2)}..` : value;
 
-const matches = (record: Soft | Setting, property: Filterable = "name") => (
-  item: Soft | Setting
+const matches = (record: Soft, property: keyof Soft = "name") => (
+  item: Soft
 ): boolean => item[property] === record[property];
 
-const notMatches = (record: Soft | Setting, property: Filterable = "name") => (
-  item: Soft | Setting
+const notMatches = (record: Soft, property: keyof Soft = "name") => (
+  item: Soft
 ): boolean => item[property] !== record[property];
 
 const isOfTypePrimaryColors = (key: string): key is PrimaryColors =>

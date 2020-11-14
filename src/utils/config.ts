@@ -1,17 +1,11 @@
 const MAIN_PANEL_MAX_WIDTH = 680;
 const PANEL_RECORD_COUNT = 8;
-const WELCOME_BAR_HEIGHT = 42;
-const HEADER_HEIGHT = 62;
-const CASKS_PANEL_LABEL = "Casks (Programs)";
-const FORMULAS_PANEL_LABEL = "Formulas (CLI Programs)";
-const SETTINGS_PANEL_LABEL = "MacOS Settings";
+const CASKS_PANEL_LABEL = "Cask (software)";
+const FORMULAS_PANEL_LABEL = "Formulae (command line software)";
 
 export {
   MAIN_PANEL_MAX_WIDTH,
   PANEL_RECORD_COUNT,
-  WELCOME_BAR_HEIGHT,
-  HEADER_HEIGHT,
   CASKS_PANEL_LABEL,
   FORMULAS_PANEL_LABEL,
-  SETTINGS_PANEL_LABEL,
 };

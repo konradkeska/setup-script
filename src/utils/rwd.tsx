@@ -10,7 +10,7 @@ interface IBreakpoints {
   xl: number;
 }
 
-const rwd: IBreakpoints = {
+export const rwd: IBreakpoints = {
   xs: 576,
   sm: 768,
   md: 992,

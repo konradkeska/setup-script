@@ -1,32 +1,23 @@
-export type BaseFields = {
-  name: string;
-  token: string;
-};
-
-export type Filterable = keyof BaseFields;
-
-export interface Setting extends BaseFields {
-  type: string;
-  value: boolean | number;
-}
-
-export interface Soft extends BaseFields {
-  desc?: string;
-  homepage: string;
-  url: string;
-  appcast?: string;
-  version: string;
-  sha256: string;
+export interface Soft {
   artifacts: string[];
-  caveats?: string;
   depends_on: Dependson;
+  homepage: string;
+  name: string;
+  sha256: string;
+  token: string;
+  type: SoftType;
+  url: string;
+  version: string;
+  appcast?: string;
+  auto_updates?: boolean;
+  caveats?: string;
   conflicts_with?: Conflictswith;
   container?: string;
-  auto_updates?: boolean;
+  desc?: string;
 }
 
-type Conflictswith = {
-  cask: string[];
+export type SoftApiRecord = Omit<Soft, "name" | "type"> & {
+  name: string | string[];
 };
 
 type Dependson = {
@@ -36,6 +27,15 @@ type Dependson = {
 
 type Macos = {
   ">=": string[];
+};
+
+export enum SoftType {
+  CASK = "cask",
+  FORMULA = "formula",
+}
+
+type Conflictswith = {
+  cask: string[];
 };
 
 export enum PrimaryColors {

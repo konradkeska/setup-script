@@ -12,13 +12,12 @@ type Props = {
 export const Brand = React.memo(({ onClick }: Props) => (
   <Row>
     <Logo id="brand" onClick={onClick}>
-      <Span selectable clickable>
+      <Span>
         <Span>🏗️</Span> <Span color={FontColors.BASE}>setup</Span>
         <Span color={PrimaryColors.PURPLE}>-</Span>
         <Span color={FontColors.BASE}>script</Span>
       </Span>
     </Logo>
-
     <Badge>
       <IssueLink href="https://github.com/konradkeska/setup-script/issues">
         MacOS BETA
@@ -40,8 +39,4 @@ const Logo = styled.h4`
   margin: 0;
   font-weight: 900;
   font-size: 24px;
-
-  &:hover {
-    -webkit-text-stroke: 0.1px white;
-  }
 `;

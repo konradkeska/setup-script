@@ -1,39 +1,34 @@
 import { useCallback, useEffect, useState } from "react";
 import { AxiosResponse } from "axios";
 
-import { BaseFields } from "../types";
+import { Soft, SoftType } from "../types";
 import { formatResponse } from "../utils/helpers";
 
-type Return<T> = [
-  T[],
-  T[],
-  (record: T) => () => void,
-  (record: T) => () => void
+type Return = [
+  Soft[],
+  Soft[],
+  (record: Soft) => () => void,
+  (record: Soft) => () => void
 ];
 
-export function useList<T extends BaseFields>(
-  loader: () => Promise<AxiosResponse<T[]>> | T[],
-  asSettings: boolean = false
-): Return<T> {
-  const [list, setList] = useState<T[]>([]);
-  const [addedList, setAddedList] = useState<T[]>([]);
+export function useList(
+  loader: () => Promise<AxiosResponse<Soft[]>>,
+  type: SoftType
+): Return {
+  const [list, setList] = useState<Soft[]>([]);
+  const [addedList, setAddedList] = useState<Soft[]>([]);
 
   const loadData = useCallback(async () => {
-    const data = await loader();
-    // fix someday 🍭
-    asSettings
-      ? setList(data as T[])
-      : setList(
-          formatResponse((data as AxiosResponse<T[]>).data as any) as any
-        );
-  }, [loader, asSettings]);
+    const data: AxiosResponse<Soft[]> = await loader();
+    setList(formatResponse(data.data, type));
+  }, [loader, type]);
 
   useEffect(() => {
     loadData();
   }, [loadData]);
 
   const addRecord = useCallback(
-    (record: T) => () => {
+    (record: Soft) => () => {
       if (!addedList.find((item) => item.name === record.name)) {
         setAddedList([record, ...addedList]);
         setList(list.filter((item) => item.name !== record.name));
@@ -43,7 +38,7 @@ export function useList<T extends BaseFields>(
   );
 
   const removeRecord = useCallback(
-    (record: T) => () => {
+    (record: Soft) => () => {
       setAddedList(addedList.filter((item) => item.name !== record.name));
       setList([record, ...list]);
     },

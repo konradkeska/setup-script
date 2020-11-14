@@ -1,23 +1,32 @@
 import React from "react";
-import styled, { DefaultColorsMaterial } from "styled-components";
+import styled from "styled-components";
 
 import { PANEL_RECORD_COUNT } from "../../../utils/config";
-import { Soft, PrimaryColors } from "../../../types";
-import { Span } from "../../base";
+import { Soft, PrimaryColors, MaterialColors, SoftType } from "../../../types";
+import { Span, Title } from "../../base";
 
 import { ListItem } from "./Item";
 import { List } from "./List";
-import { Title } from "./Title";
 
 type Props = {
-  title: string;
   items: Soft[];
-  onClick: (item: Soft) => () => void;
   id?: string;
-  bgColor?: keyof DefaultColorsMaterial;
+  title?: string;
+  count?: number;
+  withDots?: boolean;
+  accentColor?: PrimaryColors;
+  bgColor?: MaterialColors;
   mt?: boolean;
+  mb?: boolean;
+  border?: boolean;
   operation?: "add" | "remove";
   width?: string;
+  onClick?: (record: Soft) => (() => void) | undefined;
+};
+
+const COLORS_MAP = {
+  [SoftType.CASK]: PrimaryColors.PURPLE,
+  [SoftType.FORMULA]: PrimaryColors.BLUE,
 };
 
 export const Panel = React.memo(
@@ -26,16 +35,22 @@ export const Panel = React.memo(
     items,
     onClick,
     id,
-    bgColor = "overlay",
+    count = PANEL_RECORD_COUNT,
+    withDots = false,
+    accentColor = PrimaryColors.PURPLE,
+    bgColor = MaterialColors.OVERLAY,
+    border = false,
     mt = false,
     operation = "add",
     width = "100%",
   }: Props) => (
-    <Wrapper mt={mt} width={width}>
-      <Title mt={mt}>
-        <Span color={PrimaryColors.PURPLE}>#</Span> {title}
-      </Title>
-      <List id={id} bgColor={bgColor}>
+    <PanelWrapper count={count} title={title} mt={mt} width={width}>
+      {title && (
+        <Title mt={mt} title={title}>
+          <Span color={accentColor}>#</Span> {title}
+        </Title>
+      )}
+      <List id={id} border={border} count={count} bgColor={bgColor}>
         {items.map((record, index) => (
           <ListItem
             id={record.token}
@@ -43,20 +58,31 @@ export const Panel = React.memo(
             index={index}
             record={record}
             operation={operation}
-            onClick={onClick(record)}
+            onClick={onClick?.(record)}
+            accentColor={COLORS_MAP[record.type]}
+            withDots={withDots}
           />
         ))}
       </List>
-    </Wrapper>
+    </PanelWrapper>
   )
 );
 
-const Wrapper = styled.div<{ width: string; mt?: boolean }>`
-  padding: ${({ theme: { paddings } }) =>
-    `0px ${paddings.sm}px ${paddings.md}px ${paddings.sm}px`};
+type PanelWrapperProps = Pick<Props, "count" | "width" | "mt" | "title">;
+
+const PanelWrapper = styled.div<PanelWrapperProps>`
   width: ${({ width }) => width};
-  min-height: ${({ mt }) =>
-    `calc(${PANEL_RECORD_COUNT} * 32px + ${mt ? 24 + 66 : 66}px)`};
-  max-height: ${({ mt }) =>
-    `calc(${PANEL_RECORD_COUNT} * 32px + ${mt ? 24 + 66 : 66}px)`};
+
+  padding: ${({ theme: { paddings }, title }) =>
+    title ? `0px ${paddings.sm}px ${paddings.sm}px ${paddings.sm}px` : "0px"};
+
+  min-height: ${({ mt, count, title }) =>
+    `calc(${count} * 32px + ${
+      mt ? 24 + (title ? 25 + 24 : 0) : title ? 25 + 24 : 0
+    }px)`};
+
+  max-height: ${({ mt, count, title }) =>
+    `calc(${count} * 32px + ${
+      mt ? 24 + (title ? 25 + 24 : 0) : title ? 25 + 24 : 0
+    }px)`};
 `;

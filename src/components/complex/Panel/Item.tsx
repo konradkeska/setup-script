@@ -1,41 +1,39 @@
-import React, { useState } from "react";
+import React from "react";
 
 import styled from "styled-components";
 
-import { Soft } from "../../../types";
+import { PrimaryColors, Soft } from "../../../types";
 import { truncate } from "../../../utils/helpers";
-import { Code } from "../../base";
+import { MinXs } from "../../../utils/rwd";
+
+import { Code, Dot } from "../../base";
 
 type Props = {
   id: string;
   index: number;
   record: Soft;
   operation: "add" | "remove";
-  onClick: () => void;
+  onClick?: () => void;
+  accentColor?: PrimaryColors;
+  withDots?: boolean;
 };
 
 export const ListItem = React.memo(
-  ({ id, index, record, operation, onClick }: Props) => {
-    const [focused, setFocused] = useState(false);
-    return (
-      <li>
-        <Button
-          id={id}
-          index={index}
-          operation={operation}
-          onClick={onClick}
-          onFocus={() => setFocused(true)}
-          onBlur={() => setFocused(false)}
-          onKeyDown={(e) => {
-            if (focused && e.key === "Enter") onClick();
-          }}
-        >
-          <Code>{truncate(record.name, 60)}</Code>
-          {record.version && <Code>{truncate(record.version)}</Code>}
-        </Button>
-      </li>
-    );
-  }
+  ({ id, index, record, operation, onClick, accentColor, withDots }: Props) => (
+    <li>
+      <Button id={id} index={index} operation={operation} onClick={onClick}>
+        <Code>
+          {withDots ? <Dot color={accentColor}>· </Dot> : null}
+          {truncate(record.name, 33)}
+        </Code>
+        {record.version && (
+          <MinXs>
+            <Code>{truncate(record.version)}</Code>
+          </MinXs>
+        )}
+      </Button>
+    </li>
+  )
 );
 
 const Button = styled.button<{
@@ -58,5 +56,18 @@ const Button = styled.button<{
       operation === "add"
         ? `1px dashed ${theme.colors.primary.green}`
         : `1px dashed ${theme.colors.primary.red}`};
+  }
+
+  &:active {
+    border: ${({ theme, operation }) => `1px solid
+      ${
+        operation === "add"
+          ? theme.colors.primary.green
+          : theme.colors.primary.red
+      }`};
+    background-color: ${({ theme, operation }) =>
+      operation === "add"
+        ? theme.colors.primary.green
+        : theme.colors.primary.red};
   }
 `;

@@ -1,6 +1,7 @@
-export { Author } from "./Author";
 export { Button } from "./Button";
 export { Code } from "./Code";
+export { Dot } from "./Dot";
+export { Emoji } from "./Emoji";
 export { Footer } from "./Footer";
 export { GlobalStyle } from "./GlobalStyle";
 export { Header } from "./Header";
@@ -9,5 +10,6 @@ export { Link } from "./Link";
 export { Main } from "./Main";
 export { Row } from "./Row";
 export { Span } from "./Span";
-export { ThemeToggle } from "./ThemeToggle";
+export { Title } from "./Title";
+export { Toggle } from "./Toggle";
 export { Wrapper } from "./Wrapper";

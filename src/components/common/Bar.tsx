@@ -21,7 +21,9 @@ export const Bar = React.memo(
             {btnLabel}
           </Button>
         </div>
-        <Span onClick={onClose}>✖️</Span>
+        <Span onClick={onClose} clickable>
+          ✖
+        </Span>
       </Wrapper>
     </Aside>
   )
@@ -30,7 +32,7 @@ export const Bar = React.memo(
 const Aside = styled.aside`
   background-color: ${({ theme }) => theme.colors.material.input};
   width: 100%;
-  padding: ${({ theme }) => `8px 0px`};
+  padding: ${({ theme }) => `${theme.paddings.xs}px 0px`};
   position: fixed;
   justify-content: center;
   display: flex;

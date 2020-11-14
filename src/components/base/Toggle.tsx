@@ -1,39 +1,28 @@
 import React from "react";
-import styled, { Mode } from "styled-components";
+import styled from "styled-components";
 
-import Toggle from "react-toggle";
+import ReactToggle from "react-toggle";
+import { Emoji } from "./Emoji";
 
 type Props = {
-  mode: Mode;
-  switchTheme: () => void;
+  onChange: () => void;
+  icons?: {
+    checked: JSX.Element;
+    unchecked: JSX.Element;
+  };
+  defaultChecked?: boolean;
 };
 
-export const ThemeToggle = React.memo(({ mode, switchTheme }: Props) => (
-  <StyledToggle>
-    <Toggle
-      onChange={switchTheme}
-      defaultChecked={mode === "light"}
-      icons={{
-        checked: sunIcon,
-        unchecked: moonIcon,
-      }}
-    />
-  </StyledToggle>
-));
-
-const getImg = (name: string) => (
-  <img
-    src={`/${name}.png`}
-    width="16"
-    height="16"
-    role="presentation"
-    style={{ pointerEvents: "none" }}
-    alt={name}
-  />
+export const Toggle = React.memo(
+  ({
+    icons = { checked: <Emoji>✔️</Emoji>, unchecked: <Emoji>✖️</Emoji> },
+    ...props
+  }: Props) => (
+    <StyledToggle>
+      <ReactToggle icons={icons} {...props} />
+    </StyledToggle>
+  )
 );
-
-const sunIcon: JSX.Element = getImg("sun");
-const moonIcon: JSX.Element = getImg("moon");
 
 const StyledToggle = styled.div`
   .react-toggle {
@@ -52,9 +41,6 @@ const StyledToggle = styled.div`
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    -webkit-tap-highlight-color: transparent;
   }
 
   .react-toggle-screenreader-only {
@@ -87,7 +73,7 @@ const StyledToggle = styled.div`
   }
 
   .react-toggle:hover:not(.react-toggle--disabled) .react-toggle-track {
-    background-color: #000000;
+    background-color: #0f1114;
   }
 
   .react-toggle--checked .react-toggle-track {

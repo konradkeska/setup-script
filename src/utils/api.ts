@@ -1,8 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 
-import { Setting, Soft } from "../types";
-
-import settingsData from "../data/settings.json";
+import { Soft } from "../types";
 
 const BREW_HOST = "https://formulae.brew.sh/";
 
@@ -14,8 +12,4 @@ async function loadFormulas(): Promise<AxiosResponse<Soft[]>> {
   return axios.get(`${BREW_HOST}api/formula.json`);
 }
 
-function loadSettings(): Setting[] {
-  return settingsData;
-}
-
-export { loadCasks, loadFormulas, loadSettings };
+export { loadCasks, loadFormulas };

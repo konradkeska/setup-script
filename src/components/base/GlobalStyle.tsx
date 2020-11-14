@@ -1,5 +1,4 @@
 import { createGlobalStyle } from "styled-components";
-import { HEADER_HEIGHT, WELCOME_BAR_HEIGHT } from "../../utils/config";
 
 type Props = {
   wasUserGuided: boolean;
@@ -14,10 +13,6 @@ export const GlobalStyle = createGlobalStyle<Props>`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: ${({ theme }) => theme.colors.material.background};
-    min-height:  ${({ wasUserGuided }) =>
-      wasUserGuided
-        ? `calc(100vh - ${HEADER_HEIGHT}px)`
-        : `calc(100vh - ${WELCOME_BAR_HEIGHT}px)`};
   }
 
   code {
@@ -31,27 +26,27 @@ export const GlobalStyle = createGlobalStyle<Props>`
 
   *:focus {
     outline: none;
-    border: 1px dashed #f5f5f5;
+    border: ${({ theme }) => `1px dashed ${theme.colors.font.base}`};
   }
 
   input:focus {
     outline: none;
-    border: 1px dashed #f5f5f5;
+    border: ${({ theme }) => `1px dashed ${theme.colors.font.base}`};
   }
 
   input[type=submit]:focus{
     outline: none;
-    border: 1px dashed #f5f5f5;
+    border: ${({ theme }) => `1px dashed ${theme.colors.font.base}`};
   }
 
   a:focus {
     outline: none;
-    border: 1px dashed #f5f5f5;
+    border: ${({ theme }) => `1px dashed ${theme.colors.font.base}`};
   }
 
   button:focus {
     outline: none;
-    border: 1px dashed #f5f5f5;
+    border: ${({ theme }) => `1px dashed ${theme.colors.font.base}`};
   }
 
   a {

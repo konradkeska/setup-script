@@ -7,7 +7,7 @@ type Props = {
 export const Title = styled.h5<Props>`
   margin: 0;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 14px;
   margin: ${({ theme: { paddings }, mt }) =>
-    mt ? `${paddings.md}px 0px` : `0px 0px ${paddings.md}px 0px`};
+    mt ? `${paddings.md}px 0px` : `0px 0px ${paddings.xs}px 0px`};
 `;

@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 import { Soft } from "../../types";
 import { FORMULAS_PANEL_LABEL, CASKS_PANEL_LABEL } from "../../utils/config";
-import { Title } from "../base";
 
 import { Code } from "../base";
 
@@ -15,7 +14,6 @@ type Props = {
 // TODO: fix this mess
 export const Script = React.memo(({ casks, formulas }: Props) => (
   <ScriptWrapper>
-    <Title># Script preview</Title>
     <Content>
       #!/usr/bin/env bash
       <br />
@@ -65,6 +63,8 @@ const Content = styled(Code)`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: flex-start;
+  min-height: 586px;
 `;
 
 const ScriptWrapper = styled.div`

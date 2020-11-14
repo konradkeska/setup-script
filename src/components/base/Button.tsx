@@ -6,11 +6,17 @@ export const Button = styled.button<{
   small?: boolean;
   bgColor?: PrimaryColors;
   ml?: boolean;
+  disabled?: boolean;
 }>`
-  color: ${({ theme }) => theme.colors.font.base};
+  color: ${({ theme, disabled }) =>
+    disabled ? theme.colors.font.sub : theme.colors.font.base};
   margin-left: ${({ ml }) => (ml ? "12px" : "unset")};
-  background-color: ${({ theme, bgColor }) =>
-    bgColor ? theme.colors.primary[bgColor] : theme.colors.primary.blue};
+  background-color: ${({ theme, bgColor, disabled }) =>
+    disabled
+      ? theme.colors.material.input
+      : bgColor
+      ? theme.colors.primary[bgColor]
+      : theme.colors.primary.blue};
   padding: ${({ theme, small }) =>
     small
       ? `${theme.paddings.xs / 2}px ${(theme.paddings.xs / 2) * 3.25}px`
@@ -25,7 +31,7 @@ export const Button = styled.button<{
   }
 
   &:hover {
-    cursor: pointer;
-    opacity: 0.9;
+    cursor: ${({ disabled }) => (disabled ? "default" : "pointer")};
+    opacity: ${({ disabled }) => (disabled ? 1 : 0.9)};
   }
 `;

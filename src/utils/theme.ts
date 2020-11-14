@@ -46,7 +46,7 @@ const themes: Themes = {
       },
       font: {
         base: "rgb(34, 34, 34)",
-        sub: "rgb(229, 229, 229)",
+        sub: "rgb(179, 179, 179)",
       },
       material: {
         input: "rgb(229,	229,	229)",

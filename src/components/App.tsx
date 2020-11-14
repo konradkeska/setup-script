@@ -172,7 +172,7 @@ function App() {
                 <Brand />
               </Row>
             </MinSm>
-            <Button id="download-button" bgColor={PrimaryColors.GREEN}>
+            <Button id="download-button" bgColor={PrimaryColors.GREEN} disabled>
               Download
             </Button>
           </Wrapper>

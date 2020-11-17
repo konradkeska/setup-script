@@ -14,6 +14,7 @@ type Props = {
   title?: string;
   count?: number;
   withDots?: boolean;
+  withItemSeparator?: boolean;
   accentColor?: PrimaryColors;
   bgColor?: MaterialColors;
   mt?: boolean;
@@ -37,6 +38,7 @@ export const Panel = React.memo(
     id,
     count = PANEL_RECORD_COUNT,
     withDots = false,
+    withItemSeparator = false,
     accentColor = PrimaryColors.PURPLE,
     bgColor = MaterialColors.OVERLAY,
     border = false,
@@ -61,6 +63,7 @@ export const Panel = React.memo(
             onClick={onClick?.(record)}
             accentColor={COLORS_MAP[record.type]}
             withDots={withDots}
+            withSeparator={withItemSeparator}
           />
         ))}
       </List>
@@ -76,13 +79,13 @@ const PanelWrapper = styled.div<PanelWrapperProps>`
   padding: ${({ theme: { paddings }, title }) =>
     title ? `0px ${paddings.sm}px ${paddings.sm}px ${paddings.sm}px` : "0px"};
 
-  min-height: ${({ mt, count, title }) =>
+  height: ${({ mt, count, title }) =>
     `calc(${count} * 32px + ${
       mt ? 24 + (title ? 25 + 24 : 0) : title ? 25 + 24 : 0
     }px)`};
 
-  max-height: ${({ mt, count, title }) =>
+  /* max-height: ${({ mt, count, title }) =>
     `calc(${count} * 32px + ${
       mt ? 24 + (title ? 25 + 24 : 0) : title ? 25 + 24 : 0
-    }px)`};
+    }px)`}; */
 `;

@@ -16,11 +16,21 @@ type Props = {
   onClick?: () => void;
   accentColor?: PrimaryColors;
   withDots?: boolean;
+  withSeparator?: boolean;
 };
 
 export const ListItem = React.memo(
-  ({ id, index, record, operation, onClick, accentColor, withDots }: Props) => (
-    <li>
+  ({
+    id,
+    index,
+    record,
+    operation,
+    onClick,
+    accentColor,
+    withDots,
+    withSeparator,
+  }: Props) => (
+    <StyledListItem withSeparator={withSeparator}>
       <Button id={id} index={index} operation={operation} onClick={onClick}>
         <Code>
           {withDots ? <Dot color={accentColor}>· </Dot> : null}
@@ -32,13 +42,27 @@ export const ListItem = React.memo(
           </MinXs>
         )}
       </Button>
-    </li>
+    </StyledListItem>
   )
 );
 
+const StyledListItem = styled.li<Pick<Props, "withSeparator">>`
+  ${({ withSeparator }) => {
+    if (withSeparator) {
+      return `
+        border-bottom: 1px solid transparent;
+
+        &:last-child {
+          border-bottom: none;
+        }
+      `;
+    }
+  }}
+`;
+
 const Button = styled.button<Pick<Props, "index" | "operation">>`
   padding: 6px 10px;
-  border: 1px dashed transparent;
+  border: 1px solid transparent;
   display: inline-flex;
   justify-content: space-between;
   align-items: center;

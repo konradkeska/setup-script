@@ -1,3 +1,4 @@
+export { useDisplayMode } from "./useDisplayMode";
 export { useHotkeys } from "./useHotkeys";
 export { useList } from "./useList";
 export { useSearch } from "./useSearch";

@@ -2,14 +2,14 @@ import React from "react";
 import { DefaultTheme } from "styled-components";
 import { ReactourStep } from "reactour";
 
-import { setNativeValue } from "./helpers";
+import { setNativeValue } from "../../../utils/helpers";
 
 const getTourStepStyle = (theme: DefaultTheme): React.CSSProperties => ({
   backgroundColor: theme.colors.material.overlay,
   color: theme.colors.font.base,
 });
 
-export const getTourSteps = (theme: DefaultTheme): ReactourStep[] => [
+export const getSteps = (theme: DefaultTheme): ReactourStep[] => [
   {
     selector: "#brand",
     content:

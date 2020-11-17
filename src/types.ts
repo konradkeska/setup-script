@@ -52,6 +52,7 @@ export enum FontColors {
 
 export enum MaterialColors {
   INPUT = "input",
+  SIDE = "side",
   OVERLAY = "overlay",
   BACKGROUND = "background",
 }

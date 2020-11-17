@@ -16,6 +16,7 @@ declare module "styled-components" {
 
   export interface DefaultColorsMaterial {
     input: string;
+    side: string;
     overlay: string;
     background: string;
   }

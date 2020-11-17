@@ -15,6 +15,7 @@ const themes: Themes = {
       },
       material: {
         input: "rgb(51, 55, 62)",
+        side: "rgb(56, 60, 68)",
         overlay: "rgb(61, 66, 74)",
         background: "rgb(40, 44, 52)",
       },
@@ -50,6 +51,7 @@ const themes: Themes = {
       },
       material: {
         input: "rgb(229,	229,	229)",
+        side: "rgb(235,	235,	235)",
         overlay: "rgb(242, 242, 242)",
         background: "rgb(255,	255, 255)",
       },

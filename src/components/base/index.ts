@@ -5,6 +5,7 @@ export { Emoji } from "./Emoji";
 export { Footer } from "./Footer";
 export { GlobalStyle } from "./GlobalStyle";
 export { Header } from "./Header";
+export { Icon } from "./Icon";
 export { Input } from "./Input";
 export { Link } from "./Link";
 export { Main } from "./Main";

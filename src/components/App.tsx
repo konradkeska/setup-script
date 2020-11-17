@@ -1,29 +1,26 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import styled, { ThemeProvider } from "styled-components";
-import Tour from "reactour";
+import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import { ThemeProvider } from "styled-components";
 
+import {
+  useDisplayMode,
+  useHotkeys,
+  useTheme,
+  useList,
+  useSearch,
+  useSides,
+  useWindowSize,
+} from "../hooks";
 import { PrimaryColors, MaterialColors, SoftType, Soft } from "../types";
 import { loadCasks, loadFormulas } from "../utils/api";
 import { CASKS_PANEL_LABEL, FORMULAS_PANEL_LABEL } from "../utils/config";
 import { MinSm } from "../utils/rwd";
-import {
-  useHotkeys,
-  useTheme,
-  useTour,
-  useList,
-  useWindowSize,
-} from "../hooks";
+import { SvgSprites } from "../utils/SvgSprites";
 
 import {
   Button,
   Footer,
   GlobalStyle,
+  Emoji,
   Header,
   Input,
   Main,
@@ -31,34 +28,16 @@ import {
   Toggle,
   Wrapper,
 } from "./base";
-import { Bar, Brand } from "./common";
-import { Panel } from "./complex";
-import { includesQuery, sort } from "../utils/helpers";
+import { Brand } from "./common";
+import { Panel, Side, UsageTour } from "./complex";
 import { Script } from "./complex/Script";
-import { Emoji } from "./base/Emoji";
 
-export enum Preview {
-  PICKER = "picker",
-  SCRIPT = "script",
-}
+const HEADER_HEIGHT = 54;
+const PANEL_ITEM_HEIGHT = 32;
+const CONTENT_PAD_SUM = 135;
 
-// TODO: fix this mess
 function App() {
-  const [query, setQuery] = useState<string>("");
-  const [preview, setPreview] = useState<Preview>(Preview.PICKER);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
-
-  const { height } = useWindowSize();
-  const { mode, theme, switchTheme } = useTheme();
-
-  const {
-    cancelTour,
-    startTour,
-    isTourOpen,
-    steps,
-    onRequestClose,
-    wasUserGuided,
-  } = useTour({ theme });
 
   const [casks, addedCasks, addCask, removeCask] = useList(
     loadCasks,
@@ -70,11 +49,22 @@ function App() {
     SoftType.FORMULA
   );
 
-  const hasValidQuery = useMemo(() => query?.length > 1, [query]);
+  const { width, height } = useWindowSize();
+  const { mode, theme, switchTheme } = useTheme();
+  const { displayMode, switchDisplayMode, DisplayMode } = useDisplayMode();
+  const { query, setQuery, sortedResults } = useSearch({ casks, formulas });
+
+  const {
+    isLeftSideExpanded,
+    isRightSideExpanded,
+    toggleLeftSide,
+    toggleRightSide,
+    setLeftSideExpanded,
+  } = useSides();
 
   useEffect(() => {
-    if (!hasValidQuery) searchInputRef.current?.focus();
-  }, [hasValidQuery]);
+    if (query.length < 1) searchInputRef.current?.focus();
+  }, [query]);
 
   useHotkeys(
     () => ({
@@ -83,15 +73,12 @@ function App() {
     []
   );
 
-  const switchPreview = useCallback(
-    () =>
-      setPreview(preview === Preview.PICKER ? Preview.SCRIPT : Preview.PICKER),
-    [preview]
-  );
-
-  const onChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.currentTarget.value),
-    []
+  const onQueryChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setQuery(e.currentTarget.value);
+      setLeftSideExpanded(e.currentTarget.value.length > 0);
+    },
+    [setQuery, setLeftSideExpanded]
   );
 
   const onAdd = useCallback(
@@ -103,68 +90,33 @@ function App() {
     [addCask, addFormula]
   );
 
-  const getFullHeightCount = useCallback(
-    (wasUserGuided: boolean) =>
-      Math.floor((height - (wasUserGuided ? 62 : 62 + 42)) / 32),
-    [height]
+  const contentHeight = useMemo(() => height - HEADER_HEIGHT, [height]);
+
+  const searchItemCount = useMemo(
+    () => Math.floor(contentHeight / PANEL_ITEM_HEIGHT),
+    [contentHeight]
   );
 
-  const count = useMemo(() => getFullHeightCount(wasUserGuided), [
-    getFullHeightCount,
-    wasUserGuided,
-  ]);
-
-  const caskResults = useMemo(() => includesQuery(query, casks), [
-    query,
-    casks,
-  ]);
-
-  const formulaeResults = useMemo(() => includesQuery(query, formulas), [
-    query,
-    formulas,
-  ]);
-
-  const sortedResults = useMemo(
-    () =>
-      sort([...caskResults, ...formulaeResults], (a, b) =>
-        a.name.localeCompare(b.name, "en", { sensitivity: "base" })
-      ),
-    [caskResults, formulaeResults]
+  const panelItemCount = useMemo(
+    () => Math.floor((contentHeight - CONTENT_PAD_SUM) / PANEL_ITEM_HEIGHT / 2),
+    [contentHeight]
   );
 
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyle wasUserGuided={wasUserGuided} />
+      <GlobalStyle />
+      <SvgSprites />
       <>
-        {!wasUserGuided && (
-          <Bar
-            label={"Are you up for a quick tour?"}
-            btnLabel={"Ok"}
-            onClose={cancelTour}
-            onConfirm={startTour}
-          />
-        )}
-        <Tour
-          steps={steps}
-          onRequestClose={onRequestClose}
-          isOpen={isTourOpen}
-          onAfterOpen={() => (document.body.style.overflowY = "hidden")}
-          onBeforeClose={() => (document.body.style.overflowY = "auto")}
-          accentColor={theme.colors.primary.purple}
-          rounded={theme.radiuses.md}
-          showNavigation={false}
-          showNavigationNumber={false}
-          disableFocusLock
-        />
-        <Header hasShadow={hasValidQuery} wasUserGuided={wasUserGuided}>
+        <UsageTour theme={theme} />
+        <Header>
           <Wrapper maxW="100%">
             <Input
               id="search-input"
               ref={searchInputRef}
-              placeholder="Search.."
-              type="search"
+              placeholder="Find software.."
+              type="text"
               value={query}
-              onChange={onChange}
+              onChange={onQueryChange}
               autoComplete="off"
             />
             <MinSm>
@@ -177,70 +129,80 @@ function App() {
             </Button>
           </Wrapper>
         </Header>
-        {hasValidQuery && sortedResults.length > 0 && (
-          <Aside wasUserGuided={wasUserGuided}>
-            <Wrapper
-              justify="flex-start"
-              align="flex-start"
-              direction="column"
-              p="0px"
-            >
-              <Panel
-                id="results"
-                count={count}
-                items={sortedResults}
-                onClick={onAdd}
-                bgColor={MaterialColors.INPUT}
-                mt={!wasUserGuided}
-                withDots
-              />
-            </Wrapper>
-          </Aside>
-        )}
-        <Main wasUserGuided={wasUserGuided}>
+        <Side
+          expanded={isLeftSideExpanded}
+          onClick={toggleLeftSide}
+          screenWidth={width}
+          left
+        >
+          <Panel
+            id="results"
+            count={searchItemCount}
+            items={sortedResults}
+            onClick={onAdd}
+            bgColor={MaterialColors.SIDE}
+            withDots
+          />
+        </Side>
+        <Side
+          expanded={isRightSideExpanded}
+          onClick={toggleRightSide}
+          screenWidth={width}
+          right
+        >
+          <Panel
+            id="results"
+            count={searchItemCount}
+            items={[]}
+            bgColor={MaterialColors.INPUT}
+          />
+        </Side>
+        <Main>
           <Wrapper align="flex-start" p="18px 0px 0px 0px">
-            {preview === Preview.PICKER ? (
+            {displayMode === DisplayMode.PICKER ? (
               <>
-                <Panel
-                  id="added-casks"
-                  title={CASKS_PANEL_LABEL}
-                  items={addedCasks}
-                  onClick={removeCask}
-                  operation="remove"
-                  border
-                />
                 <Panel
                   id="added-formulas"
                   title={FORMULAS_PANEL_LABEL}
                   items={addedFormulas}
                   onClick={removeFormula}
+                  count={panelItemCount}
                   operation="remove"
                   accentColor={PrimaryColors.BLUE}
+                  withItemSeparator
+                  border
+                />
+                <Panel
+                  id="added-casks"
+                  title={CASKS_PANEL_LABEL}
+                  items={addedCasks}
+                  onClick={removeCask}
+                  count={panelItemCount}
+                  operation="remove"
+                  withItemSeparator
                   border
                 />
               </>
             ) : (
-              <Script casks={addedCasks} formulas={addedFormulas} />
+              <Script
+                screenHeight={contentHeight}
+                casks={addedCasks}
+                formulas={addedFormulas}
+              />
             )}
           </Wrapper>
         </Main>
         <Footer>
           <Wrapper color={theme.colors.font.sub} p="0px 16px">
             <Toggle
-              defaultChecked={preview === Preview.PICKER}
-              onChange={switchPreview}
-              icons={{
-                checked: <Emoji>📦</Emoji>,
-                unchecked: <Emoji>📜</Emoji>,
-              }}
+              defaultChecked={displayMode === DisplayMode.PICKER}
+              onChange={switchDisplayMode}
+              icons={DISPLAY_ICONS}
             />
             <Toggle
               defaultChecked={mode === "light"}
               onChange={switchTheme}
-              icons={{
-                checked: <Emoji>☀️</Emoji>,
-                unchecked: <Emoji>🌙</Emoji>,
-              }}
+              icons={THEME_ICONS}
             />
           </Wrapper>
         </Footer>
@@ -251,14 +213,12 @@ function App() {
 
 export default App;
 
-const Aside = styled.aside<{ wasUserGuided: boolean }>`
-  z-index: 4;
-  padding-top: ${({ wasUserGuided }) => `${wasUserGuided ? 62 : 62 + 42}px`};
-  max-width: 360px;
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  background-color: ${({ theme }) => theme.colors.material.input};
-  box-shadow: ${({ theme }) => theme.shadows.base};
-  transition: padding 700ms;
-`;
+const DISPLAY_ICONS = {
+  checked: <Emoji>📦</Emoji>,
+  unchecked: <Emoji>📜</Emoji>,
+};
+
+const THEME_ICONS = {
+  checked: <Emoji>☀️</Emoji>,
+  unchecked: <Emoji>🌙</Emoji>,
+};

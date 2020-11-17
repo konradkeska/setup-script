@@ -1,14 +1,9 @@
 import styled from "styled-components";
 
-type Props = {
-  hasShadow: boolean;
-  wasUserGuided: boolean;
-};
-
-export const Header = styled.header<Props>`
-  margin-top: ${({ wasUserGuided }) => (wasUserGuided ? "0px" : "42px")};
+export const Header = styled.header`
+  margin-top: 0px;
   width: 100%;
-  padding: ${({ theme }) => `${theme.paddings.md / 2}px 0px`};
+  padding: ${({ theme }) => `${theme.paddings.xs}px 0px`};
   position: fixed;
   display: flex;
   justify-content: center;
@@ -18,13 +13,7 @@ export const Header = styled.header<Props>`
   color: ${({ theme }) => theme.colors.font.base};
   transition: margin 700ms;
   backdrop-filter: blur(5px);
-  box-shadow: ${({ theme, hasShadow }) =>
-    hasShadow ? "unset" : theme.shadows.base};
+  box-shadow: ${({ theme }) => theme.shadows.base};
   border-bottom: ${({ theme }) => `1px solid ${theme.colors.material.input}`};
-  border-top: ${({ wasUserGuided, theme }) =>
-    `1px solid ${
-      wasUserGuided
-        ? theme.colors.material.overlay
-        : theme.colors.material.input
-    }`};
+  border-top: ${({ theme }) => `1px solid ${theme.colors.material.overlay}`};
 `;

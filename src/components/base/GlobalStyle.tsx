@@ -1,10 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-type Props = {
-  wasUserGuided: boolean;
-};
-
-export const GlobalStyle = createGlobalStyle<Props>`
+export const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",

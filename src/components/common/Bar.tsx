@@ -30,7 +30,9 @@ export const Bar = React.memo(
 );
 
 const Aside = styled.aside`
-  background-color: ${({ theme }) => theme.colors.material.input};
+  bottom: 0px;
+  border-top: ${({ theme }) => theme.colors.material.background};
+  background-color: ${({ theme }) => theme.colors.material.overlay};
   width: 100%;
   padding: ${({ theme }) => `${theme.paddings.xs}px 0px`};
   position: fixed;

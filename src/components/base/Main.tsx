@@ -1,11 +1,7 @@
 import styled from "styled-components";
 
-type Props = {
-  wasUserGuided: boolean;
-};
-
-export const Main = styled.main<Props>`
-  padding-top: ${({ wasUserGuided }) => `${wasUserGuided ? 62 : 62 + 42}px`};
+export const Main = styled.main`
+  padding-top: 54px;
   width: 100%;
   display: flex;
   justify-content: space-between;

@@ -1,37 +1,34 @@
-import { useCallback, useMemo, useState } from "react";
-import { DefaultTheme } from "styled-components";
+import { useCallback, useState } from "react";
 
-import { getTourSteps } from "../utils/tour";
-
-type Props = {
-  theme: DefaultTheme;
-};
-
-export function useTour({ theme }: Props) {
-  const [wasUserGuided, setWasUserGuided] = useState(false);
+export function useTour() {
+  const [wasUserGuided, setWasUserGuided] = useState(
+    window.localStorage.getItem("wasGuided") === "true" || false
+  );
   const [isTourOpen, setIsTourOpen] = useState(false);
 
-  const cancelTour = useCallback(() => {
+  const setGuided = () => {
+    window.localStorage.setItem("wasGuided", "true");
     setWasUserGuided(true);
+  };
+
+  const cancelTour = useCallback(() => {
+    setGuided();
   }, []);
 
   const startTour = useCallback(() => {
     setTimeout(() => setIsTourOpen(true), 1000);
-    setWasUserGuided(true);
+    setGuided();
   }, []);
 
   const onRequestClose = useCallback(() => {
     setIsTourOpen(false);
-    setWasUserGuided(true);
+    setGuided();
   }, []);
-
-  const steps = useMemo(() => getTourSteps(theme), [theme]);
 
   return {
     cancelTour,
     startTour,
     isTourOpen,
-    steps,
     onRequestClose,
     wasUserGuided,
   };

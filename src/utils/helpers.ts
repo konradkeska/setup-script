@@ -1,13 +1,13 @@
 import { DefaultTheme } from "styled-components";
 
 import {
+  Soft,
   SoftType,
   FontColors,
   MaterialColors,
   PrimaryColors,
   SoftApiRecord,
-} from "../types";
-import { Soft } from "../types";
+} from "types";
 
 const formatResponse = (records: SoftApiRecord[], type: SoftType): Soft[] =>
   records.map(({ name, ...record }) => ({
@@ -20,7 +20,7 @@ const includesQuery = (query: string, records: Soft[]) =>
   records.filter(
     (item: Soft) =>
       (query?.length > 1 &&
-        ((item.name as string)?.toLowerCase().includes(query.toLowerCase()) ||
+        (item.name?.toLowerCase().includes(query.toLowerCase()) ||
           item.token?.toLowerCase().includes(query.toLowerCase()))) ||
       false
   );

@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 
-import { Soft } from "../types";
-import { includesQuery, sort } from "../utils/helpers";
+import { Soft } from "types";
+import { includesQuery, sort } from "utils";
 
 type Props = {
   casks: Soft[];

@@ -1,0 +1,36 @@
+import styled from "styled-components";
+
+import { FontColors, MaterialColors, PrimaryColors } from "types";
+import { toColorString } from "utils";
+
+type Props = {
+  color?: PrimaryColors | FontColors;
+  bgColor?: PrimaryColors | MaterialColors;
+  radius?: string;
+  p?: boolean;
+  ml?: boolean;
+  size?: string;
+  h?: string;
+  clickable?: boolean;
+  selectable?: boolean;
+};
+
+export const Span = styled.span<Props>`
+  color: ${({ color, theme }) =>
+    color ? toColorString(color, theme) : "inherit"};
+  background-color: ${({ bgColor, theme }) =>
+    bgColor ? toColorString(bgColor, theme) : "unset"};
+  border-radius: ${({ radius }) => radius || "unset"};
+  margin-left: ${({ ml }) => (ml ? "12px" : "unset")};
+  padding: ${({ p }) => (p ? "6px" : "unset")};
+  font-size: ${({ size }) => size || "inherit"};
+  height: ${({ h }) => h || "auto"};
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    cursor: ${({ clickable }) => (clickable ? "pointer" : "unset")};
+    user-select: ${({ selectable }) => (selectable ? "unset" : "none")};
+  }
+`;

@@ -1,5 +1,4 @@
 import React from "react";
-
 import MediaQuery from "react-responsive";
 
 interface IBreakpoints {
@@ -10,7 +9,7 @@ interface IBreakpoints {
   xl: number;
 }
 
-export const rwd: IBreakpoints = {
+const rwd: IBreakpoints = {
   xs: 576,
   sm: 768,
   md: 992,
@@ -50,4 +49,16 @@ const MinXl: <T>(props: T) => JSX.Element = (props) => (
   <MediaQuery {...props} minWidth={rwd.xl} />
 );
 
-export { MaxXs, MaxSm, MaxMd, MaxLg, MaxXl, MinXs, MinSm, MinMd, MinLg, MinXl };
+export {
+  rwd,
+  MaxXs,
+  MaxSm,
+  MaxMd,
+  MaxLg,
+  MaxXl,
+  MinXs,
+  MinSm,
+  MinMd,
+  MinLg,
+  MinXl,
+};

@@ -1,8 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 import { AxiosResponse } from "axios";
 
-import { Soft, SoftType } from "../types";
-import { formatResponse } from "../utils/helpers";
+import { Soft, SoftType } from "types";
+import { formatResponse } from "utils";
+
+type Props = {
+  loader: () => Promise<AxiosResponse<Soft[]>>;
+  type: SoftType;
+};
 
 type Return = [
   Soft[],
@@ -11,10 +16,7 @@ type Return = [
   (record: Soft) => () => void
 ];
 
-export function useList(
-  loader: () => Promise<AxiosResponse<Soft[]>>,
-  type: SoftType
-): Return {
+export function useList({ loader, type }: Props): Return {
   const [list, setList] = useState<Soft[]>([]);
   const [addedList, setAddedList] = useState<Soft[]>([]);
 

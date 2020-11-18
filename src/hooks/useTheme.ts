@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Mode } from "styled-components";
 
-import { themes } from "../utils/theme";
+import { themes } from "utils";
 
 const DEFAULT_THEME: Mode = "dark";
 

@@ -1,34 +1,34 @@
 import { useState, useCallback } from "react";
 import { useMediaQuery } from "react-responsive";
 
-import { rwd } from "../utils/rwd";
+import { rwd } from "utils";
 
 export function useSides() {
-  const [isLeftSideExpanded, setLeftSideExpanded] = useState(false);
-  const [isRightSideExpanded, setRightSideExpanded] = useState(false);
+  const [isLeftExpanded, setLeftExpanded] = useState(false);
+  const [isRightExpanded, setRightExpanded] = useState(false);
 
   const isMobile = useMediaQuery({ maxWidth: rwd.sm - 1 });
 
-  const toggleLeftSide = useCallback(() => {
-    if (isMobile && isRightSideExpanded && !isLeftSideExpanded) {
-      setRightSideExpanded(false);
+  const toggleLeft = useCallback(() => {
+    if (isMobile && isRightExpanded && !isLeftExpanded) {
+      setRightExpanded(false);
     }
-    setLeftSideExpanded(!isLeftSideExpanded);
-  }, [isMobile, isRightSideExpanded, isLeftSideExpanded]);
+    setLeftExpanded(!isLeftExpanded);
+  }, [isMobile, isRightExpanded, isLeftExpanded]);
 
-  const toggleRightSide = useCallback(() => {
-    if (isMobile && isLeftSideExpanded && !isRightSideExpanded) {
-      setLeftSideExpanded(false);
+  const toggleRight = useCallback(() => {
+    if (isMobile && isLeftExpanded && !isRightExpanded) {
+      setLeftExpanded(false);
     }
-    setRightSideExpanded(!isRightSideExpanded);
-  }, [isMobile, isLeftSideExpanded, isRightSideExpanded]);
+    setRightExpanded(!isRightExpanded);
+  }, [isMobile, isLeftExpanded, isRightExpanded]);
 
   return {
-    isLeftSideExpanded,
-    isRightSideExpanded,
-    toggleLeftSide,
-    toggleRightSide,
-    setLeftSideExpanded,
-    setRightSideExpanded,
+    isLeftExpanded,
+    isRightExpanded,
+    toggleLeft,
+    toggleRight,
+    setLeftExpanded,
+    setRightExpanded,
   };
 }

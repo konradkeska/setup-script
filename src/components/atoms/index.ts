@@ -11,5 +11,4 @@ export { Main } from "./Main";
 export { Row } from "./Row";
 export { Span } from "./Span";
 export { Title } from "./Title";
-export { Toggle } from "./Toggle";
 export { Wrapper } from "./Wrapper";

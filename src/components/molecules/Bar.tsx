@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import { PrimaryColors } from "types";
 import { Button, Span, Wrapper } from "../atoms";
 
 type Props = {
@@ -17,7 +16,7 @@ export const Bar = React.memo(
       <Wrapper maxW="100%">
         <div>
           {label}{" "}
-          <Button bgColor={PrimaryColors.GREEN} onClick={onConfirm} small ml>
+          <Button onClick={onConfirm} small ml>
             {btnLabel}
           </Button>
         </div>

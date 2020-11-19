@@ -16,7 +16,7 @@ export const Button = styled.button<{
       ? theme.colors.material.input
       : bgColor
       ? theme.colors.primary[bgColor]
-      : theme.colors.primary.blue};
+      : theme.colors.primary.green};
   padding: ${({ theme, small }) =>
     small
       ? `${theme.paddings.xs / 2}px ${(theme.paddings.xs / 2) * 3.25}px`

@@ -1,3 +1,4 @@
+import { HEADER_HEIGHT } from "components/config";
 import styled from "styled-components";
 
 import { rwd } from "utils";
@@ -14,7 +15,7 @@ export const Wrapper = styled.aside<Props>`
   display: flex;
   flex-direction: row;
   z-index: 4;
-  padding-top: 54px;
+  padding-top: ${HEADER_HEIGHT}px;
   right: ${({ right, expanded }) =>
     getExpandValue({ side: right, sideWidth: `-350px`, expanded })};
   left: ${({ left, expanded }) =>
@@ -27,32 +28,32 @@ export const Wrapper = styled.aside<Props>`
 
   @media (max-width: ${rwd.sm - 1}px) {
     max-width: calc(100% - 40px);
-    right: ${({ right, expanded, screenWidth }) =>
+    right: ${({ right, expanded }) =>
       getExpandValue({
         side: right,
-        sideWidth: `calc((${screenWidth}px - 70px) * -1)`,
+        sideWidth: `calc((100% - 70px) * -1)`,
         expanded,
       })};
-    left: ${({ left, expanded, screenWidth }) =>
+    left: ${({ left, expanded }) =>
       getExpandValue({
         side: left,
-        sideWidth: `calc((${screenWidth}px - 70px) * -1)`,
+        sideWidth: `calc((100% - 70px) * -1)`,
         expanded,
       })};
   }
 
   @media (min-width: ${rwd.lg}px) {
     max-width: calc((100% - 750px) / 2);
-    right: ${({ right, expanded, screenWidth }) =>
+    right: ${({ right, expanded }) =>
       getExpandValue({
         side: right,
-        sideWidth: `calc((${screenWidth}px - 810px) / -2)`,
+        sideWidth: `calc((100% - 810px) / -2)`,
         expanded,
       })};
-    left: ${({ left, expanded, screenWidth }) =>
+    left: ${({ left, expanded }) =>
       getExpandValue({
         side: left,
-        sideWidth: `calc((${screenWidth}px - 810px) / -2)`,
+        sideWidth: `calc((100% - 810px) / -2)`,
         expanded,
       })};
   }

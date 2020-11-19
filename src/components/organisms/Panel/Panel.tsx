@@ -68,14 +68,11 @@ export const Panel = React.memo(
   )
 );
 
-type PanelWrapperProps = Pick<Props, "count" | "width" | "height" | "title">;
+type PanelWrapperProps = Pick<Props, "width" | "height" | "title">;
 
 const PanelWrapper = styled.div<PanelWrapperProps>`
   width: ${({ width }) => width};
-
+  height: ${({ height }) => height};
   padding: ${({ theme: { paddings }, title }) =>
     title ? `0px ${paddings.sm}px ${paddings.sm}px ${paddings.sm}px` : "0px"};
-
-  height: ${({ height, count, title }) =>
-    height || `calc(${count} * 32px + ${title ? 25 + 24 : 0}px)`};
 `;

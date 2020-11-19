@@ -6,20 +6,22 @@ import { Emoji } from "./Emoji";
 
 type Props = {
   onChange: () => void;
-  icons?: {
-    checked: JSX.Element;
-    unchecked: JSX.Element;
-  };
+  checkedIcon?: JSX.Element;
+  uncheckedIcon?: JSX.Element;
   defaultChecked?: boolean;
 };
 
 export const Toggle = React.memo(
   ({
-    icons = { checked: <Emoji>✔️</Emoji>, unchecked: <Emoji>✖️</Emoji> },
+    checkedIcon = <Emoji>✔️</Emoji>,
+    uncheckedIcon = <Emoji>✖️</Emoji>,
     ...props
   }: Props) => (
     <StyledToggle>
-      <ReactToggle icons={icons} {...props} />
+      <ReactToggle
+        icons={{ checked: checkedIcon, unchecked: checkedIcon }}
+        {...props}
+      />
     </StyledToggle>
   )
 );

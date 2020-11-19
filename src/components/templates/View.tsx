@@ -10,7 +10,6 @@ interface ViewProps {
 
 interface SideProps extends ViewProps {
   expanded: boolean;
-  screenWidth?: number;
   onClick?: () => void;
 }
 
@@ -24,21 +23,17 @@ const HeaderContainer = React.memo(({ children }: ViewProps) => (
 
 const SidesContainer = ({ children }: ViewProps) => <>{children}</>;
 
-const Left = React.memo(
-  ({ children, expanded, onClick, screenWidth }: SideProps) => (
-    <Side expanded={expanded} onClick={onClick} screenWidth={screenWidth} left>
-      {children}
-    </Side>
-  )
-);
+const Left = React.memo(({ children, expanded, onClick }: SideProps) => (
+  <Side expanded={expanded} onClick={onClick} left>
+    {children}
+  </Side>
+));
 
-const Right = React.memo(
-  ({ children, expanded, onClick, screenWidth }: SideProps) => (
-    <Side expanded={expanded} onClick={onClick} screenWidth={screenWidth} right>
-      {children}
-    </Side>
-  )
-);
+const Right = React.memo(({ children, expanded, onClick }: SideProps) => (
+  <Side expanded={expanded} onClick={onClick} right>
+    {children}
+  </Side>
+));
 
 SidesContainer.Left = Left;
 SidesContainer.Right = Right;

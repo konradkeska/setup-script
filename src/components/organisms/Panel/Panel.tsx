@@ -20,7 +20,7 @@ type Props = {
   operation?: "add" | "remove";
   width?: string;
   height?: string;
-  onClick?: (record: Soft) => (() => void) | undefined;
+  onItemClick?: (record: Soft) => (() => void) | undefined;
 };
 
 const COLORS_MAP = {
@@ -32,7 +32,7 @@ export const Panel = React.memo(
   ({
     title,
     items,
-    onClick,
+    onItemClick,
     id,
     withDots = false,
     withItemSeparator = false,
@@ -57,7 +57,7 @@ export const Panel = React.memo(
             index={index}
             record={record}
             operation={operation}
-            onClick={onClick?.(record)}
+            onClick={onItemClick?.(record)}
             dotColor={COLORS_MAP[record.type]}
             withDots={withDots}
             withSeparator={withItemSeparator}

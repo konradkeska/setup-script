@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Span, Title } from "components/atoms";
+import { Base, PrimaryColors, MaterialColors, SoftType, Action } from "types";
 import { Soft, PrimaryColors, MaterialColors, SoftType } from "types";
 
 import { ListItem } from "./Item";
 import { List } from "./List";
+import { Title } from "./Title";
 
 type Props = {
   items: Soft[];
@@ -44,11 +45,7 @@ export const Panel = React.memo(
     height = "100%",
   }: Props) => (
     <PanelWrapper title={title} width={width} height={height}>
-      {title && (
-        <Title title={title}>
-          <Span color={accentColor}>#</Span> {title}
-        </Title>
-      )}
+      {title && <Title title={title} accentColor={accentColor} />}
       <List id={id} title={title} border={border} bgColor={bgColor}>
         {items.map((record, index) => (
           <ListItem

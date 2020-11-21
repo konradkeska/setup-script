@@ -8,7 +8,9 @@ type Props = {
   formulas: Soft[];
 };
 
-export function useSearch({ casks, formulas }: Props) {
+type Return = [string, React.Dispatch<React.SetStateAction<string>>, Soft[]];
+
+export function useSearch({ casks, formulas }: Props): Return {
   const [query, setQuery] = useState<string>("");
   const hasValidQuery = useMemo(() => query?.length > 1, [query]);
 
@@ -30,5 +32,5 @@ export function useSearch({ casks, formulas }: Props) {
     [caskResults, formulaeResults]
   );
 
-  return { query, setQuery, sortedResults };
+  return [query, setQuery, sortedResults];
 }

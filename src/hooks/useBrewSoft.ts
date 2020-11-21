@@ -5,15 +5,23 @@ import { Soft, SoftType } from "../types";
 import { useList } from "./useList";
 
 export function useBrewSoft() {
-  const [casks, addedCasks, addCask, removeCask] = useList({
-    loader: loadCasks,
-    type: SoftType.CASK,
-  });
+  const [
+    casks,
+    addedCasks,
+    addCask,
+    removeCask,
+    addCasks,
+    removeCasks,
+  ] = useList({ loader: loadCasks, type: SoftType.CASK });
 
-  const [formulas, addedFormulas, addFormula, removeFormula] = useList({
-    loader: loadFormulas,
-    type: SoftType.FORMULA,
-  });
+  const [
+    formulas,
+    addedFormulas,
+    addFormula,
+    removeFormula,
+    addFormulas,
+    removeFormulas,
+  ] = useList({ loader: loadFormulas, type: SoftType.FORMULA });
 
   const onAdd = useCallback(
     (record: Soft) =>
@@ -31,6 +39,18 @@ export function useBrewSoft() {
     [removeCask, removeFormula]
   );
 
+  const onMultiAdd = useCallback(
+    (records: Soft[], type: SoftType) =>
+      getCallbackMap([addCasks, addFormulas])[type](records)(),
+    [addCasks, addFormulas]
+  );
+
+  const onMultiRemove = useCallback(
+    (records: Soft[], type: SoftType) =>
+      getCallbackMap([removeCasks, removeFormulas])[type](records)(),
+    [removeCasks, removeFormulas]
+  );
+
   return {
     casks,
     addedCasks,
@@ -38,6 +58,8 @@ export function useBrewSoft() {
     addedFormulas,
     onAdd,
     onRemove,
+    onMultiAdd,
+    onMultiRemove,
   };
 }
 

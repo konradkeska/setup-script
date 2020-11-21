@@ -2,14 +2,12 @@ import React from "react";
 import styled from "styled-components";
 
 import { Base, PrimaryColors, MaterialColors, SoftType, Action } from "types";
-import { Soft, PrimaryColors, MaterialColors, SoftType } from "types";
-
-import { ListItem } from "./Item";
 import { List } from "./List";
+import { ListItem } from "./Item";
 import { Title } from "./Title";
 
-type Props = {
-  items: Soft[];
+interface Props<T> {
+  items: T[];
   id?: string;
   title?: string;
   count?: number;
@@ -21,16 +19,11 @@ type Props = {
   action?: Action;
   width?: string;
   height?: string;
-  onItemClick?: (record: Soft) => (() => void) | undefined;
-};
-
-const COLORS_MAP = {
-  [SoftType.CASK]: PrimaryColors.PURPLE,
-  [SoftType.FORMULA]: PrimaryColors.BLUE,
-};
+  onItemClick?: (record: T) => () => void;
+}
 
 export const Panel = React.memo(
-  ({
+  <T extends Base>({
     title,
     items,
     onItemClick,
@@ -43,19 +36,19 @@ export const Panel = React.memo(
     action = Action.ADD,
     width = "100%",
     height = "100%",
-  }: Props) => (
+  }: Props<T>) => (
     <PanelWrapper title={title} width={width} height={height}>
       {title && <Title title={title} accentColor={accentColor} />}
       <List id={id} title={title} border={border} bgColor={bgColor}>
         {items.map((record, index) => (
           <ListItem
-            id={record.token}
+            id={record.token || record.name}
             key={index}
             index={index}
             record={record}
             action={action}
             onClick={onItemClick?.(record)}
-            dotColor={COLORS_MAP[record.type]}
+            dotColor={record?.type ? COLORS_MAP[record.type] : undefined}
             withDots={withDots}
             withSeparator={withItemSeparator}
           />
@@ -65,7 +58,12 @@ export const Panel = React.memo(
   )
 );
 
-type PanelWrapperProps = Pick<Props, "width" | "height" | "title">;
+const COLORS_MAP = {
+  [SoftType.CASK]: PrimaryColors.PURPLE,
+  [SoftType.FORMULA]: PrimaryColors.BLUE,
+};
+
+type PanelWrapperProps = Pick<Props<Base>, "width" | "height" | "title">;
 
 const PanelWrapper = styled.div<PanelWrapperProps>`
   width: ${({ width }) => width};

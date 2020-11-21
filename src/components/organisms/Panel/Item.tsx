@@ -7,28 +7,28 @@ import { truncate, MinXs } from "utils";
 
 import { Code, Dot } from "components/atoms";
 
-type Props = {
+interface Props<T> {
   id: string;
   index: number;
-  record: Soft;
+  record: T;
   action: Action;
   onClick?: () => void;
   dotColor?: PrimaryColors;
   withDots?: boolean;
   withSeparator?: boolean;
-};
+}
 
 export const ListItem = React.memo(
-  ({
+  <T extends Base>({
     id,
     index,
     record,
-    operation,
+    action,
     onClick,
     dotColor,
     withDots,
     withSeparator,
-  }: Props) => (
+  }: Props<T>) => (
     <StyledListItem withSeparator={withSeparator}>
       <Button id={id} index={index} action={action} onClick={onClick}>
         <Code>
@@ -45,7 +45,7 @@ export const ListItem = React.memo(
   )
 );
 
-const StyledListItem = styled.li<Pick<Props, "withSeparator">>`
+const StyledListItem = styled.li<Pick<Props<Base>, "withSeparator">>`
   ${({ withSeparator }) => {
     if (withSeparator) {
       return `

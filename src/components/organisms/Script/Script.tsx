@@ -45,8 +45,8 @@ export const Script = React.memo(({ casks, formulas }: Props) => (
       <br /># {CASKS_PANEL_LABEL}
       <br />
       brew cask install (<br />
-      {casks.map(({ token }, index) => (
-        <BrewRecord key={index} token={token} />
+      {casks.map(({ token, name }, index) => (
+        <BrewRecord key={index} token={token || name} />
       ))}
       )
     </Preview>

@@ -3,6 +3,7 @@ import React from "react";
 import {
   useBrewSoft,
   useDisplayMode,
+  usePreset,
   useSearch,
   useSides,
   useTheme,
@@ -29,6 +30,16 @@ function App() {
     onMultiAdd,
     onMultiRemove,
   } = useBrewSoft();
+
+  const [onPresetClick, PRESETS] = usePreset({
+    casks,
+    formulas,
+    addedCasks,
+    addedFormulas,
+    onMultiAdd,
+    onMultiRemove,
+  });
+
   const [query, setQuery, searchResults] = useSearch({ casks, formulas });
 
   const {
@@ -66,7 +77,11 @@ function App() {
             />
           </View.Sides.Left>
           <View.Sides.Right expanded={isRightExpanded} onClick={toggleRight}>
-            <Panel items={sortedResults} bgColor={MaterialColors.SIDE} />
+            <Panel
+              items={PRESETS}
+              bgColor={MaterialColors.SIDE}
+              onItemClick={onPresetClick}
+            />
           </View.Sides.Right>
         </View.Sides>
         <View.Main>

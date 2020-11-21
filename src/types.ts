@@ -1,13 +1,28 @@
-export interface Soft {
-  artifacts: string[];
-  depends_on: Dependson;
-  homepage: string;
+type All = Preset & Soft;
+
+export interface Base extends All {
   name: string;
-  sha256: string;
-  token: string;
-  type: SoftType;
-  url: string;
-  version: string;
+  token?: string;
+  type?: SoftType;
+  version?: string;
+}
+
+export interface Preset {
+  name: string;
+  casks?: string[];
+  formulas?: string[];
+}
+
+export interface Soft {
+  artifacts?: string[];
+  depends_on?: Dependson;
+  homepage?: string;
+  name: string;
+  sha256?: string;
+  token?: string;
+  type?: SoftType;
+  url?: string;
+  version?: string;
   appcast?: string;
   auto_updates?: boolean;
   caveats?: string;
@@ -29,14 +44,14 @@ type Macos = {
   ">=": string[];
 };
 
+type Conflictswith = {
+  cask: string[];
+};
+
 export enum SoftType {
   CASK = "cask",
   FORMULA = "formula",
 }
-
-type Conflictswith = {
-  cask: string[];
-};
 
 export enum PrimaryColors {
   PURPLE = "purple",
@@ -75,15 +90,17 @@ export enum Radiuses {
   INPUT = "input",
 }
 
-export const Colors = {
-  PRIMARY: PrimaryColors,
-  FONT: FontColors,
-  MATERIAL: MaterialColors,
-};
+export enum Action {
+  ADD = "add",
+  REMOVE = "remove",
+}
 
-export const Theme = {
-  COLORS: Colors,
-  PADDINGS: Paddings,
-  SHADOWS: Shadows,
-  RADIUSES: Radiuses,
-};
+export enum DisplayMode {
+  PICKER = "picker",
+  SCRIPT = "script",
+}
+
+export enum ThemeMode {
+  LIGHT = "light",
+  DARK = "dark",
+}

@@ -16,6 +16,9 @@ import { Global, View } from "./templates";
 import { CASKS_PANEL_LABEL, FORMULAS_PANEL_LABEL } from "./config";
 
 function App() {
+  const { mode, theme, switchTheme, ThemeMode } = useTheme();
+  const { displayMode, switchDisplayMode, DisplayMode } = useDisplayMode();
+
   const {
     casks,
     addedCasks,
@@ -23,7 +26,11 @@ function App() {
     addedFormulas,
     onAdd,
     onRemove,
+    onMultiAdd,
+    onMultiRemove,
   } = useBrewSoft();
+  const [query, setQuery, searchResults] = useSearch({ casks, formulas });
+
   const {
     isLeftExpanded,
     isRightExpanded,
@@ -31,9 +38,7 @@ function App() {
     toggleRight,
     setLeftExpanded,
   } = useSides();
-  const { mode, theme, switchTheme, ThemeMode } = useTheme();
-  const { displayMode, switchDisplayMode, DisplayMode } = useDisplayMode();
-  const { query, setQuery, sortedResults } = useSearch({ casks, formulas });
+
   return (
     <Global theme={theme}>
       <View>
@@ -54,7 +59,7 @@ function App() {
           <View.Sides.Left expanded={isLeftExpanded} onClick={toggleLeft}>
             <Panel
               id="results"
-              items={sortedResults}
+              items={searchResults}
               onItemClick={onAdd}
               bgColor={MaterialColors.SIDE}
               withDots

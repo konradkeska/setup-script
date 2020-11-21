@@ -6,10 +6,10 @@ import {
   FontColors,
   MaterialColors,
   PrimaryColors,
-  SoftApiRecord,
+  SoftApiResponse,
 } from "types";
 
-const formatResponse = (records: SoftApiRecord[], type: SoftType): Soft[] =>
+const formatResponse = (records: SoftApiResponse[], type: SoftType): Soft[] =>
   records.map(({ name, ...record }) => ({
     ...record,
     name: typeof name === "string" ? name : name[0],

@@ -50,7 +50,6 @@ const StyledListItem = Sc.li<Pick<Props<Base>, "withSeparator">>`
     if (withSeparator) {
       return `
         border-bottom: 1px solid transparent;
-
         &:last-child {
           border-bottom: none;
         }
@@ -73,21 +72,16 @@ const Button = Sc.button<Pick<Props<Base>, "index" | "action">>`
   &:hover {
     cursor: pointer;
     border: ${({ theme, action }) =>
-      action === Action.ADD
-        ? `1px dashed ${theme.colors.primary.green}`
-        : `1px dashed ${theme.colors.primary.red}`};
+      `1px dashed ${theme.colors.primary[getHighlightColor(action)]}`};
   }
 
   &:active {
     border: ${({ theme, action }) => `1px solid
-      ${
-        action === Action.ADD
-          ? theme.colors.primary.green
-          : theme.colors.primary.red
-      }`};
+      ${theme.colors.primary[getHighlightColor(action)]}`};
     background-color: ${({ theme, action }) =>
-      action === Action.ADD
-        ? theme.colors.primary.green
-        : theme.colors.primary.red};
+      theme.colors.primary[getHighlightColor(action)]};
   }
 `;
+
+const getHighlightColor = (action: Action): PrimaryColors =>
+  action === Action.ADD ? PrimaryColors.GREEN : PrimaryColors.RED;

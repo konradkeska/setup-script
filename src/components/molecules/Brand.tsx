@@ -1,7 +1,7 @@
 import React from "react";
 import Sc from "styled-components";
-import { FontColors, PrimaryColors } from "types";
 
+import { FontColors, PrimaryColors } from "types";
 import { Link, Row, Span } from "../atoms";
 import { Badge } from "./Badge";
 

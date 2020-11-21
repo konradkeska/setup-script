@@ -1,6 +1,4 @@
-type All = Preset & Soft;
-
-export interface Base extends All {
+export interface Base extends Preset, Soft {
   name: string;
   token?: string;
   type?: SoftType;
@@ -31,10 +29,6 @@ export interface Soft {
   desc?: string;
 }
 
-export type SoftApiRecord = Omit<Soft, "name" | "type"> & {
-  name: string | string[];
-};
-
 type Dependson = {
   macos?: Macos;
   cask?: string[];
@@ -46,6 +40,10 @@ type Macos = {
 
 type Conflictswith = {
   cask: string[];
+};
+
+export type SoftApiResponse = Omit<Soft, "name" | "type"> & {
+  name: string | string[];
 };
 
 export enum SoftType {

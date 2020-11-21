@@ -7,7 +7,7 @@ export {
   setNativeValue,
 } from "./helpers";
 export {
-  rwd,
+  RWD,
   MaxXs,
   MaxSm,
   MaxMd,

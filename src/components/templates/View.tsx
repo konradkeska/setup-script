@@ -10,12 +10,7 @@ interface ViewProps {
   children: React.ReactNode;
 }
 
-interface SideProps extends ViewProps {
-  expanded: boolean;
-  onClick?: () => void;
-}
-
-const View = ({ children }: ViewProps) => <>{children}</>;
+export const View = ({ children }: ViewProps) => <>{children}</>;
 
 const HeaderContainer = React.memo(({ children }: ViewProps) => (
   <Header>
@@ -24,6 +19,11 @@ const HeaderContainer = React.memo(({ children }: ViewProps) => (
 ));
 
 const SidesContainer = ({ children }: ViewProps) => <>{children}</>;
+
+interface SideProps extends ViewProps {
+  expanded: boolean;
+  onClick?: () => void;
+}
 
 const Left = React.memo(({ children, expanded, onClick }: SideProps) => (
   <Side expanded={expanded} onClick={onClick} left>
@@ -62,8 +62,6 @@ View.Main = MainContainer;
 View.Footer = FooterContainer;
 
 const Header = Sc.header`
-
-export const Header = styled.header`
   margin-top: 0px;
   width: 100%;
   padding: ${({ theme }) => `${theme.paddings.xs}px 0px`};

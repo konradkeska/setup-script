@@ -34,7 +34,7 @@ const IssueLink = styled(Link)`
   }
 `;
 
-const Logo = styled.h4`
+const Logo = styled.h1`
   user-select: none;
   margin: 0;
   font-weight: 900;

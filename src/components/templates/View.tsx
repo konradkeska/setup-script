@@ -1,6 +1,8 @@
 import React from "react";
+import styled from "styled-components";
 
-import { Footer, Header, Main, Wrapper } from "components/atoms";
+import { FOOTER_HEIGHT, HEADER_HEIGHT } from "components/config";
+import { Wrapper } from "components/atoms";
 import { Side } from "components/organisms";
 import { FontColors } from "types";
 
@@ -60,3 +62,42 @@ View.Main = MainContainer;
 View.Footer = FooterContainer;
 
 export { View };
+
+export const Header = styled.header`
+  margin-top: 0px;
+  width: 100%;
+  padding: ${({ theme }) => `${theme.paddings.xs}px 0px`};
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  background-color: ${({ theme }) => theme.colors.material.overlay};
+  color: ${({ theme }) => theme.colors.font.base};
+  transition: margin 500ms;
+  backdrop-filter: blur(5px);
+  box-shadow: ${({ theme }) => theme.shadows.base};
+  border-bottom: ${({ theme }) => `1px solid ${theme.colors.material.input}`};
+  border-top: ${({ theme }) => `1px solid ${theme.colors.material.overlay}`};
+`;
+
+export const Main = styled.main`
+  padding-top: ${HEADER_HEIGHT}px;
+  width: 100%;
+  height: calc(100% - ${FOOTER_HEIGHT}px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  background-color: ${({ theme }) => theme.colors.material.background};
+  transition: padding 500ms;
+`;
+
+export const Footer = styled.footer`
+  color: ${({ theme }) => theme.colors.font.sub};
+  background-color: ${({ theme }) => theme.colors.material.background};
+  padding-bottom: ${({ theme }) => `${theme.paddings.xs}px`};
+  text-align: right;
+  display: flex;
+  justify-content: space-between;
+`;

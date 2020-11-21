@@ -18,6 +18,6 @@ export const Grid = styled.div<{
   margin-top: ${({ mt }) => mt || "unset"};
   flex-wrap: wrap;
   height: 100%;
-  transition: margin 700ms;
+  transition: margin 500ms;
   color: ${({ theme, color }) => color || theme.colors.font.base};
 `;

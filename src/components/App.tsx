@@ -3,19 +3,23 @@ import React from "react";
 import {
   useBrewSoft,
   useDisplayMode,
+  usePreset,
   useSearch,
   useSides,
   useTheme,
 } from "hooks";
-import { PrimaryColors, MaterialColors } from "types";
+import { PrimaryColors, MaterialColors, Action } from "types";
 import { MinSm } from "utils";
-import { Button, Emoji, Toggle } from "./atoms";
-import { Brand, Search } from "./molecules";
+import { Button, Emoji } from "./atoms";
+import { Brand, Search, Toggle } from "./molecules";
 import { Panel, Script } from "./organisms";
 import { Global, View } from "./templates";
 import { CASKS_PANEL_LABEL, FORMULAS_PANEL_LABEL } from "./config";
 
 function App() {
+  const { mode, theme, switchTheme, ThemeMode } = useTheme();
+  const { displayMode, switchDisplayMode, DisplayMode } = useDisplayMode();
+
   const {
     casks,
     addedCasks,
@@ -23,7 +27,21 @@ function App() {
     addedFormulas,
     onAdd,
     onRemove,
+    onMultiAdd,
+    onMultiRemove,
   } = useBrewSoft();
+
+  const [onPresetClick, PRESETS] = usePreset({
+    casks,
+    formulas,
+    addedCasks,
+    addedFormulas,
+    onMultiAdd,
+    onMultiRemove,
+  });
+
+  const [query, setQuery, searchResults] = useSearch({ casks, formulas });
+
   const {
     isLeftExpanded,
     isRightExpanded,
@@ -31,9 +49,6 @@ function App() {
     toggleRight,
     setLeftExpanded,
   } = useSides();
-  const { mode, theme, switchTheme, ThemeMode } = useTheme();
-  const { displayMode, switchDisplayMode, DisplayMode } = useDisplayMode();
-  const { query, setQuery, sortedResults } = useSearch({ casks, formulas });
   return (
     <Global theme={theme}>
       <View>
@@ -54,14 +69,18 @@ function App() {
           <View.Sides.Left expanded={isLeftExpanded} onClick={toggleLeft}>
             <Panel
               id="results"
-              items={sortedResults}
+              items={searchResults}
               onItemClick={onAdd}
               bgColor={MaterialColors.SIDE}
               withDots
             />
           </View.Sides.Left>
           <View.Sides.Right expanded={isRightExpanded} onClick={toggleRight}>
-            <Panel items={sortedResults} bgColor={MaterialColors.SIDE} />
+            <Panel
+              items={PRESETS}
+              bgColor={MaterialColors.SIDE}
+              onItemClick={onPresetClick}
+            />
           </View.Sides.Right>
         </View.Sides>
         <View.Main>
@@ -72,7 +91,7 @@ function App() {
                 title={FORMULAS_PANEL_LABEL}
                 items={addedFormulas}
                 onItemClick={onRemove}
-                operation="remove"
+                action={Action.REMOVE}
                 accentColor={PrimaryColors.BLUE}
                 withItemSeparator
                 height="50%"
@@ -83,7 +102,7 @@ function App() {
                 title={CASKS_PANEL_LABEL}
                 items={addedCasks}
                 onItemClick={onRemove}
-                operation="remove"
+                action={Action.REMOVE}
                 withItemSeparator
                 height="50%"
                 border

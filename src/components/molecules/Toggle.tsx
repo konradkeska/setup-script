@@ -1,8 +1,8 @@
 import React from "react";
+import ReactToggle from "react-toggle";
 import styled from "styled-components";
 
-import ReactToggle from "react-toggle";
-import { Emoji } from "./Emoji";
+import { Emoji } from "components/atoms";
 
 type Props = {
   onChange: () => void;

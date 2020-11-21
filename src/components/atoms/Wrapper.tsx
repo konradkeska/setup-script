@@ -27,7 +27,7 @@ export const Wrapper = styled.div<Props>`
   max-width: ${({ maxW }) => maxW || `${MAIN_MAX_WIDTH}px`};
   margin-top: ${({ mt }) => mt || "unset"};
   height: 100%;
-  transition: margin 700ms;
+  transition: margin 500ms;
   color: ${({ theme, color }) =>
     color ? toColorString(color, theme) : theme.colors.font.base};
 `;

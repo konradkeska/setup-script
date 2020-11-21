@@ -1,14 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Span, Title } from "components/atoms";
-import { Soft, PrimaryColors, MaterialColors, SoftType } from "types";
-
-import { ListItem } from "./Item";
+import { Base, PrimaryColors, MaterialColors, SoftType, Action } from "types";
 import { List } from "./List";
+import { ListItem } from "./Item";
+import { Title } from "./Title";
 
-type Props = {
-  items: Soft[];
+interface Props<T> {
+  items: T[];
   id?: string;
   title?: string;
   count?: number;
@@ -17,19 +16,14 @@ type Props = {
   accentColor?: PrimaryColors;
   bgColor?: MaterialColors;
   border?: boolean;
-  operation?: "add" | "remove";
+  action?: Action;
   width?: string;
   height?: string;
-  onItemClick?: (record: Soft) => (() => void) | undefined;
-};
-
-const COLORS_MAP = {
-  [SoftType.CASK]: PrimaryColors.PURPLE,
-  [SoftType.FORMULA]: PrimaryColors.BLUE,
-};
+  onItemClick?: (record: T) => () => void;
+}
 
 export const Panel = React.memo(
-  ({
+  <T extends Base>({
     title,
     items,
     onItemClick,
@@ -39,26 +33,22 @@ export const Panel = React.memo(
     accentColor = PrimaryColors.PURPLE,
     bgColor = MaterialColors.OVERLAY,
     border = false,
-    operation = "add",
+    action = Action.ADD,
     width = "100%",
     height = "100%",
-  }: Props) => (
+  }: Props<T>) => (
     <PanelWrapper title={title} width={width} height={height}>
-      {title && (
-        <Title title={title}>
-          <Span color={accentColor}>#</Span> {title}
-        </Title>
-      )}
+      {title && <Title title={title} accentColor={accentColor} />}
       <List id={id} title={title} border={border} bgColor={bgColor}>
         {items.map((record, index) => (
           <ListItem
-            id={record.token}
+            id={record.token || record.name}
             key={index}
             index={index}
             record={record}
-            operation={operation}
+            action={action}
             onClick={onItemClick?.(record)}
-            dotColor={COLORS_MAP[record.type]}
+            dotColor={record?.type ? COLORS_MAP[record.type] : undefined}
             withDots={withDots}
             withSeparator={withItemSeparator}
           />
@@ -68,7 +58,12 @@ export const Panel = React.memo(
   )
 );
 
-type PanelWrapperProps = Pick<Props, "width" | "height" | "title">;
+const COLORS_MAP = {
+  [SoftType.CASK]: PrimaryColors.PURPLE,
+  [SoftType.FORMULA]: PrimaryColors.BLUE,
+};
+
+type PanelWrapperProps = Pick<Props<Base>, "width" | "height" | "title">;
 
 const PanelWrapper = styled.div<PanelWrapperProps>`
   width: ${({ width }) => width};

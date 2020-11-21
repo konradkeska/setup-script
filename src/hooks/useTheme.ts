@@ -1,22 +1,17 @@
 import { useMemo, useState, useCallback } from "react";
-import { Mode } from "styled-components";
+import { DefaultTheme, Themes } from "styled-components";
 
-import { themes } from "utils";
+import { ThemeMode } from "types";
 
-enum ThemeMode {
-  LIGHT = "light",
-  DARK = "dark",
-}
+type Return = [ThemeMode, DefaultTheme, () => void];
 
 export function useTheme(): Return {
   const initialTheme: ThemeMode =
-export function useTheme() {
-  const initialTheme: Mode =
     (window.localStorage.getItem("theme") as ThemeMode) || DEFAULT_THEME;
 
-  const [theme, setTheme] = useState<Mode>(initialTheme);
+  const [theme, setTheme] = useState<ThemeMode>(initialTheme);
 
-  const setMode = useCallback((mode: Mode) => {
+  const setMode = useCallback((mode: ThemeMode) => {
     window.localStorage.setItem("theme", mode);
     setTheme(mode);
   }, []);
@@ -29,7 +24,7 @@ export function useTheme() {
 
   const currentTheme = useMemo(() => THEMES[theme], [theme]);
 
-  return { mode: initialTheme, theme: currentTheme, switchTheme, ThemeMode };
+  return [initialTheme, currentTheme, switchTheme];
 }
 
 const DEFAULT_THEME: ThemeMode = ThemeMode.DARK;

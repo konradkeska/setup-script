@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { Action, Preset, Soft, SoftType } from "types";
 
 type Props = {
@@ -19,61 +20,88 @@ export function usePreset({
   onMultiAdd,
   onMultiRemove,
 }: Props): Return {
-  const getCasks = (names?: string[]) =>
-    [...casks, ...addedCasks].filter(({ token }) =>
-      names?.includes(token || "")
-    );
+  const getCasks = useCallback(
+    (names?: string[]): Soft[] =>
+      [...casks, ...addedCasks].filter(({ token }) =>
+        names?.includes(token || "")
+      ),
+    [casks, addedCasks]
+  );
 
-  const getFormulas = (tokens?: string[]) =>
-    [...formulas, ...addedFormulas].filter(({ name }) =>
-      tokens?.includes(name)
-    );
+  const getFormulas = useCallback(
+    (tokens?: string[]): Soft[] =>
+      [...formulas, ...addedFormulas].filter(({ name }) =>
+        tokens?.includes(name)
+      ),
+    [formulas, addedFormulas]
+  );
 
-  const getSoft = ({ casks, formulas }: Preset) => [
-    ...(casks || []),
-    ...(formulas || []),
-  ];
+  const getSoft = useCallback(
+    ({ casks, formulas }: Preset): string[] => [
+      ...(casks || []),
+      ...(formulas || []),
+    ],
+    []
+  );
 
-  const getAddedSoft = () => [
-    ...addedCasks.map(({ token }) => token),
-    ...addedFormulas.map(({ name }) => name),
-  ];
+  const getAddedSoft = useCallback(
+    (): string[] => [
+      ...addedCasks.map(({ name, token }) => token || name),
+      ...addedFormulas.map(({ name }) => name),
+    ],
+    [addedCasks, addedFormulas]
+  );
 
-  const getAvailableToAdd = (preset: Preset) => {
-    const presetSoft = getSoft(preset);
-    const addedSoft = getAddedSoft();
-    return presetSoft.filter((entry) => !addedSoft.includes(entry));
-  };
+  const getAvailableToAdd = useCallback(
+    (preset: Preset): string[] => {
+      const presetSoft = getSoft(preset);
+      const addedSoft = getAddedSoft();
+      return presetSoft.filter((entry) => !addedSoft.includes(entry));
+    },
+    [getSoft, getAddedSoft]
+  );
 
-  const getAction = (preset: Preset) => {
-    const availableToAddCount = getAvailableToAdd(preset).length;
-    return availableToAddCount > 0 ? Action.ADD : Action.REMOVE;
-  };
+  const getAction = useCallback(
+    (preset: Preset): Action => {
+      const availableToAddCount = getAvailableToAdd(preset).length;
+      return availableToAddCount > 0 ? Action.ADD : Action.REMOVE;
+    },
+    [getAvailableToAdd]
+  );
 
-  const getActionCallback = (presetAction: Action) => {
-    return presetAction === Action.ADD ? onMultiAdd : onMultiRemove;
-  };
+  const getActionCallback = useCallback(
+    (presetAction: Action) => {
+      return presetAction === Action.ADD ? onMultiAdd : onMultiRemove;
+    },
+    [onMultiAdd, onMultiRemove]
+  );
 
-  const getPackagesFromConfig = ({ casks, formulas }: Preset) => {
-    const presetCasks = getCasks(casks);
-    const presetFormulas = getFormulas(formulas);
-    return [presetCasks, presetFormulas];
-  };
+  const getPackagesFromConfig = useCallback(
+    ({ casks, formulas }: Preset): [Soft[], Soft[]] => {
+      const presetCasks = getCasks(casks);
+      const presetFormulas = getFormulas(formulas);
+      return [presetCasks, presetFormulas];
+    },
+    [getCasks, getFormulas]
+  );
 
-  const onClick = (preset: Preset) => {
-    const presetAction = getAction(preset);
-    const actionCallback = getActionCallback(presetAction);
-    const [casks, formulas] = getPackagesFromConfig(preset);
-    return () => {
-      actionCallback(casks, SoftType.CASK);
-      actionCallback(formulas, SoftType.FORMULA);
-    };
-  };
+  const onClick = useCallback(
+    (preset: Preset) => {
+      const presetAction = getAction(preset);
+      const actionCallback = getActionCallback(presetAction);
+      const [casks, formulas] = getPackagesFromConfig(preset);
+      return () => {
+        actionCallback(casks, SoftType.CASK);
+        actionCallback(formulas, SoftType.FORMULA);
+      };
+    },
+    [getAction, getActionCallback, getPackagesFromConfig]
+  );
 
-  return [onClick, PRESETS];
+  return [onClick, FEATURED_PRESETS];
 }
 
-const PRESETS: Preset[] = [
+const FEATURED_PRESETS: Preset[] = [
   {
     name: "Base Essentials",
     casks: [

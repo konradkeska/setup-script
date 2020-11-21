@@ -1,24 +1,20 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 
-enum DisplayMode {
-  PICKER = "picker",
-  SCRIPT = "script",
-}
+import { DisplayMode } from "types";
 
-export function useDisplayMode() {
+type Return = [DisplayMode, () => void];
+
+export function useDisplayMode(): Return {
   const [displayMode, setDisplayMode] = useState<DisplayMode>(
     DisplayMode.PICKER
   );
 
-  const switchDisplayMode = useCallback(
-    () =>
-      setDisplayMode(
-        displayMode === DisplayMode.PICKER
-          ? DisplayMode.SCRIPT
-          : DisplayMode.PICKER
-      ),
-    [displayMode]
-  );
+  const switchDisplayMode = () =>
+    setDisplayMode(
+      displayMode === DisplayMode.PICKER
+        ? DisplayMode.SCRIPT
+        : DisplayMode.PICKER
+    );
 
-  return { displayMode, switchDisplayMode, DisplayMode };
+  return [displayMode, switchDisplayMode];
 }

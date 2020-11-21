@@ -8,7 +8,13 @@ import {
   useSides,
   useTheme,
 } from "hooks";
-import { PrimaryColors, MaterialColors, Action } from "types";
+import {
+  PrimaryColors,
+  MaterialColors,
+  Action,
+  DisplayMode,
+  ThemeMode,
+} from "types";
 import { MinSm } from "utils";
 import { Button, Emoji } from "./atoms";
 import { Brand, Search, Toggle } from "./molecules";
@@ -17,8 +23,8 @@ import { Global, View } from "./templates";
 import { CASKS_PANEL_LABEL, FORMULAS_PANEL_LABEL } from "./config";
 
 function App() {
-  const { mode, theme, switchTheme, ThemeMode } = useTheme();
-  const { displayMode, switchDisplayMode, DisplayMode } = useDisplayMode();
+  const [mode, theme, switchTheme] = useTheme();
+  const [displayMode, switchDisplayMode] = useDisplayMode();
 
   const {
     casks,
@@ -31,7 +37,7 @@ function App() {
     onMultiRemove,
   } = useBrewSoft();
 
-  const [onPresetClick, PRESETS] = usePreset({
+  const [onPresetClick, FEATURED_PRESETS] = usePreset({
     casks,
     formulas,
     addedCasks,
@@ -78,7 +84,7 @@ function App() {
           </View.Sides.Left>
           <View.Sides.Right expanded={isRightExpanded} onClick={toggleRight}>
             <Panel
-              items={PRESETS}
+              items={FEATURED_PRESETS}
               bgColor={MaterialColors.SIDE}
               onItemClick={onPresetClick}
             />

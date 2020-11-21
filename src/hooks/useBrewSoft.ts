@@ -24,30 +24,34 @@ export function useBrewSoft() {
   ] = useList({ loader: loadFormulas, type: SoftType.FORMULA });
 
   const onAdd = useCallback(
-    (record: Soft) =>
-      getCallbackMap([addCask, addFormula])[record.type || SoftType.CASK](
-        record
-      ),
+    (record: Soft) => {
+      return getCallbackMap([addCask, addFormula])[
+        record.type || SoftType.CASK
+      ](record);
+    },
     [addCask, addFormula]
   );
 
   const onRemove = useCallback(
-    (record: Soft) =>
-      getCallbackMap([removeCask, removeFormula])[record.type || SoftType.CASK](
-        record
-      ),
+    (record: Soft) => {
+      return getCallbackMap([removeCask, removeFormula])[
+        record.type || SoftType.CASK
+      ](record);
+    },
     [removeCask, removeFormula]
   );
 
   const onMultiAdd = useCallback(
-    (records: Soft[], type: SoftType) =>
-      getCallbackMap([addCasks, addFormulas])[type](records)(),
+    (records: Soft[], type: SoftType) => {
+      return getCallbackMap([addCasks, addFormulas])[type](records);
+    },
     [addCasks, addFormulas]
   );
 
   const onMultiRemove = useCallback(
-    (records: Soft[], type: SoftType) =>
-      getCallbackMap([removeCasks, removeFormulas])[type](records)(),
+    (records: Soft[], type: SoftType) => {
+      return getCallbackMap([removeCasks, removeFormulas])[type](records);
+    },
     [removeCasks, removeFormulas]
   );
 
@@ -71,10 +75,11 @@ const loadCasks = (): Promise<AxiosResponse<Soft[]>> =>
 const loadFormulas = (): Promise<AxiosResponse<Soft[]>> =>
   Axios.get(`${BREW_HOST}api/formula.json`);
 
-const getCallbackMap = <T>([caskCallback, formulaCallback]: [
-  (records: T) => () => void,
-  (records: T) => () => void
-]) => ({
+type SoftCallbacks<T> = [(arg: T) => () => void, (arg: T) => () => void];
+
+const getCallbackMap = <T>([caskCallback, formulaCallback]: SoftCallbacks<
+  T
+>) => ({
   [SoftType.CASK]: caskCallback,
   [SoftType.FORMULA]: formulaCallback,
 });

@@ -24,7 +24,7 @@ export const Wrapper = styled.aside<Props>`
   width: 100%;
   height: 100%;
   position: fixed;
-  transition: padding 700ms, left 700ms, right 700ms;
+  transition: padding 500ms, left 500ms, right 500ms;
 
   @media (max-width: ${rwd.sm - 1}px) {
     max-width: calc(100% - 40px);

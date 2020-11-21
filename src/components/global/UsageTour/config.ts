@@ -63,18 +63,8 @@ export const getSteps = (theme: DefaultTheme): ReactourStep[] => [
   },
   {
     selector: "#download-button",
-    content: (
-      <p>
-        When you are done, you can click this button to download the shell
-        script.
-        <br />
-        <br />
-        Thanks you for your patience and hope you find this useful. 💜
-        <br />
-        <br />
-        You can close this diagram now.
-      </p>
-    ),
+    content:
+      "When you are done, you can click this button to download the shell script. Thanks you for your patience and hope you find this useful. 💜",
     style: getTourStepStyle(theme),
     stepInteraction: true,
   },

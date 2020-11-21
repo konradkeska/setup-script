@@ -7,5 +7,4 @@ export { Input } from "./Input";
 export { Link } from "./Link";
 export { Row } from "./Row";
 export { Span } from "./Span";
-export { Title } from "./Title";
 export { Wrapper } from "./Wrapper";

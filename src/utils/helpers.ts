@@ -31,14 +31,6 @@ const sort = <T>(arr: T[], callback: (a: T, b: T) => number) =>
 const truncate = (value: string, limit = 10) =>
   value.length > limit ? `${value.slice(0, limit - 2)}..` : value;
 
-const matches = (record: Soft, property: keyof Soft = "name") => (
-  item: Soft
-): boolean => item[property] === record[property];
-
-const notMatches = (record: Soft, property: keyof Soft = "name") => (
-  item: Soft
-): boolean => item[property] !== record[property];
-
 const isOfTypePrimaryColors = (key: string): key is PrimaryColors =>
   Object.values(PrimaryColors).includes(key as PrimaryColors);
 
@@ -58,7 +50,7 @@ const toColorString = (
   return "unset";
 };
 
-function setNativeValue(element: HTMLElement, value: string | number) {
+const setNativeValue = (element: HTMLElement, value: string | number) => {
   const { set: valueSetter } =
     Object.getOwnPropertyDescriptor(element, "value") || {};
   const prototype = Object.getPrototypeOf(element);
@@ -72,15 +64,13 @@ function setNativeValue(element: HTMLElement, value: string | number) {
   } else {
     throw new Error("The given element does not have a value setter");
   }
-}
+};
 
 export {
   formatResponse,
   includesQuery,
   sort,
   truncate,
-  matches,
-  notMatches,
   toColorString,
   setNativeValue,
 };

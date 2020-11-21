@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/setup-script/static/js/main.fd5a8a58.chunk.js",
-    "main.js.map": "/setup-script/static/js/main.fd5a8a58.chunk.js.map",
+    "main.js": "/setup-script/static/js/main.b023f9f3.chunk.js",
+    "main.js.map": "/setup-script/static/js/main.b023f9f3.chunk.js.map",
     "runtime-main.js": "/setup-script/static/js/runtime-main.1eb0e4ec.js",
     "runtime-main.js.map": "/setup-script/static/js/runtime-main.1eb0e4ec.js.map",
-    "static/js/2.eccd2b97.chunk.js": "/setup-script/static/js/2.eccd2b97.chunk.js",
-    "static/js/2.eccd2b97.chunk.js.map": "/setup-script/static/js/2.eccd2b97.chunk.js.map",
+    "static/js/2.71214dc2.chunk.js": "/setup-script/static/js/2.71214dc2.chunk.js",
+    "static/js/2.71214dc2.chunk.js.map": "/setup-script/static/js/2.71214dc2.chunk.js.map",
     "static/js/3.fbe0601d.chunk.js": "/setup-script/static/js/3.fbe0601d.chunk.js",
     "static/js/3.fbe0601d.chunk.js.map": "/setup-script/static/js/3.fbe0601d.chunk.js.map",
     "index.html": "/setup-script/index.html",
-    "static/js/2.eccd2b97.chunk.js.LICENSE.txt": "/setup-script/static/js/2.eccd2b97.chunk.js.LICENSE.txt"
+    "static/js/2.71214dc2.chunk.js.LICENSE.txt": "/setup-script/static/js/2.71214dc2.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.1eb0e4ec.js",
-    "static/js/2.eccd2b97.chunk.js",
-    "static/js/main.fd5a8a58.chunk.js"
+    "static/js/2.71214dc2.chunk.js",
+    "static/js/main.b023f9f3.chunk.js"
   ]
 }

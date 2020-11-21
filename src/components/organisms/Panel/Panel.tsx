@@ -38,7 +38,7 @@ export const Panel = React.memo(
     height = "100%",
   }: Props<T>) => (
     <PanelWrapper title={title} width={width} height={height}>
-      {title && <Title title={title} accentColor={accentColor} />}
+      {title && <Title text={title} accentColor={accentColor} />}
       <List id={id} title={title} border={border} bgColor={bgColor}>
         {items.map((record, index) => (
           <ListItem

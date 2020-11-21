@@ -5,13 +5,13 @@ import { PrimaryColors } from "types";
 import { Span } from "components/atoms";
 
 type Props = {
-  title: string;
+  text: string;
   accentColor: PrimaryColors;
 };
 
-export const Title = React.memo(({ title, accentColor }: Props) => (
+export const Title = React.memo(({ text, accentColor }: Props) => (
   <Heading>
-    <Span color={accentColor}>#</Span> {title}
+    <Span color={accentColor}>#</Span> {text}
   </Heading>
 ));
 

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import Sc from "styled-components";
 
 import { MAIN_MAX_WIDTH } from "components/config";
 import { toColorString } from "utils";
@@ -15,7 +15,7 @@ type Props = {
   p?: string;
 };
 
-export const Wrapper = styled.div<Props>`
+export const Wrapper = Sc.div<Props>`
   display: flex;
   align-items: ${({ align }) => align || "center"};
   justify-content: ${({ justify }) => justify || "space-between"};

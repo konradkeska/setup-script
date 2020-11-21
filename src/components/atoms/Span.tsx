@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import Sc from "styled-components";
 
 import { FontColors, MaterialColors, PrimaryColors } from "types";
 import { toColorString } from "utils";
@@ -15,7 +15,7 @@ type Props = {
   selectable?: boolean;
 };
 
-export const Span = styled.span<Props>`
+export const Span = Sc.span<Props>`
   color: ${({ color, theme }) =>
     color ? toColorString(color, theme) : "inherit"};
   background-color: ${({ bgColor, theme }) =>

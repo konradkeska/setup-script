@@ -1,6 +1,6 @@
 import React from "react";
 
-import styled from "styled-components";
+import Sc from "styled-components";
 
 import { Action, Base, PrimaryColors } from "types";
 import { truncate, MinXs } from "utils";
@@ -45,7 +45,7 @@ export const ListItem = React.memo(
   )
 );
 
-const StyledListItem = styled.li<Pick<Props<Base>, "withSeparator">>`
+const StyledListItem = Sc.li<Pick<Props<Base>, "withSeparator">>`
   ${({ withSeparator }) => {
     if (withSeparator) {
       return `
@@ -59,7 +59,7 @@ const StyledListItem = styled.li<Pick<Props<Base>, "withSeparator">>`
   }}
 `;
 
-const Button = styled.button<Pick<Props<Base>, "index" | "action">>`
+const Button = Sc.button<Pick<Props<Base>, "index" | "action">>`
   padding: 6px 10px;
   border: 1px solid transparent;
   display: inline-flex;

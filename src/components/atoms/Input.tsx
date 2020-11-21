@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import Sc from "styled-components";
 
-export const Input = styled.input`
+export const Input = Sc.input`
   max-width: 180px;
   padding: ${({ theme }) => `${theme.paddings.xs}px ${theme.paddings.sm}px`};
   border-radius: ${({ theme }) => `${theme.radiuses.md}px`};

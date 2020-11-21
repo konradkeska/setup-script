@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import Sc from "styled-components";
 
 import { Icon } from "components/atoms";
 
@@ -25,7 +25,7 @@ export const Expander = React.memo(({ onClick, pointed, expanded }: Props) =>
   )
 );
 
-const Wrapper = styled.div`
+const Wrapper = Sc.div`
   display: flex;
   justify-content: center;
   height: 100%;
@@ -33,15 +33,15 @@ const Wrapper = styled.div`
   z-index: 4;
 `;
 
-const LeftWrapper = styled(Wrapper)`
+const LeftWrapper = Sc(Wrapper)`
   margin-top: 30%;
 `;
 
-const RightWrapper = styled(Wrapper)`
+const RightWrapper = Sc(Wrapper)`
   margin-top: 60%;
 `;
 
-const Button = styled.button`
+const Button = Sc.button`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,14 +63,14 @@ const Button = styled.button`
   }
 `;
 
-const LeftButton = styled(Button)`
+const LeftButton = Sc(Button)`
   margin-left: -1px;
   border-top-right-radius: 33%;
   border-bottom-right-radius: 33%;
   border-right: 1px solid ${({ theme }) => theme.colors.material.background};
 `;
 
-const RightButton = styled(Button)`
+const RightButton = Sc(Button)`
   margin-right: -1px;
   border-top-left-radius: 33%;
   border-bottom-left-radius: 33%;

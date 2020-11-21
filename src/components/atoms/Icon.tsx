@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import Sc from "styled-components";
 import { FontColors, MaterialColors, PrimaryColors } from "types";
 import { toColorString } from "utils";
 
@@ -34,7 +34,7 @@ type SvgProps = {
   hoverFillColor?: FontColors | PrimaryColors | MaterialColors;
 };
 
-const Container = styled.div<Pick<SvgProps, "size">>`
+const Container = Sc.div<Pick<SvgProps, "size">>`
   position: relative;
   width: ${({ size }) => `${size || 16}px`};
   height: ${({ size }) => `${size || 16}px`};
@@ -42,7 +42,7 @@ const Container = styled.div<Pick<SvgProps, "size">>`
   max-height: ${({ size }) => `${size || 16}px`};
 `;
 
-const Svg = styled.svg<Omit<SvgProps, "size">>`
+const Svg = Sc.svg<Omit<SvgProps, "size">>`
   position: absolute;
   top: 0;
   left: 0;

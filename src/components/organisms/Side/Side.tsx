@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import Sc from "styled-components";
 
 import { Expander } from "./Expander";
 import { Wrapper } from "./Wrapper";
@@ -34,7 +34,7 @@ export const Side = React.memo(
   )
 );
 
-const Content = styled.div<Pick<Props, "left" | "right">>`
+const Content = Sc.div<Pick<Props, "left" | "right">>`
   width: calc(100% - 20px);
   background-color: ${({ theme }) => theme.colors.material.side};
   ${({ left, right, theme }) => {

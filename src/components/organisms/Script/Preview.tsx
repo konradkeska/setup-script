@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import Sc from "styled-components";
 
 import { Code } from "components/atoms";
 
-export const Preview = styled(Code)`
+export const Preview = Sc(Code)`
   width: 100%;
   height: 100%;
   padding: 16px;

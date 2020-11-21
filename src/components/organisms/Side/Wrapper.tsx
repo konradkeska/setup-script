@@ -1,3 +1,5 @@
+import Sc from "styled-components";
+
 import { HEADER_HEIGHT } from "components/config";
 import styled from "styled-components";
 
@@ -11,7 +13,7 @@ type Props = {
   screenWidth?: number;
 };
 
-export const Wrapper = styled.aside<Props>`
+export const Wrapper = Sc.aside<Props>`
   display: flex;
   flex-direction: row;
   z-index: 4;

@@ -1,6 +1,6 @@
 import React from "react";
 import ReactToggle from "react-toggle";
-import styled from "styled-components";
+import Sc from "styled-components";
 
 import { Emoji } from "components/atoms";
 
@@ -26,7 +26,7 @@ export const Toggle = React.memo(
   )
 );
 
-const StyledToggle = styled.div`
+const StyledToggle = Sc.div`
   .react-toggle {
     touch-action: pan-x;
 

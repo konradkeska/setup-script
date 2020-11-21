@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import Sc from "styled-components";
 
 import { FOOTER_HEIGHT, HEADER_HEIGHT } from "components/config";
 import { Wrapper } from "components/atoms";
@@ -61,7 +61,7 @@ View.Sides = SidesContainer;
 View.Main = MainContainer;
 View.Footer = FooterContainer;
 
-export { View };
+const Header = Sc.header`
 
 export const Header = styled.header`
   margin-top: 0px;
@@ -81,7 +81,7 @@ export const Header = styled.header`
   border-top: ${({ theme }) => `1px solid ${theme.colors.material.overlay}`};
 `;
 
-export const Main = styled.main`
+const Main = Sc.main`
   padding-top: ${HEADER_HEIGHT}px;
   width: 100%;
   height: calc(100% - ${FOOTER_HEIGHT}px);
@@ -93,7 +93,7 @@ export const Main = styled.main`
   transition: padding 500ms;
 `;
 
-export const Footer = styled.footer`
+const Footer = Sc.footer`
   color: ${({ theme }) => theme.colors.font.sub};
   background-color: ${({ theme }) => theme.colors.material.background};
   padding-bottom: ${({ theme }) => `${theme.paddings.xs}px`};

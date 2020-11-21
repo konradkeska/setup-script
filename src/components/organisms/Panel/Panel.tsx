@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import Sc from "styled-components";
 
 import { Base, PrimaryColors, MaterialColors, SoftType, Action } from "types";
 import { List } from "./List";
@@ -65,7 +65,7 @@ const COLORS_MAP = {
 
 type PanelWrapperProps = Pick<Props<Base>, "width" | "height" | "title">;
 
-const PanelWrapper = styled.div<PanelWrapperProps>`
+const PanelWrapper = Sc.div<PanelWrapperProps>`
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   padding: ${({ theme: { paddings }, title }) =>

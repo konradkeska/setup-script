@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import Sc from "styled-components";
 import { FontColors, PrimaryColors } from "types";
 
 import { Link, Row, Span } from "../atoms";
@@ -26,7 +26,7 @@ export const Brand = React.memo(({ onClick }: Props) => (
   </Row>
 ));
 
-const IssueLink = styled(Link)`
+const IssueLink = Sc(Link)`
   text-decoration: none;
   color: ${({ theme }) => theme.colors.font.base};
   &:hover {
@@ -34,7 +34,7 @@ const IssueLink = styled(Link)`
   }
 `;
 
-const Logo = styled.h1`
+const Logo = Sc.h1`
   user-select: none;
   margin: 0;
   font-weight: 900;

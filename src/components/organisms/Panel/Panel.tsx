@@ -18,7 +18,7 @@ type Props = {
   accentColor?: PrimaryColors;
   bgColor?: MaterialColors;
   border?: boolean;
-  operation?: "add" | "remove";
+  action?: Action;
   width?: string;
   height?: string;
   onItemClick?: (record: Soft) => (() => void) | undefined;
@@ -40,7 +40,7 @@ export const Panel = React.memo(
     accentColor = PrimaryColors.PURPLE,
     bgColor = MaterialColors.OVERLAY,
     border = false,
-    operation = "add",
+    action = Action.ADD,
     width = "100%",
     height = "100%",
   }: Props) => (
@@ -53,7 +53,7 @@ export const Panel = React.memo(
             key={index}
             index={index}
             record={record}
-            operation={operation}
+            action={action}
             onClick={onItemClick?.(record)}
             dotColor={COLORS_MAP[record.type]}
             withDots={withDots}

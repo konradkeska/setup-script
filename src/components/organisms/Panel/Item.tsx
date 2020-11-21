@@ -2,7 +2,7 @@ import React from "react";
 
 import styled from "styled-components";
 
-import { PrimaryColors, Soft } from "types";
+import { Action, Base, PrimaryColors } from "types";
 import { truncate, MinXs } from "utils";
 
 import { Code, Dot } from "components/atoms";
@@ -11,7 +11,7 @@ type Props = {
   id: string;
   index: number;
   record: Soft;
-  operation: "add" | "remove";
+  action: Action;
   onClick?: () => void;
   dotColor?: PrimaryColors;
   withDots?: boolean;
@@ -30,7 +30,7 @@ export const ListItem = React.memo(
     withSeparator,
   }: Props) => (
     <StyledListItem withSeparator={withSeparator}>
-      <Button id={id} index={index} operation={operation} onClick={onClick}>
+      <Button id={id} index={index} action={action} onClick={onClick}>
         <Code>
           {withDots ? <Dot color={dotColor}>· </Dot> : null}
           {truncate(record.name, 33)}
@@ -59,7 +59,7 @@ const StyledListItem = styled.li<Pick<Props, "withSeparator">>`
   }}
 `;
 
-const Button = styled.button<Pick<Props, "index" | "operation">>`
+const Button = styled.button<Pick<Props<Base>, "index" | "action">>`
   padding: 6px 10px;
   border: 1px solid transparent;
   display: inline-flex;
@@ -72,21 +72,21 @@ const Button = styled.button<Pick<Props, "index" | "operation">>`
 
   &:hover {
     cursor: pointer;
-    border: ${({ theme, operation }) =>
-      operation === "add"
+    border: ${({ theme, action }) =>
+      action === Action.ADD
         ? `1px dashed ${theme.colors.primary.green}`
         : `1px dashed ${theme.colors.primary.red}`};
   }
 
   &:active {
-    border: ${({ theme, operation }) => `1px solid
+    border: ${({ theme, action }) => `1px solid
       ${
-        operation === "add"
+        action === Action.ADD
           ? theme.colors.primary.green
           : theme.colors.primary.red
       }`};
-    background-color: ${({ theme, operation }) =>
-      operation === "add"
+    background-color: ${({ theme, action }) =>
+      action === Action.ADD
         ? theme.colors.primary.green
         : theme.colors.primary.red};
   }

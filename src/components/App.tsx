@@ -7,7 +7,7 @@ import {
   useSides,
   useTheme,
 } from "hooks";
-import { PrimaryColors, MaterialColors } from "types";
+import { PrimaryColors, MaterialColors, Action } from "types";
 import { MinSm } from "utils";
 import { Button, Emoji } from "./atoms";
 import { Brand, Search, Toggle } from "./molecules";
@@ -72,7 +72,7 @@ function App() {
                 title={FORMULAS_PANEL_LABEL}
                 items={addedFormulas}
                 onItemClick={onRemove}
-                operation="remove"
+                action={Action.REMOVE}
                 accentColor={PrimaryColors.BLUE}
                 withItemSeparator
                 height="50%"
@@ -83,7 +83,7 @@ function App() {
                 title={CASKS_PANEL_LABEL}
                 items={addedCasks}
                 onItemClick={onRemove}
-                operation="remove"
+                action={Action.REMOVE}
                 withItemSeparator
                 height="50%"
                 border

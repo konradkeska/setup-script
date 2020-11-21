@@ -3,8 +3,6 @@ export {
   includesQuery,
   sort,
   truncate,
-  matches,
-  notMatches,
   toColorString,
   setNativeValue,
 } from "./helpers";
@@ -21,4 +19,3 @@ export {
   MinLg,
   MinXl,
 } from "./rwd";
-export { themes } from "./theme";

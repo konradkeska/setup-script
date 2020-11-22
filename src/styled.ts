@@ -50,8 +50,6 @@ declare module "styled-components" {
     dark: DefaultTheme;
   };
 
-  export type Mode = keyof Themes;
-
   export interface DefaultTheme {
     colors: DefaultColors;
     paddings: DefaultPaddings;

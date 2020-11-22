@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import Sc from "styled-components";
 
 import { PrimaryColors } from "types";
 
-export const Button = styled.button<{
+export const Button = Sc.button<{
   small?: boolean;
   bgColor?: PrimaryColors;
   ml?: boolean;

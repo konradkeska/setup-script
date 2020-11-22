@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import Sc from "styled-components";
 
 import { FOOTER_HEIGHT, HEADER_HEIGHT } from "components/config";
 import { Wrapper } from "components/atoms";
@@ -10,12 +10,7 @@ interface ViewProps {
   children: React.ReactNode;
 }
 
-interface SideProps extends ViewProps {
-  expanded: boolean;
-  onClick?: () => void;
-}
-
-const View = ({ children }: ViewProps) => <>{children}</>;
+export const View = ({ children }: ViewProps) => <>{children}</>;
 
 const HeaderContainer = React.memo(({ children }: ViewProps) => (
   <Header>
@@ -24,6 +19,11 @@ const HeaderContainer = React.memo(({ children }: ViewProps) => (
 ));
 
 const SidesContainer = ({ children }: ViewProps) => <>{children}</>;
+
+interface SideProps extends ViewProps {
+  expanded: boolean;
+  onClick?: () => void;
+}
 
 const Left = React.memo(({ children, expanded, onClick }: SideProps) => (
   <Side expanded={expanded} onClick={onClick} left>
@@ -61,9 +61,7 @@ View.Sides = SidesContainer;
 View.Main = MainContainer;
 View.Footer = FooterContainer;
 
-export { View };
-
-export const Header = styled.header`
+const Header = Sc.header`
   margin-top: 0px;
   width: 100%;
   padding: ${({ theme }) => `${theme.paddings.xs}px 0px`};
@@ -81,7 +79,7 @@ export const Header = styled.header`
   border-top: ${({ theme }) => `1px solid ${theme.colors.material.overlay}`};
 `;
 
-export const Main = styled.main`
+const Main = Sc.main`
   padding-top: ${HEADER_HEIGHT}px;
   width: 100%;
   height: calc(100% - ${FOOTER_HEIGHT}px);
@@ -93,7 +91,7 @@ export const Main = styled.main`
   transition: padding 500ms;
 `;
 
-export const Footer = styled.footer`
+const Footer = Sc.footer`
   color: ${({ theme }) => theme.colors.font.sub};
   background-color: ${({ theme }) => theme.colors.material.background};
   padding-bottom: ${({ theme }) => `${theme.paddings.xs}px`};

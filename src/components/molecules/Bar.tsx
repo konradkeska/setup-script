@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import Sc from "styled-components";
 
 import { Button, Span, Wrapper } from "../atoms";
 
@@ -28,7 +28,7 @@ export const Bar = React.memo(
   )
 );
 
-const Aside = styled.aside`
+const Aside = Sc.aside`
   bottom: 0px;
   border-top: ${({ theme }) => theme.colors.material.background};
   background-color: ${({ theme }) => theme.colors.material.overlay};

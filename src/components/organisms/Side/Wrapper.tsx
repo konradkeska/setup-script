@@ -1,7 +1,7 @@
-import { HEADER_HEIGHT } from "components/config";
-import styled from "styled-components";
+import Sc from "styled-components";
 
-import { rwd } from "utils";
+import { HEADER_HEIGHT } from "components/config";
+import { RWD } from "utils";
 
 type Props = {
   expanded: boolean;
@@ -11,7 +11,7 @@ type Props = {
   screenWidth?: number;
 };
 
-export const Wrapper = styled.aside<Props>`
+export const Wrapper = Sc.aside<Props>`
   display: flex;
   flex-direction: row;
   z-index: 4;
@@ -26,7 +26,7 @@ export const Wrapper = styled.aside<Props>`
   position: fixed;
   transition: padding 500ms, left 500ms, right 500ms;
 
-  @media (max-width: ${rwd.sm - 1}px) {
+  @media (max-width: ${RWD.SM - 1}px) {
     max-width: calc(100% - 40px);
     right: ${({ right, expanded }) =>
       getExpandValue({
@@ -42,7 +42,7 @@ export const Wrapper = styled.aside<Props>`
       })};
   }
 
-  @media (min-width: ${rwd.lg}px) {
+  @media (min-width: ${RWD.LG}px) {
     max-width: calc((100% - 750px) / 2);
     right: ${({ right, expanded }) =>
       getExpandValue({

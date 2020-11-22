@@ -1,5 +1,5 @@
-import styled from "styled-components";
+import Sc from "styled-components";
 
-export const Emoji = styled.div`
+export const Emoji = Sc.div`
   margin-top: 8px;
 `;

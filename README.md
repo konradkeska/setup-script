@@ -1,9 +1,10 @@
-![setup-script logo](https://user-images.githubusercontent.com/29062983/98661184-71de2980-2346-11eb-89dd-9daf5ef7b9df.png)
+![setup-script app preview](https://user-images.githubusercontent.com/29062983/99889924-3b63b100-2c5a-11eb-8bcc-2ac84298866c.png)
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/konradkeska/setup-script/blob/master/LICENSE)
 [![Cypress.io](https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg)](https://www.cypress.io/)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=konradkeska_setup-script&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=konradkeska_setup-script)
 
-# About
+## About
 
 Tired of setting your workstation twice a year? Create setup script and never do this again.
 
@@ -15,6 +16,6 @@ Super-charge your macOS setup today!
 - save and share your results with friends or work colleagues
 - collaborate with others on the creation of perfect setup
 
-# Preview
+## License
 
-![setup-script app preview](https://user-images.githubusercontent.com/29062983/98658716-a7354800-2343-11eb-976e-7122ba6637c1.png)
+[MIT](LICENSE). Copyright (c) 2020 Konrad Kęska.

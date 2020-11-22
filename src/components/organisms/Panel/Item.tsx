@@ -1,6 +1,6 @@
 import React from "react";
 
-import styled from "styled-components";
+import Sc from "styled-components";
 
 import { Action, Base, PrimaryColors } from "types";
 import { truncate, MinXs } from "utils";
@@ -45,12 +45,11 @@ export const ListItem = React.memo(
   )
 );
 
-const StyledListItem = styled.li<Pick<Props<Base>, "withSeparator">>`
+const StyledListItem = Sc.li<Pick<Props<Base>, "withSeparator">>`
   ${({ withSeparator }) => {
     if (withSeparator) {
       return `
         border-bottom: 1px solid transparent;
-
         &:last-child {
           border-bottom: none;
         }
@@ -59,7 +58,7 @@ const StyledListItem = styled.li<Pick<Props<Base>, "withSeparator">>`
   }}
 `;
 
-const Button = styled.button<Pick<Props<Base>, "index" | "action">>`
+const Button = Sc.button<Pick<Props<Base>, "index" | "action">>`
   padding: 6px 10px;
   border: 1px solid transparent;
   display: inline-flex;
@@ -73,21 +72,16 @@ const Button = styled.button<Pick<Props<Base>, "index" | "action">>`
   &:hover {
     cursor: pointer;
     border: ${({ theme, action }) =>
-      action === Action.ADD
-        ? `1px dashed ${theme.colors.primary.green}`
-        : `1px dashed ${theme.colors.primary.red}`};
+      `1px dashed ${theme.colors.primary[getHighlightColor(action)]}`};
   }
 
   &:active {
     border: ${({ theme, action }) => `1px solid
-      ${
-        action === Action.ADD
-          ? theme.colors.primary.green
-          : theme.colors.primary.red
-      }`};
+      ${theme.colors.primary[getHighlightColor(action)]}`};
     background-color: ${({ theme, action }) =>
-      action === Action.ADD
-        ? theme.colors.primary.green
-        : theme.colors.primary.red};
+      theme.colors.primary[getHighlightColor(action)]};
   }
 `;
+
+const getHighlightColor = (action: Action): PrimaryColors =>
+  action === Action.ADD ? PrimaryColors.GREEN : PrimaryColors.RED;

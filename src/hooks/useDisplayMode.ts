@@ -1,11 +1,10 @@
-import { useState, useCallback } from "react";
+import { useCallback, useMemo, useState } from "react";
 
-enum DisplayMode {
-  PICKER = "picker",
-  SCRIPT = "script",
-}
+import { DisplayMode } from "types";
 
-export function useDisplayMode() {
+type Return = [DisplayMode, () => void];
+
+export function useDisplayMode(): Return {
   const [displayMode, setDisplayMode] = useState<DisplayMode>(
     DisplayMode.PICKER
   );
@@ -20,5 +19,10 @@ export function useDisplayMode() {
     [displayMode]
   );
 
-  return { displayMode, switchDisplayMode, DisplayMode };
+  const memoizedReturn: Return = useMemo(
+    () => [displayMode, switchDisplayMode],
+    [displayMode, switchDisplayMode]
+  );
+
+  return memoizedReturn;
 }

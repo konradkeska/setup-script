@@ -3,13 +3,11 @@ export {
   includesQuery,
   sort,
   truncate,
-  matches,
-  notMatches,
   toColorString,
   setNativeValue,
 } from "./helpers";
 export {
-  rwd,
+  RWD,
   MaxXs,
   MaxSm,
   MaxMd,
@@ -21,4 +19,3 @@ export {
   MinLg,
   MinXl,
 } from "./rwd";
-export { themes } from "./theme";

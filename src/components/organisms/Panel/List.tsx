@@ -1,4 +1,4 @@
-import styled, { DefaultColorsMaterial } from "styled-components";
+import Sc, { DefaultColorsMaterial } from "styled-components";
 
 type Props = {
   bgColor: keyof DefaultColorsMaterial;
@@ -6,7 +6,7 @@ type Props = {
   title?: string;
 };
 
-export const List = styled.ul<Props>`
+export const List = Sc.ul<Props>`
   margin: 0px;
   padding: 0px;
   height: ${({ title }) => (title ? "calc(100% - (16px + 15px))" : "100%")};

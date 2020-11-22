@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { AxiosResponse } from "axios";
 
 import { Soft, SoftType } from "types";
@@ -69,7 +69,12 @@ export function useList({ loader, type }: Props): Return {
     [addedList, list]
   );
 
-  return [list, addedList, addItem, removeItem, addItems, removeItems];
+  const memoizedReturn: Return = useMemo(
+    () => [list, addedList, addItem, removeItem, addItems, removeItems],
+    [list, addedList, addItem, removeItem, addItems, removeItems]
+  );
+
+  return memoizedReturn;
 }
 
 const getAddable = ([itemsToAdd, addedItems]: [Soft[], Soft[]]) =>
@@ -84,5 +89,5 @@ const getRemovable = ([itemsToRemove, addedItems]: [Soft[], Soft[]]) =>
 
 const getListWithout = ([list, itemsToRemove]: [Soft[], Soft[]]) =>
   list.filter(
-    ({ name }) => !itemsToRemove.map(({ name }) => name).includes(name)
+    (record) => !itemsToRemove.map(({ name }) => name).includes(record.name)
   );

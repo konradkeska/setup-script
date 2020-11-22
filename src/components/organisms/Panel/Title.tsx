@@ -1,21 +1,21 @@
 import React from "react";
-import styled from "styled-components";
+import Sc from "styled-components";
 
 import { PrimaryColors } from "types";
 import { Span } from "components/atoms";
 
 type Props = {
-  title: string;
+  text: string;
   accentColor: PrimaryColors;
 };
 
-export const Title = React.memo(({ title, accentColor }: Props) => (
+export const Title = React.memo(({ text, accentColor }: Props) => (
   <Heading>
-    <Span color={accentColor}>#</Span> {title}
+    <Span color={accentColor}>#</Span> {text}
   </Heading>
 ));
 
-const Heading = styled.h5`
+const Heading = Sc.h5`
   margin: 0;
   font-weight: 700;
   font-size: 14px;

@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import Sc from "styled-components";
 
 import { Base, PrimaryColors, MaterialColors, SoftType, Action } from "types";
 import { List } from "./List";
@@ -38,7 +38,7 @@ export const Panel = React.memo(
     height = "100%",
   }: Props<T>) => (
     <PanelWrapper title={title} width={width} height={height}>
-      {title && <Title title={title} accentColor={accentColor} />}
+      {title && <Title text={title} accentColor={accentColor} />}
       <List id={id} title={title} border={border} bgColor={bgColor}>
         {items.map((record, index) => (
           <ListItem
@@ -65,7 +65,7 @@ const COLORS_MAP = {
 
 type PanelWrapperProps = Pick<Props<Base>, "width" | "height" | "title">;
 
-const PanelWrapper = styled.div<PanelWrapperProps>`
+const PanelWrapper = Sc.div<PanelWrapperProps>`
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   padding: ${({ theme: { paddings }, title }) =>

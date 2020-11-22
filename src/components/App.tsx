@@ -146,7 +146,6 @@ function App() {
                 onItemClick={onRemove}
                 action={Action.REMOVE}
                 accentColor={PrimaryColors.BLUE}
-                withItemSeparator
                 height="50%"
                 withDots
                 border
@@ -158,7 +157,6 @@ function App() {
                 items={addedCasks}
                 onItemClick={onRemove}
                 action={Action.REMOVE}
-                withItemSeparator
                 height="50%"
                 withDots
                 border

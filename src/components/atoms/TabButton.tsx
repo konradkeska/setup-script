@@ -26,10 +26,10 @@ export const TabButton = Sc.button<{ active?: boolean }>`
 
   &:focus {
     border: none;
-    background-color: rgba(104, 117, 245, 0.2);
+    background-color: rgba(35, 206, 107, 0.2);
 
     svg {
-      fill: ${({ theme }) => theme.colors.primary.purple};
+      fill: ${({ theme }) => theme.colors.primary.green};
     }
   }
 
@@ -37,25 +37,25 @@ export const TabButton = Sc.button<{ active?: boolean }>`
   ${({ theme, active }) => {
     if (active) {
       return `
-      color: ${theme.colors.primary.purple};
-      border-bottom: 3px solid ${theme.colors.primary.purple};
+      color: ${theme.colors.primary.green};
+      border-bottom: 3px solid ${theme.colors.primary.green};
 
       &:focus {
         border-top: none;
         border-right: none;
-        border-bottom: 3px solid ${theme.colors.primary.purple};
+        border-bottom: 3px solid ${theme.colors.primary.green};
         border-left: none;
-        background-color: rgba(104, 117, 245, 0.2);
+        background-color: rgba(35, 206, 107, 0.2);
       }
 
       &:hover {
         svg {
-          fill: ${theme.colors.primary.purple};
+          fill: ${theme.colors.primary.green};
         }
       }
 
       svg {
-        fill: ${theme.colors.primary.purple};
+        fill: ${theme.colors.primary.green};
       }
       `;
     }

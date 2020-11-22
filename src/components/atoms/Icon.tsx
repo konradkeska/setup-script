@@ -1,5 +1,6 @@
 import React from "react";
 import Sc from "styled-components";
+
 import { FontColors, MaterialColors, PrimaryColors } from "types";
 import { toColorString } from "utils";
 
@@ -12,19 +13,18 @@ type Props = {
 
 export const Icon = React.memo(
   ({ name, size = 20, fillColor = FontColors.SUB, hoverFillColor }: Props) => (
-    <Container size={size}>
-      <Svg
-        xmlns="http://www.w3.org/2000/svg"
-        xmlnsXlink="http://www.w3.org/1999/xlink"
-        version="1.1"
-        width="100%"
-        height="100%"
-        fillColor={fillColor}
-        hoverFillColor={hoverFillColor}
-      >
-        <use xlinkHref={`#${name}`} href={`#${name}`} />
-      </Svg>
-    </Container>
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+      version="1.1"
+      width="100%"
+      height="100%"
+      fillColor={fillColor}
+      hoverFillColor={hoverFillColor}
+      size={size}
+    >
+      <use xlinkHref={`#${name}`} href={`#${name}`} />
+    </Svg>
   )
 );
 
@@ -34,18 +34,11 @@ type SvgProps = {
   hoverFillColor?: FontColors | PrimaryColors | MaterialColors;
 };
 
-const Container = Sc.div<Pick<SvgProps, "size">>`
-  position: relative;
-  width: ${({ size }) => `${size || 16}px`};
-  height: ${({ size }) => `${size || 16}px`};
-  max-width: ${({ size }) => `${size || 16}px`};
-  max-height: ${({ size }) => `${size || 16}px`};
-`;
-
-const Svg = Sc.svg<Omit<SvgProps, "size">>`
-  position: absolute;
-  top: 0;
-  left: 0;
+const Svg = Sc.svg<SvgProps>`
+  width: ${({ size }) => `${size}px`};
+  height: ${({ size }) => `${size}px`};
+  max-width: ${({ size }) => `${size}px`};
+  max-height: ${({ size }) => `${size}px`};
   fill: ${({ theme, fillColor }) => toColorString(fillColor, theme)};
 
   ${({ theme, hoverFillColor }) => {

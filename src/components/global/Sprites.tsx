@@ -9,11 +9,15 @@ export const Sprites = React.memo(() => (
   >
     <symbol id="angle-left" viewBox="0 0 256 256">
       <title>angle-left</title>
-      <polygon points="207.093,30.187 176.907,0 48.907,128 176.907,256 207.093,225.813 109.28,128" />
+      <g>
+        <polygon points="207.093,30.187 176.907,0 48.907,128 176.907,256 207.093,225.813 109.28,128" />
+      </g>
     </symbol>
     <symbol id="angle-right" viewBox="0 0 256 256">
       <title>angle-right</title>
-      <polygon points="79.093,0 48.907,30.187 146.72,128 48.907,225.813 79.093,256 207.093,128" />
+      <g>
+        <polygon points="79.093,0 48.907,30.187 146.72,128 48.907,225.813 79.093,256 207.093,128" />
+      </g>
     </symbol>
     <symbol id="arrow-left" viewBox="0 0 447.243 447.243">
       <title>arrow-left</title>

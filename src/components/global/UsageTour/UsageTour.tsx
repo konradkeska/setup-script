@@ -35,7 +35,7 @@ export const UsageTour = React.memo(({ theme }: Props) => {
         isOpen={isTourOpen}
         onAfterOpen={() => (document.body.style.overflowY = "hidden")}
         onBeforeClose={() => (document.body.style.overflowY = "auto")}
-        accentColor={theme.colors.primary.purple}
+        accentColor={theme.colors.primary.green}
         rounded={theme.radiuses.md}
         showNavigation={false}
         showNavigationNumber={false}

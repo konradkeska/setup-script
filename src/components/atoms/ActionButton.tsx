@@ -15,10 +15,10 @@ export const ActionButton = Sc.button<{ active?: boolean; mr?: boolean }>`
   ${({ theme, active }) => {
     if (active) {
       return `
-        background-color: rgba(104, 117, 245, 0.2);
-        color: ${theme.colors.primary.purple};
+        background-color: rgba(35, 206, 107, 0.2);
+        color: ${theme.colors.primary.green};
         svg {
-          fill: ${theme.colors.primary.purple};
+          fill: ${theme.colors.primary.green};
         }
       `;
     }
@@ -33,10 +33,10 @@ export const ActionButton = Sc.button<{ active?: boolean; mr?: boolean }>`
 
   &:active {
     border: none;
-    background-color: rgba(104, 117, 245, 0.2);
-    color: ${({ theme }) => theme.colors.primary.purple};
+    background-color: rgba(35, 206, 107, 0.2);
+    color: ${({ theme }) => theme.colors.primary.green};
     svg {
-      fill: ${({ theme }) => theme.colors.primary.purple};
+      fill: ${({ theme }) => theme.colors.primary.green};
     }
   }
 `;

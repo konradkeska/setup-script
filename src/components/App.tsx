@@ -55,6 +55,7 @@ function App() {
     toggleRight,
     setLeftExpanded,
   } = useSides();
+
   return (
     <Global theme={theme}>
       <View>

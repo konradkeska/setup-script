@@ -1,12 +1,14 @@
 ![setup-script app preview](https://user-images.githubusercontent.com/29062983/99889924-3b63b100-2c5a-11eb-8bcc-2ac84298866c.png)
+
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=konradkeska_setup-script&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=konradkeska_setup-script)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkonradkeska%2Fsetup-script.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkonradkeska%2Fsetup-script?ref=badge_shield)
+[![Cypress.io](https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg)](https://www.cypress.io/)
+[![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/konradkeska/setup-script/blob/master/LICENSE)
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-[![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/konradkeska/setup-script/blob/master/LICENSE)
-[![Cypress.io](https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg)](https://www.cypress.io/)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=konradkeska_setup-script&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=konradkeska_setup-script)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkonradkeska%2Fsetup-script.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkonradkeska%2Fsetup-script?ref=badge_shield)
 
 ## About
 
@@ -19,10 +21,6 @@ Super-charge your macOS setup today!
 - generate and download `.sh` setup script based on options you pick
 - save and share your results with friends or work colleagues
 - collaborate with others on the creation of perfect setup
-
-## License
-
-[MIT](LICENSE). Copyright (c) 2020 Konrad Kęska.
 
 ## Contributors ✨
 
@@ -39,6 +37,11 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+## License
+
+[MIT](LICENSE). Copyright (c) 2020 Konrad Kęska.

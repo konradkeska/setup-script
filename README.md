@@ -3,6 +3,7 @@
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/konradkeska/setup-script/blob/master/LICENSE)
 [![Cypress.io](https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg)](https://www.cypress.io/)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=konradkeska_setup-script&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=konradkeska_setup-script)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkonradkeska%2Fsetup-script.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkonradkeska%2Fsetup-script?ref=badge_shield)
 
 ## About
 

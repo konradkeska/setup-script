@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const Icon = React.memo(
-  ({ name, size = 16, fillColor = FontColors.SUB, hoverFillColor }: Props) => (
+  ({ name, size = 20, fillColor = FontColors.SUB, hoverFillColor }: Props) => (
     <Container size={size}>
       <Svg
         xmlns="http://www.w3.org/2000/svg"

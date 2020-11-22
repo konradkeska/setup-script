@@ -13,13 +13,13 @@ export const Expander = React.memo(({ onClick, pointed, expanded }: Props) =>
   pointed === "left" ? (
     <LeftWrapper>
       <LeftButton onClick={onClick}>
-        {expanded ? <Icon name="arrow-left" /> : <Icon name="arrow-right" />}
+        {expanded ? <Icon name="angle-left" /> : <Icon name="angle-right" />}
       </LeftButton>
     </LeftWrapper>
   ) : (
     <RightWrapper>
       <RightButton onClick={onClick}>
-        {expanded ? <Icon name="arrow-right" /> : <Icon name="arrow-left" />}
+        {expanded ? <Icon name="angle-right" /> : <Icon name="angle-left" />}
       </RightButton>
     </RightWrapper>
   )
@@ -55,10 +55,15 @@ const Button = Sc.button`
   border-bottom: 1px solid ${({ theme }) => theme.colors.material.background};
 
   &:hover,
-  &:active,
   &:focus {
     svg {
       fill: ${({ theme }) => theme.colors.font.base};
+    }
+  }
+  &:active {
+    background-color: rgba(104, 117, 245, 0.2);
+    svg {
+      fill: ${({ theme }) => theme.colors.primary.purple};
     }
   }
 `;

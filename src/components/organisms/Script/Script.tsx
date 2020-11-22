@@ -1,7 +1,12 @@
 import React from "react";
 
 import { Soft } from "types";
-import { FORMULAS_PANEL_LABEL, CASKS_PANEL_LABEL } from "components/config";
+import {
+  CASKS_PANEL_HEADING,
+  CASKS_PANEL_DESCRIPTION,
+  FORMULAS_PANEL_HEADING,
+  FORMULAS_PANEL_DESCRIPTION,
+} from "components/config";
 
 import { Wrapper } from "./Wrapper";
 import { Preview } from "./Preview";
@@ -34,7 +39,7 @@ export const Script = React.memo(({ casks, formulas }: Props) => (
         '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"'
       }
       <br />
-      <br /># {FORMULAS_PANEL_LABEL}
+      <br /># {FORMULAS_PANEL_HEADING} {FORMULAS_PANEL_DESCRIPTION}
       <br />
       brew install (<br />
       {formulas.map(({ name }, index) => (
@@ -42,7 +47,7 @@ export const Script = React.memo(({ casks, formulas }: Props) => (
       ))}
       )
       <br />
-      <br /># {CASKS_PANEL_LABEL}
+      <br /># {CASKS_PANEL_HEADING} {CASKS_PANEL_DESCRIPTION}
       <br />
       brew cask install (<br />
       {casks.map(({ token, name }, index) => (

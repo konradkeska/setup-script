@@ -1,45 +1,11 @@
-import React from "react";
 import Sc from "styled-components";
 
-import { ISSUES_LINK } from "components/config";
-import { FontColors, PrimaryColors } from "types";
-import { Link, Row, Span } from "../atoms";
-import { Badge } from "./Badge";
+import { ActionButton } from "components/atoms";
 
-type Props = {
-  onClick?: () => void;
-  id?: string;
-  badgeId?: string;
-};
-
-export const Brand = React.memo(({ onClick, id, badgeId }: Props) => (
-  <Row>
-    <Logo id={id} onClick={onClick}>
-      <Span>
-        <Span>🏗️</Span> <Span color={FontColors.BASE}>setup</Span>
-        <Span color={PrimaryColors.PURPLE}>-</Span>
-        <Span color={FontColors.BASE}>script</Span>
-      </Span>
-    </Logo>
-    <Badge>
-      <IssueLink id={badgeId} href={ISSUES_LINK}>
-        MacOS BETA
-      </IssueLink>
-    </Badge>
-  </Row>
-));
-
-const IssueLink = Sc(Link)`
-  text-decoration: none;
+export const Brand = Sc(ActionButton)`
+  font-size: 30px;
+  font-weight: 700;
+  background-color: ${({ theme }) => theme.colors.material.input};
   color: ${({ theme }) => theme.colors.font.base};
-  &:hover {
-    color: ${({ theme }) => theme.colors.primary.purple};
-  }
-`;
-
-const Logo = Sc.h1`
-  user-select: none;
-  margin: 0;
-  font-weight: 900;
-  font-size: 24px;
+  margin-right: ${({ theme }) => `${theme.paddings.xs}px`};
 `;

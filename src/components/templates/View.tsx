@@ -50,7 +50,7 @@ const MainContainer = React.memo(({ children }: ViewProps) => (
 
 const FooterContainer = React.memo(({ children }: ViewProps) => (
   <Footer>
-    <Wrapper color={FontColors.SUB} p="0px 16px">
+    <Wrapper justify="center" color={FontColors.SUB} p="0px 16px">
       {children}
     </Wrapper>
   </Footer>
@@ -64,7 +64,7 @@ View.Footer = FooterContainer;
 const Header = Sc.header`
   margin-top: 0px;
   width: 100%;
-  padding: ${({ theme }) => `${theme.paddings.xs}px 0px`};
+  height: 58px;
   position: fixed;
   display: flex;
   justify-content: center;
@@ -95,7 +95,4 @@ const Footer = Sc.footer`
   color: ${({ theme }) => theme.colors.font.sub};
   background-color: ${({ theme }) => theme.colors.material.background};
   padding-bottom: ${({ theme }) => `${theme.paddings.xs}px`};
-  text-align: right;
-  display: flex;
-  justify-content: space-between;
 `;

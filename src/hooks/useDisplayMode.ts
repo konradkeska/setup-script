@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 import { DisplayMode } from "types";
 
@@ -9,12 +9,20 @@ export function useDisplayMode(): Return {
     DisplayMode.PICKER
   );
 
-  const switchDisplayMode = () =>
-    setDisplayMode(
-      displayMode === DisplayMode.PICKER
-        ? DisplayMode.SCRIPT
-        : DisplayMode.PICKER
-    );
+  const switchDisplayMode = useCallback(
+    () =>
+      setDisplayMode(
+        displayMode === DisplayMode.PICKER
+          ? DisplayMode.SCRIPT
+          : DisplayMode.PICKER
+      ),
+    [displayMode]
+  );
 
-  return [displayMode, switchDisplayMode];
+  const memoizedReturn: Return = useMemo(
+    () => [displayMode, switchDisplayMode],
+    [displayMode, switchDisplayMode]
+  );
+
+  return memoizedReturn;
 }

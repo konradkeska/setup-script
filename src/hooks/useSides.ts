@@ -29,12 +29,24 @@ export function useSides() {
     setRightExpanded(!isRightExpanded);
   }, [collapseLeftIsNeeded, isRightExpanded]);
 
-  return {
-    isLeftExpanded,
-    isRightExpanded,
-    toggleLeft,
-    toggleRight,
-    setLeftExpanded,
-    setRightExpanded,
-  };
+  const memoizedReturn = useMemo(
+    () => ({
+      isLeftExpanded,
+      isRightExpanded,
+      toggleLeft,
+      toggleRight,
+      setLeftExpanded,
+      setRightExpanded,
+    }),
+    [
+      isLeftExpanded,
+      isRightExpanded,
+      toggleLeft,
+      toggleRight,
+      setLeftExpanded,
+      setRightExpanded,
+    ]
+  );
+
+  return memoizedReturn;
 }

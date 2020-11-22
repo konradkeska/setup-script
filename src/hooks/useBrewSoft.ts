@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import Axios, { AxiosResponse } from "axios";
 
 import { Soft, SoftType } from "../types";
@@ -55,16 +55,30 @@ export function useBrewSoft() {
     [removeCasks, removeFormulas]
   );
 
-  return {
-    casks,
-    addedCasks,
-    formulas,
-    addedFormulas,
-    onAdd,
-    onRemove,
-    onMultiAdd,
-    onMultiRemove,
-  };
+  const memoizedReturn = useMemo(
+    () => ({
+      casks,
+      addedCasks,
+      formulas,
+      addedFormulas,
+      onAdd,
+      onRemove,
+      onMultiAdd,
+      onMultiRemove,
+    }),
+    [
+      casks,
+      addedCasks,
+      formulas,
+      addedFormulas,
+      onAdd,
+      onRemove,
+      onMultiAdd,
+      onMultiRemove,
+    ]
+  );
+
+  return memoizedReturn;
 }
 
 const BREW_HOST = "https://formulae.brew.sh/";

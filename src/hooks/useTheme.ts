@@ -24,7 +24,12 @@ export function useTheme(): Return {
 
   const currentTheme = useMemo(() => THEMES[theme], [theme]);
 
-  return [initialTheme, currentTheme, switchTheme];
+  const memoizedReturn: Return = useMemo(
+    () => [initialTheme, currentTheme, switchTheme],
+    [initialTheme, currentTheme, switchTheme]
+  );
+
+  return memoizedReturn;
 }
 
 const DEFAULT_THEME: ThemeMode = ThemeMode.DARK;

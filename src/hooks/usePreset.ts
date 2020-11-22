@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { Action, Preset, Soft, SoftType } from "types";
 
 type Props = {
@@ -98,7 +98,11 @@ export function usePreset({
     [getAction, getActionCallback, getSoftPackagesFromConfig]
   );
 
-  return [onClick, FEATURED_PRESETS];
+  const memoizedReturn: Return = useMemo(() => [onClick, FEATURED_PRESETS], [
+    onClick,
+  ]);
+
+  return memoizedReturn;
 }
 
 const FEATURED_PRESETS: Preset[] = [

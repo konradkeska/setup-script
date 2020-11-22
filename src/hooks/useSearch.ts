@@ -32,5 +32,10 @@ export function useSearch({ casks, formulas }: Props): Return {
     [caskResults, formulaeResults]
   );
 
-  return [query, setQuery, sortedResults];
+  const memoizedReturn: Return = useMemo(
+    () => [query, setQuery, sortedResults],
+    [query, setQuery, sortedResults]
+  );
+
+  return memoizedReturn;
 }

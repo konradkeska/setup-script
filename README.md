@@ -1,4 +1,4 @@
-![setup-script app preview](https://user-images.githubusercontent.com/29062983/99889924-3b63b100-2c5a-11eb-8bcc-2ac84298866c.png)
+![setup-script app preview](https://user-images.githubusercontent.com/29062983/99917551-44638980-2d11-11eb-9b44-33b57eff2203.png)
 
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=konradkeska_setup-script&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=konradkeska_setup-script)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkonradkeska%2Fsetup-script.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkonradkeska%2Fsetup-script?ref=badge_shield)

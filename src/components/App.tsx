@@ -1,4 +1,5 @@
 import React from "react";
+import { useMediaQuery } from "react-responsive";
 
 import {
   useBrewSoft,
@@ -15,12 +16,17 @@ import {
   DisplayMode,
   ThemeMode,
 } from "types";
-import { MinSm } from "utils";
-import { Button, Emoji } from "./atoms";
+import { ActionButton, Emoji, Icon, Row, TabButton } from "./atoms";
 import { Brand, Search, Toggle } from "./molecules";
 import { Panel, Script } from "./organisms";
 import { Global, View } from "./templates";
-import { CASKS_PANEL_LABEL, FORMULAS_PANEL_LABEL } from "./config";
+import {
+  CASKS_PANEL_HEADING,
+  CASKS_PANEL_DESCRIPTION,
+  FORMULAS_PANEL_HEADING,
+  FORMULAS_PANEL_DESCRIPTION,
+} from "./config";
+import { MinSm, RWD } from "utils";
 
 function App() {
   const [mode, theme, switchTheme] = useTheme();
@@ -56,22 +62,59 @@ function App() {
     setLeftExpanded,
   } = useSides();
 
+  const onMobileDevice: boolean = useMediaQuery({ maxWidth: RWD.SM - 1 });
+
   return (
     <Global theme={theme}>
       <View>
         <View.Header>
-          <Search
-            id="search-input"
-            query={query}
-            setQuery={setQuery}
-            setLeftExpanded={setLeftExpanded}
-          />
+          <Row justifyContent="flex-start" w={onMobileDevice ? "70%" : "30%"}>
+            {query ? (
+              <ActionButton
+                onClick={() => {
+                  setQuery("");
+                  setLeftExpanded(false);
+                }}
+                mr
+              >
+                <Icon name="arrow-left" />
+              </ActionButton>
+            ) : (
+              <Brand>S</Brand>
+            )}
+            <Search
+              id="search-input"
+              query={query}
+              setQuery={setQuery}
+              setLeftExpanded={setLeftExpanded}
+            />
+          </Row>
           <MinSm>
-            <Brand id="brand" />
+            <Row w="30%">
+              <TabButton
+                onClick={switchDisplayMode}
+                active={displayMode === DisplayMode.PICKER}
+                disabled={displayMode === DisplayMode.PICKER}
+              >
+                <Icon name="tools" />
+              </TabButton>
+              <TabButton
+                onClick={switchDisplayMode}
+                active={displayMode === DisplayMode.SCRIPT}
+                disabled={displayMode === DisplayMode.SCRIPT}
+              >
+                <Icon name="code" />
+              </TabButton>
+            </Row>
           </MinSm>
-          <Button id="download-button" disabled>
-            Download
-          </Button>
+          <Row justifyContent="flex-end" w="30%">
+            <ActionButton onClick={() => console.log("save")} mr>
+              <Icon name="save" />
+            </ActionButton>
+            <ActionButton onClick={() => console.log("download")}>
+              <Icon name="download" />
+            </ActionButton>
+          </Row>
         </View.Header>
         <View.Sides>
           <View.Sides.Left expanded={isLeftExpanded} onClick={toggleLeft}>
@@ -97,23 +140,27 @@ function App() {
             <>
               <Panel
                 id="added-formulas"
-                title={FORMULAS_PANEL_LABEL}
+                heading={FORMULAS_PANEL_HEADING}
+                description={FORMULAS_PANEL_DESCRIPTION}
                 items={addedFormulas}
                 onItemClick={onRemove}
                 action={Action.REMOVE}
                 accentColor={PrimaryColors.BLUE}
                 withItemSeparator
                 height="50%"
+                withDots
                 border
               />
               <Panel
                 id="added-casks"
-                title={CASKS_PANEL_LABEL}
+                heading={CASKS_PANEL_HEADING}
+                description={CASKS_PANEL_DESCRIPTION}
                 items={addedCasks}
                 onItemClick={onRemove}
                 action={Action.REMOVE}
                 withItemSeparator
                 height="50%"
+                withDots
                 border
               />
             </>
@@ -122,13 +169,6 @@ function App() {
           )}
         </View.Main>
         <View.Footer>
-          <Toggle
-            id="display-toggle"
-            defaultChecked={displayMode === DisplayMode.PICKER}
-            onChange={switchDisplayMode}
-            checkedIcon={<Emoji>📦</Emoji>}
-            uncheckedIcon={<Emoji>📜</Emoji>}
-          />
           <Toggle
             id="theme-toggle"
             defaultChecked={mode === ThemeMode.LIGHT}

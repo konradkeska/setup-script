@@ -9,7 +9,8 @@ import { Title } from "./Title";
 interface Props<T> {
   items: T[];
   id?: string;
-  title?: string;
+  heading?: string;
+  description?: string;
   count?: number;
   withDots?: boolean;
   withItemSeparator?: boolean;
@@ -24,7 +25,8 @@ interface Props<T> {
 
 export const Panel = React.memo(
   <T extends Base>({
-    title,
+    heading,
+    description,
     items,
     onItemClick,
     id,
@@ -37,9 +39,15 @@ export const Panel = React.memo(
     width = "100%",
     height = "100%",
   }: Props<T>) => (
-    <PanelWrapper title={title} width={width} height={height}>
-      {title && <Title text={title} accentColor={accentColor} />}
-      <List id={id} title={title} border={border} bgColor={bgColor}>
+    <PanelWrapper heading={heading} width={width} height={height}>
+      {heading && (
+        <Title
+          text={heading}
+          description={description}
+          accentColor={accentColor}
+        />
+      )}
+      <List id={id} heading={heading} border={border} bgColor={bgColor}>
         {items.map((record, index) => (
           <ListItem
             id={record.token || record.name}
@@ -63,11 +71,11 @@ const COLORS_MAP = {
   [SoftType.FORMULA]: PrimaryColors.BLUE,
 };
 
-type PanelWrapperProps = Pick<Props<Base>, "width" | "height" | "title">;
+type PanelWrapperProps = Pick<Props<Base>, "width" | "height" | "heading">;
 
 const PanelWrapper = Sc.div<PanelWrapperProps>`
   width: ${({ width }) => width};
   height: ${({ height }) => height};
-  padding: ${({ theme: { paddings }, title }) =>
-    title ? `0px ${paddings.sm}px ${paddings.sm}px ${paddings.sm}px` : "0px"};
+  padding: ${({ theme: { paddings }, heading }) =>
+    heading ? `0px ${paddings.sm}px ${paddings.sm}px ${paddings.sm}px` : "0px"};
 `;

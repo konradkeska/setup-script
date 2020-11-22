@@ -76,7 +76,7 @@ export function usePreset({
     [onMultiAdd, onMultiRemove]
   );
 
-  const getSoftPackagesFromConfig = useCallback(
+  const getSoftPackagesFromPreset = useCallback(
     (preset: Preset): [Soft[], Soft[]] => {
       const presetCasks = getCasks(preset.casks);
       const presetFormulas = getFormulas(preset.formulas);
@@ -89,13 +89,13 @@ export function usePreset({
     (preset: Preset) => {
       const presetAction = getAction(preset);
       const actionCallback = getActionCallback(presetAction);
-      const [presetCasks, presetFormulas] = getSoftPackagesFromConfig(preset);
+      const [presetCasks, presetFormulas] = getSoftPackagesFromPreset(preset);
       return () => {
         actionCallback(presetCasks, SoftType.CASK);
         actionCallback(presetFormulas, SoftType.FORMULA);
       };
     },
-    [getAction, getActionCallback, getSoftPackagesFromConfig]
+    [getAction, getActionCallback, getSoftPackagesFromPreset]
   );
 
   const memoizedReturn: Return = useMemo(() => [onClick, FEATURED_PRESETS], [

@@ -43,14 +43,14 @@ export function useBrewSoft() {
 
   const onMultiAdd = useCallback(
     (records: Soft[], type: SoftType) => {
-      return getCallbackMap([addCasks, addFormulas])[type](records);
+      return getCallbackMap([addCasks, addFormulas])[type](records)();
     },
     [addCasks, addFormulas]
   );
 
   const onMultiRemove = useCallback(
     (records: Soft[], type: SoftType) => {
-      return getCallbackMap([removeCasks, removeFormulas])[type](records);
+      return getCallbackMap([removeCasks, removeFormulas])[type](records)();
     },
     [removeCasks, removeFormulas]
   );
@@ -91,9 +91,10 @@ const loadFormulas = (): Promise<AxiosResponse<Soft[]>> =>
 
 type SoftCallbacks<T> = [(arg: T) => () => void, (arg: T) => () => void];
 
-const getCallbackMap = <T>([caskCallback, formulaCallback]: SoftCallbacks<
-  T
->) => ({
+const getCallbackMap = <T>([
+  caskCallback,
+  formulaCallback,
+]: SoftCallbacks<T>) => ({
   [SoftType.CASK]: caskCallback,
   [SoftType.FORMULA]: formulaCallback,
 });

@@ -84,5 +84,5 @@ const getRemovable = ([itemsToRemove, addedItems]: [Soft[], Soft[]]) =>
 
 const getListWithout = ([list, itemsToRemove]: [Soft[], Soft[]]) =>
   list.filter(
-    ({ name }) => !itemsToRemove.map(({ name }) => name).includes(name)
+    (record) => !itemsToRemove.map(({ name }) => name).includes(record.name)
   );

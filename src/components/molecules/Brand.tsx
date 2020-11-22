@@ -1,17 +1,20 @@
 import React from "react";
 import Sc from "styled-components";
 
+import { ISSUES_LINK } from "components/config";
 import { FontColors, PrimaryColors } from "types";
 import { Link, Row, Span } from "../atoms";
 import { Badge } from "./Badge";
 
 type Props = {
   onClick?: () => void;
+  id?: string;
+  badgeId?: string;
 };
 
-export const Brand = React.memo(({ onClick }: Props) => (
+export const Brand = React.memo(({ onClick, id, badgeId }: Props) => (
   <Row>
-    <Logo id="brand" onClick={onClick}>
+    <Logo id={id} onClick={onClick}>
       <Span>
         <Span>🏗️</Span> <Span color={FontColors.BASE}>setup</Span>
         <Span color={PrimaryColors.PURPLE}>-</Span>
@@ -19,7 +22,7 @@ export const Brand = React.memo(({ onClick }: Props) => (
       </Span>
     </Logo>
     <Badge>
-      <IssueLink href="https://github.com/konradkeska/setup-script/issues">
+      <IssueLink id={badgeId} href={ISSUES_LINK}>
         MacOS BETA
       </IssueLink>
     </Badge>

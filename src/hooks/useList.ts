@@ -50,8 +50,8 @@ export function useList({ loader, type }: Props): Return {
   );
 
   const addItems = useCallback(
-    (items: Soft[]) => () => {
-      const addableItems = getAddable([items, addedList]);
+    (records: Soft[]) => () => {
+      const addableItems = getAddable([records, addedList]);
       const listWithoutItems = getListWithout([list, addableItems]);
       setAddedList([...addableItems, ...addedList]);
       setList(listWithoutItems);
@@ -60,8 +60,8 @@ export function useList({ loader, type }: Props): Return {
   );
 
   const removeItems = useCallback(
-    (items: Soft[]) => () => {
-      const removableItems = getRemovable([items, addedList]);
+    (records: Soft[]) => () => {
+      const removableItems = getRemovable([records, addedList]);
       const addedListWithoutItems = getListWithout([addedList, removableItems]);
       setAddedList(addedListWithoutItems);
       setList([...removableItems, ...list]);

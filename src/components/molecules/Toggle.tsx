@@ -8,6 +8,7 @@ type Props = {
   checkedIcon?: JSX.Element;
   uncheckedIcon?: JSX.Element;
   defaultChecked?: boolean;
+  id?: string;
 };
 
 export const Toggle = React.memo(

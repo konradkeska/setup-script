@@ -7,10 +7,11 @@ type Props = {
   query: string;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
   setLeftExpanded: React.Dispatch<React.SetStateAction<boolean>>;
+  id?: string;
 };
 
 export const Search = React.memo(
-  ({ query, setQuery, setLeftExpanded }: Props) => {
+  ({ id, query, setQuery, setLeftExpanded }: Props) => {
     const searchInputRef = useRef<HTMLInputElement | null>(null);
 
     useEffect(() => {
@@ -34,7 +35,7 @@ export const Search = React.memo(
 
     return (
       <Input
-        id="search-input"
+        id={id}
         ref={searchInputRef}
         placeholder="Find software.."
         type="text"

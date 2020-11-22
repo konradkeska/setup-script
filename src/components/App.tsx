@@ -61,12 +61,13 @@ function App() {
       <View>
         <View.Header>
           <Search
+            id="search-input"
             query={query}
             setQuery={setQuery}
             setLeftExpanded={setLeftExpanded}
           />
           <MinSm>
-            <Brand />
+            <Brand id="brand" />
           </MinSm>
           <Button id="download-button" disabled>
             Download
@@ -75,7 +76,7 @@ function App() {
         <View.Sides>
           <View.Sides.Left expanded={isLeftExpanded} onClick={toggleLeft}>
             <Panel
-              id="results"
+              id="search-results"
               items={searchResults}
               onItemClick={onAdd}
               bgColor={MaterialColors.SIDE}
@@ -84,6 +85,7 @@ function App() {
           </View.Sides.Left>
           <View.Sides.Right expanded={isRightExpanded} onClick={toggleRight}>
             <Panel
+              id="presets"
               items={FEATURED_PRESETS}
               bgColor={MaterialColors.SIDE}
               onItemClick={onPresetClick}
@@ -121,12 +123,14 @@ function App() {
         </View.Main>
         <View.Footer>
           <Toggle
+            id="display-toggle"
             defaultChecked={displayMode === DisplayMode.PICKER}
             onChange={switchDisplayMode}
             checkedIcon={<Emoji>📦</Emoji>}
             uncheckedIcon={<Emoji>📜</Emoji>}
           />
           <Toggle
+            id="theme-toggle"
             defaultChecked={mode === ThemeMode.LIGHT}
             onChange={switchTheme}
             checkedIcon={<Emoji>☀️</Emoji>}

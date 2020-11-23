@@ -27,7 +27,7 @@ import {
   FORMULAS_PANEL_HEADING,
   FORMULAS_PANEL_DESCRIPTION,
 } from "./config";
-import { MinSm, RWD } from "utils";
+import { MinMd, MinSm, RWD } from "utils";
 
 function App() {
   const [mode, theme, switchTheme] = useTheme();
@@ -178,14 +178,20 @@ function App() {
             checkedIcon={<Emoji>☀️</Emoji>}
             uncheckedIcon={<Emoji>🌙</Emoji>}
           />
+          <MinMd>
+            <Code>
+              <Link label="wget" href="https://google.com/" />
+              &nbsp;(1.20.3) Internet file retriever
+            </Code>
+          </MinMd>
+          <MinMd>
+            <Code>1350482 installs (365 days)</Code>
+          </MinMd>
+          <MinMd>
+            <Code>0 conflicts</Code>
+          </MinMd>
           <Code>
-            <Link label="wget" href="https://google.com/" />
-            &nbsp;(1.20.3) Internet file retriever
-          </Code>
-          <Code>1350482 installs (365 days)</Code>
-          <Code>0 conflicts with setup</Code>
-          <Code>
-            all made possible due to&nbsp;
+            powered by&nbsp;
             <Link label="Brew" href="https://formulae.brew.sh/" />
             &nbsp;🤍
           </Code>

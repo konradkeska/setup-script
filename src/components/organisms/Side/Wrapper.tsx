@@ -1,6 +1,6 @@
 import Sc from "styled-components";
 
-import { HEADER_HEIGHT } from "components/config";
+import { FOOTER_HEIGHT, HEADER_HEIGHT } from "components/config";
 import { RWD } from "utils";
 
 type Props = {
@@ -16,10 +16,11 @@ export const Wrapper = Sc.aside<Props>`
   flex-direction: row;
   z-index: 4;
   padding-top: ${HEADER_HEIGHT}px;
+  padding-bottom: ${FOOTER_HEIGHT}px;
   right: ${({ right, expanded }) =>
-    getExpandValue({ side: right, sideWidth: `-350px`, expanded })};
+    getCoord({ side: right, width: `-350px`, expanded })};
   left: ${({ left, expanded }) =>
-    getExpandValue({ side: left, sideWidth: `-350px`, expanded })};
+    getCoord({ side: left, width: `-350px`, expanded })};
   max-width: 380px;
   width: 100%;
   height: 100%;
@@ -29,15 +30,15 @@ export const Wrapper = Sc.aside<Props>`
   @media (max-width: ${RWD.SM - 1}px) {
     max-width: calc(100% - 40px);
     right: ${({ right, expanded }) =>
-      getExpandValue({
+      getCoord({
         side: right,
-        sideWidth: `calc((100% - 70px) * -1)`,
+        width: `calc((100% - 70px) * -1)`,
         expanded,
       })};
     left: ${({ left, expanded }) =>
-      getExpandValue({
+      getCoord({
         side: left,
-        sideWidth: `calc((100% - 70px) * -1)`,
+        width: `calc((100% - 70px) * -1)`,
         expanded,
       })};
   }
@@ -45,26 +46,26 @@ export const Wrapper = Sc.aside<Props>`
   @media (min-width: ${RWD.LG}px) {
     max-width: calc((100% - 750px) / 2);
     right: ${({ right, expanded }) =>
-      getExpandValue({
+      getCoord({
         side: right,
-        sideWidth: `calc((100% - 810px) / -2)`,
+        width: `calc((100% - 810px) / -2)`,
         expanded,
       })};
     left: ${({ left, expanded }) =>
-      getExpandValue({
+      getCoord({
         side: left,
-        sideWidth: `calc((100% - 810px) / -2)`,
+        width: `calc((100% - 810px) / -2)`,
         expanded,
       })};
   }
 `;
 
-const getExpandValue = ({
-  sideWidth,
+const getCoord = ({
+  width,
   expanded,
   side,
 }: {
   expanded: boolean;
-  sideWidth: string;
+  width: string;
   side?: boolean;
-}) => (side ? (expanded ? `0px` : sideWidth) : "unset");
+}) => (side ? (expanded ? `0px` : width) : "unset");

@@ -4,7 +4,6 @@ import Sc from "styled-components";
 import { FOOTER_HEIGHT, HEADER_HEIGHT } from "components/config";
 import { Wrapper } from "components/atoms";
 import { Side } from "components/organisms";
-import { FontColors } from "types";
 
 interface ViewProps {
   children: React.ReactNode;
@@ -50,9 +49,7 @@ const MainContainer = React.memo(({ children }: ViewProps) => (
 
 const FooterContainer = React.memo(({ children }: ViewProps) => (
   <Footer>
-    <Wrapper justify="center" color={FontColors.SUB} p="0px 16px">
-      {children}
-    </Wrapper>
+    <Wrapper maxW="100%">{children}</Wrapper>
   </Footer>
 ));
 
@@ -70,29 +67,43 @@ const Header = Sc.header`
   justify-content: center;
   align-items: center;
   z-index: 5;
-  background-color: ${({ theme }) => theme.colors.material.overlay};
-  color: ${({ theme }) => theme.colors.font.base};
   transition: margin 500ms;
   backdrop-filter: blur(5px);
-  box-shadow: ${({ theme }) => theme.shadows.base};
+  background-color: ${({ theme }) => theme.colors.material.overlay};
+  color: ${({ theme }) => theme.colors.font.base};
+  box-shadow: ${({ theme }) => theme.shadows.header};
   border-bottom: ${({ theme }) => `1px solid ${theme.colors.material.input}`};
   border-top: ${({ theme }) => `1px solid ${theme.colors.material.overlay}`};
 `;
 
 const Main = Sc.main`
   padding-top: ${HEADER_HEIGHT}px;
+  padding-bottom: ${FOOTER_HEIGHT}px;
   width: 100%;
-  height: calc(100% - ${FOOTER_HEIGHT}px);
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.colors.material.background};
   transition: padding 500ms;
+  background-color: ${({ theme }) => theme.colors.material.background};
 `;
 
 const Footer = Sc.footer`
-  color: ${({ theme }) => theme.colors.font.sub};
-  background-color: ${({ theme }) => theme.colors.material.background};
-  padding-bottom: ${({ theme }) => `${theme.paddings.xs}px`};
+  bottom: 0;
+  height: ${FOOTER_HEIGHT}px;
+
+  width: 100%;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  transition: margin 500ms;
+  backdrop-filter: blur(5px);
+  background-color: ${({ theme }) => theme.colors.material.overlay};
+  color: ${({ theme }) => theme.colors.font.base};
+  box-shadow: ${({ theme }) => theme.shadows.footer};
+  border-bottom: ${({ theme }) => `1px solid ${theme.colors.material.input}`};
+  border-top: ${({ theme }) => `1px solid ${theme.colors.material.overlay}`};
 `;

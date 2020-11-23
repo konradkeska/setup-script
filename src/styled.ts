@@ -36,7 +36,8 @@ declare module "styled-components" {
   }
 
   export interface DefaultShadows {
-    base: string;
+    header: string;
+    footer: string;
   }
 
   export interface DefaultRadiuses {

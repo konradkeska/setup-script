@@ -15,8 +15,9 @@ import {
   Action,
   DisplayMode,
   ThemeMode,
+  SoftType,
 } from "types";
-import { ActionButton, Emoji, Icon, Row, TabButton } from "./atoms";
+import { ActionButton, Code, Emoji, Icon, Link, Row, TabButton } from "./atoms";
 import { Brand, Search, Toggle } from "./molecules";
 import { Panel, Script } from "./organisms";
 import { Global, View } from "./templates";
@@ -41,6 +42,7 @@ function App() {
     onRemove,
     onMultiAdd,
     onMultiRemove,
+    loadInfo,
   } = useBrewSoft();
 
   const [onPresetClick, FEATURED_PRESETS] = usePreset({
@@ -64,6 +66,8 @@ function App() {
 
   const onMobileDevice: boolean = useMediaQuery({ maxWidth: RWD.SM - 1 });
 
+  console.log(loadInfo("wget", SoftType.FORMULA));
+
   return (
     <Global theme={theme}>
       <View>
@@ -80,7 +84,7 @@ function App() {
                 <Icon name="arrow-left" />
               </ActionButton>
             ) : (
-              <Brand>S</Brand>
+              <Brand />
             )}
             <Search
               id="search-input"
@@ -174,6 +178,17 @@ function App() {
             checkedIcon={<Emoji>☀️</Emoji>}
             uncheckedIcon={<Emoji>🌙</Emoji>}
           />
+          <Code>
+            <Link label="wget" href="https://google.com/" />
+            &nbsp;(1.20.3) Internet file retriever
+          </Code>
+          <Code>1350482 installs (365 days)</Code>
+          <Code>0 conflicts with setup</Code>
+          <Code>
+            all made possible due to&nbsp;
+            <Link label="Brew" href="https://formulae.brew.sh/" />
+            &nbsp;🤍
+          </Code>
         </View.Footer>
       </View>
     </Global>

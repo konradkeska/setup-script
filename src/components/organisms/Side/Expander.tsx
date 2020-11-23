@@ -56,6 +56,8 @@ const Button = Sc.button`
 
   &:hover,
   &:focus {
+    border-top: 1px solid ${({ theme }) => theme.colors.material.background};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.material.background};
     svg {
       fill: ${({ theme }) => theme.colors.font.base};
     }
@@ -73,6 +75,13 @@ const LeftButton = Sc(Button)`
   border-top-right-radius: 33%;
   border-bottom-right-radius: 33%;
   border-right: 1px solid ${({ theme }) => theme.colors.material.background};
+
+  &:focus {
+    border-top-right-radius: 33%;
+    border-bottom-right-radius: 33%;
+    border-right: 1px solid ${({ theme }) => theme.colors.material.background};
+    border-left: none;
+  }
 `;
 
 const RightButton = Sc(Button)`
@@ -80,4 +89,11 @@ const RightButton = Sc(Button)`
   border-top-left-radius: 33%;
   border-bottom-left-radius: 33%;
   border-left: 1px solid ${({ theme }) => theme.colors.material.background};
+
+  &:focus {
+    border-top-left-radius: 33%;
+    border-bottom-left-radius: 33%;
+    border-left: 1px solid ${({ theme }) => theme.colors.material.background};
+    border-right: none;
+  }
 `;

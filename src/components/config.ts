@@ -4,9 +4,9 @@ const FORMULAS_PANEL_HEADING = "Formulas";
 const FORMULAS_PANEL_DESCRIPTION = "(Command Line Software)";
 const ISSUES_LINK = "https://github.com/konradkeska/setup-script/issues";
 const HEADER_HEIGHT = 58;
+const FOOTER_HEIGHT = 32;
 const MAIN_MAX_WIDTH = 680;
 const PANEL_ITEM_HEIGHT = 32;
-const FOOTER_HEIGHT = 35;
 
 export {
   CASKS_PANEL_HEADING,

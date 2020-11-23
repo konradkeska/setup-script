@@ -1,4 +1,4 @@
-![setup-script app preview](https://user-images.githubusercontent.com/29062983/99917551-44638980-2d11-11eb-9b44-33b57eff2203.png)
+![setup-script logo](https://user-images.githubusercontent.com/29062983/100010558-b9e25f00-2dd0-11eb-93bf-f7a3934fba16.png)
 
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=konradkeska_setup-script&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=konradkeska_setup-script)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkonradkeska%2Fsetup-script.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkonradkeska%2Fsetup-script?ref=badge_shield)
@@ -9,6 +9,11 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
+## Preview
+
+![setup-script UI preview](https://user-images.githubusercontent.com/29062983/100010376-78ea4a80-2dd0-11eb-9fe5-72ade4b88d99.png)
+
+### [LIVE DEMO](https://konradkeska.github.io/setup-script/)
 
 ## About
 
@@ -44,4 +49,4 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 ## License
 
-[MIT](LICENSE). Copyright (c) 2020 Konrad Kęska.
+[MIT](LICENSE) (c) 2020 Konrad Kęska.

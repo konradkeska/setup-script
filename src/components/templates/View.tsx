@@ -104,6 +104,6 @@ const Footer = Sc.footer`
   background-color: ${({ theme }) => theme.colors.material.overlay};
   color: ${({ theme }) => theme.colors.font.base};
   box-shadow: ${({ theme }) => theme.shadows.footer};
-  border-bottom: ${({ theme }) => `1px solid ${theme.colors.material.input}`};
-  border-top: ${({ theme }) => `1px solid ${theme.colors.material.overlay}`};
+  border-bottom: ${({ theme }) => `1px solid ${theme.colors.material.overlay}`};
+  border-top: ${({ theme }) => `1px solid ${theme.colors.material.input}`};
 `;

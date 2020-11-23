@@ -63,9 +63,9 @@ const Button = Sc.button`
     }
   }
   &:active {
-    background-color: rgba(35, 206, 107, 0.2);
+    background-color: rgba(104, 117, 245, 0.2);
     svg {
-      fill: ${({ theme }) => theme.colors.primary.green};
+      fill: ${({ theme }) => theme.colors.primary.purple};
     }
   }
 `;

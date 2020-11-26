@@ -1,7 +1,8 @@
 import React from "react";
 import Sc from "styled-components";
 
-import { Button, Span, Wrapper } from "../atoms";
+import { FOOTER_HEIGHT } from "components/config";
+import { Span, Wrapper } from "../atoms";
 
 type Props = {
   label: string;
@@ -16,9 +17,9 @@ export const Bar = React.memo(
       <Wrapper maxW="100%">
         <div>
           {label}{" "}
-          <Button onClick={onConfirm} small ml>
+          <ConfirmButton aria-label="confirm guide tour" onClick={onConfirm}>
             {btnLabel}
-          </Button>
+          </ConfirmButton>
         </div>
         <Span onClick={onClose} clickable>
           ✖
@@ -29,8 +30,8 @@ export const Bar = React.memo(
 );
 
 const Aside = Sc.aside`
-  bottom: 0px;
-  border-top: ${({ theme }) => theme.colors.material.background};
+  bottom: ${FOOTER_HEIGHT}px;
+  border-top: ${({ theme }) => theme.colors.material.side};
   background-color: ${({ theme }) => theme.colors.material.overlay};
   width: 100%;
   padding: ${({ theme }) => `${theme.paddings.xs}px 0px`};
@@ -40,4 +41,21 @@ const Aside = Sc.aside`
   align-items: center;
   z-index: 5;
   color: ${({ theme }) => theme.colors.font.base};
+  box-shadow: ${({ theme }) => theme.shadows.footer};
+`;
+
+const ConfirmButton = Sc.button`
+    padding: 2px 10px;
+    border-radius: ${({ theme }) => `${theme.paddings.xs / 2}px`};
+    color: ${({ theme }) => theme.colors.font.base};
+    margin-left: ${({ theme }) => `${theme.paddings.xs * 1.5}px`};
+    background-color: ${({ theme }) => theme.colors.primary.green};
+    font-size: 14px;
+    font-weight: 700;
+    border-width: 1px solid transparent;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.9;
+    }
 `;

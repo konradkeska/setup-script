@@ -1,5 +1,4 @@
 export { ActionButton } from "./ActionButton";
-export { Button } from "./Button";
 export { Code } from "./Code";
 export { Dot } from "./Dot";
 export { Emoji } from "./Emoji";

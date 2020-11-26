@@ -12,7 +12,7 @@ export function useBrewSoft() {
     removeCask,
     addCasks,
     removeCasks,
-  ] = useList({ loader: loadCasks, type: SoftType.CASK });
+  ] = useList([loadCasks, SoftType.CASK]);
 
   const [
     formulas,
@@ -21,7 +21,7 @@ export function useBrewSoft() {
     removeFormula,
     addFormulas,
     removeFormulas,
-  ] = useList({ loader: loadFormulas, type: SoftType.FORMULA });
+  ] = useList([loadFormulas, SoftType.FORMULA]);
 
   const onAdd = useCallback(
     (record: Soft) => {

@@ -36,6 +36,7 @@ export const Search = React.memo(
     return (
       <Input
         id={id}
+        aria-label="search"
         ref={searchInputRef}
         placeholder="Find software.."
         type="text"

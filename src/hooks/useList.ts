@@ -4,10 +4,7 @@ import { AxiosResponse } from "axios";
 import { Soft, SoftType } from "types";
 import { formatResponse } from "utils";
 
-type Props = {
-  loader: () => Promise<AxiosResponse<Soft[]>>;
-  type: SoftType;
-};
+type Props = [() => Promise<AxiosResponse<Soft[]>>, SoftType];
 
 type Return = [
   Soft[],
@@ -18,7 +15,7 @@ type Return = [
   (records: Soft[]) => () => void
 ];
 
-export function useList({ loader, type }: Props): Return {
+export function useList([loader, type]: Props): Return {
   const [list, setList] = useState<Soft[]>([]);
   const [addedList, setAddedList] = useState<Soft[]>([]);
 

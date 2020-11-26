@@ -39,7 +39,12 @@ export const Panel = React.memo(
     width = "100%",
     height = "100%",
   }: Props<T>) => (
-    <PanelWrapper heading={heading} width={width} height={height}>
+    <PanelWrapper
+      aria-label={getAriaLabel(action, heading)}
+      heading={heading}
+      width={width}
+      height={height}
+    >
       {heading && (
         <Title
           text={heading}
@@ -47,7 +52,13 @@ export const Panel = React.memo(
           accentColor={accentColor}
         />
       )}
-      <List id={id} heading={heading} border={border} bgColor={bgColor}>
+      <List
+        aria-label={`${heading || "records"} list`}
+        id={id}
+        heading={heading}
+        border={border}
+        bgColor={bgColor}
+      >
         {items.map((record, index) => (
           <ListItem
             id={record.token || record.name}
@@ -66,9 +77,12 @@ export const Panel = React.memo(
   )
 );
 
+const getAriaLabel = (action: Action, heading: string = "records") =>
+  `${action === Action.ADD ? "found" : "added"} ${heading}`;
+
 const COLORS_MAP = {
-  [SoftType.CASK]: PrimaryColors.PURPLE,
-  [SoftType.FORMULA]: PrimaryColors.BLUE,
+  [SoftType.CASK]: PrimaryColors.BLUE,
+  [SoftType.FORMULA]: PrimaryColors.YELLOW,
 };
 
 type PanelWrapperProps = Pick<Props<Base>, "width" | "height" | "heading">;

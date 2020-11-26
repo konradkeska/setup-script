@@ -152,23 +152,23 @@ export const GlobalStyle = createGlobalStyle`
     height: 24px;
     padding: 0;
     border-radius: 30px;
-    background-color: #0f1114;
+    background-color: ${({ theme }) => theme.colors.font.sub};
     -webkit-transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;
     transition: all 0.2s ease;
   }
 
   .react-toggle:hover:not(.react-toggle--disabled) .react-toggle-track {
-    background-color: #0f1114;
+    background-color: ${({ theme }) => theme.colors.font.sub};
   }
 
   .react-toggle--checked .react-toggle-track {
-    background-color: #0f1114;
+    background-color: ${({ theme }) => theme.colors.font.sub};
   }
 
   .react-toggle--checked:hover:not(.react-toggle--disabled)
     .react-toggle-track {
-    background-color: #0f1114;
+    background-color: ${({ theme }) => theme.colors.font.sub};
   }
 
   .react-toggle-track-check {
@@ -221,9 +221,9 @@ export const GlobalStyle = createGlobalStyle`
     left: 1px;
     width: 22px;
     height: 22px;
-    border: 1px solid #4d4d4d;
+    border: 1px solid ${({ theme }) => theme.colors.font.sub};
     border-radius: 50%;
-    background-color: #fafafa;
+    background-color: ${({ theme }) => theme.colors.brand.lighter};
 
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -236,18 +236,22 @@ export const GlobalStyle = createGlobalStyle`
 
   .react-toggle--checked .react-toggle-thumb {
     left: 27px;
-    border-color: #0f1114;
+    border-color: ${({ theme }) => theme.colors.material.input};
   }
 
   .react-toggle--focus .react-toggle-thumb {
-    -webkit-box-shadow: 0px 0px 3px 2px rgb(104, 117, 245);
-    -moz-box-shadow: 0px 0px 3px 2px rgb(104, 117, 245);
-    box-shadow: 0px 0px 2px 3px rgb(104, 117, 245);
+    -webkit-box-shadow: 0px 0px 3px 2px ${({ theme }) =>
+      theme.colors.brand.lighter};
+    -moz-box-shadow: 0px 0px 3px 2px ${({ theme }) =>
+      theme.colors.brand.lighter};
+    box-shadow: 0px 0px 2px 3px ${({ theme }) => theme.colors.brand.lighter};
   }
 
   .react-toggle:active:not(.react-toggle--disabled) .react-toggle-thumb {
-    -webkit-box-shadow: 0px 0px 5px 5px rgb(104, 117, 245);
-    -moz-box-shadow: 0px 0px 5px 5px rgb(104, 117, 245);
-    box-shadow: 0px 0px 5px 5px rgb(104, 117, 245);
+    -webkit-box-shadow: 0px 0px 5px 5px ${({ theme }) =>
+      theme.colors.brand.lighter};
+    -moz-box-shadow: 0px 0px 5px 5px ${({ theme }) =>
+      theme.colors.brand.lighter};
+    box-shadow: 0px 0px 5px 5px ${({ theme }) => theme.colors.brand.lighter};
   }
 `;

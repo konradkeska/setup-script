@@ -30,7 +30,13 @@ export const ListItem = React.memo(
     withSeparator,
   }: Props<T>) => (
     <StyledListItem withSeparator={withSeparator}>
-      <Button id={id} index={index} action={action} onClick={onClick}>
+      <Button
+        id={id}
+        index={index}
+        action={action}
+        onClick={onClick}
+        aria-label={`${action} ${record.name} ${record.type || "preset"}`}
+      >
         <Code>
           {withDots ? <Dot color={dotColor}>· </Dot> : null}
           {truncate(record.name, 33)}
@@ -80,6 +86,11 @@ const Button = Sc.button<Pick<Props<Base>, "index" | "action">>`
       ${theme.colors.primary[getHighlightColor(action)]}`};
     background-color: ${({ theme, action }) =>
       theme.colors.primary[getHighlightColor(action)]};
+    color: ${({ theme }) => theme.colors.font.base};
+
+    span {
+      color: ${({ theme }) => theme.colors.font.base};
+    }
   }
 `;
 

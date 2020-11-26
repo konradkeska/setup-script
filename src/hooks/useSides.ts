@@ -38,14 +38,7 @@ export function useSides() {
       setLeftExpanded,
       setRightExpanded,
     }),
-    [
-      isLeftExpanded,
-      isRightExpanded,
-      toggleLeft,
-      toggleRight,
-      setLeftExpanded,
-      setRightExpanded,
-    ]
+    [isLeftExpanded, isRightExpanded, toggleLeft, toggleRight]
   );
 
   return memoizedReturn;

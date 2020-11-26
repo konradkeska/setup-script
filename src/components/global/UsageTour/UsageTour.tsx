@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const UsageTour = React.memo(({ theme }: Props) => {
-  const steps = getSteps(theme);
+  const steps = getSteps();
   const {
     cancelTour,
     startTour,
@@ -24,7 +24,7 @@ export const UsageTour = React.memo(({ theme }: Props) => {
       {!wasUserGuided && (
         <Bar
           label="Are you up for a quick tour?"
-          btnLabel="Ok"
+          btnLabel="OK"
           onClose={cancelTour}
           onConfirm={startTour}
         />
@@ -35,7 +35,7 @@ export const UsageTour = React.memo(({ theme }: Props) => {
         isOpen={isTourOpen}
         onAfterOpen={() => (document.body.style.overflowY = "hidden")}
         onBeforeClose={() => (document.body.style.overflowY = "auto")}
-        accentColor={theme.colors.primary.purple}
+        accentColor={theme.colors.brand.darker}
         rounded={theme.radiuses.md}
         showNavigation={false}
         showNavigationNumber={false}

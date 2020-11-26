@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useMediaQuery } from "react-responsive";
 
 import {
@@ -15,7 +15,6 @@ import {
   Action,
   DisplayMode,
   ThemeMode,
-  SoftType,
 } from "types";
 import { ActionButton, Code, Emoji, Icon, Link, Row, TabButton } from "./atoms";
 import { Brand, Search, Toggle } from "./molecules";
@@ -42,7 +41,6 @@ function App() {
     onRemove,
     onMultiAdd,
     onMultiRemove,
-    loadInfo,
   } = useBrewSoft();
 
   const [onPresetClick, FEATURED_PRESETS] = usePreset({
@@ -64,9 +62,12 @@ function App() {
     setLeftExpanded,
   } = useSides();
 
-  const onMobileDevice: boolean = useMediaQuery({ maxWidth: RWD.SM - 1 });
+  const onMobileDevice = useMediaQuery({ maxWidth: RWD.SM - 1 });
 
-  console.log(loadInfo("wget", SoftType.FORMULA));
+  const onReset = useCallback(() => {
+    setQuery("");
+    setLeftExpanded(false);
+  }, [setQuery, setLeftExpanded]);
 
   return (
     <Global theme={theme}>
@@ -74,13 +75,7 @@ function App() {
         <View.Header>
           <Row justifyContent="flex-start" w={onMobileDevice ? "70%" : "30%"}>
             {query ? (
-              <ActionButton
-                onClick={() => {
-                  setQuery("");
-                  setLeftExpanded(false);
-                }}
-                mr
-              >
+              <ActionButton aria-label="reset search" onClick={onReset} mr>
                 <Icon name="arrow-left" />
               </ActionButton>
             ) : (
@@ -96,6 +91,8 @@ function App() {
           <MinSm>
             <Row w="30%">
               <TabButton
+                id="edit-mode-button"
+                aria-label="switch to edit mode"
                 onClick={switchDisplayMode}
                 active={displayMode === DisplayMode.PICKER}
                 disabled={displayMode === DisplayMode.PICKER}
@@ -103,6 +100,8 @@ function App() {
                 <Icon name="tools" />
               </TabButton>
               <TabButton
+                id="script-mode-button"
+                aria-label="switch to script preview mode"
                 onClick={switchDisplayMode}
                 active={displayMode === DisplayMode.SCRIPT}
                 disabled={displayMode === DisplayMode.SCRIPT}
@@ -112,10 +111,19 @@ function App() {
             </Row>
           </MinSm>
           <Row justifyContent="flex-end" w="30%">
-            <ActionButton onClick={() => console.log("save")} mr>
+            <ActionButton
+              id="save-button"
+              aria-label="save script"
+              onClick={() => console.log("save")}
+              mr
+            >
               <Icon name="save" />
             </ActionButton>
-            <ActionButton onClick={() => console.log("download")}>
+            <ActionButton
+              id="download-button"
+              aria-label="download script"
+              onClick={() => console.log("download")}
+            >
               <Icon name="download" />
             </ActionButton>
           </Row>
@@ -136,6 +144,7 @@ function App() {
               items={FEATURED_PRESETS}
               bgColor={MaterialColors.SIDE}
               onItemClick={onPresetClick}
+              withItemSeparator
             />
           </View.Sides.Right>
         </View.Sides>
@@ -173,7 +182,8 @@ function App() {
         <View.Footer>
           <Toggle
             id="theme-toggle"
-            defaultChecked={mode === ThemeMode.LIGHT}
+            aria-label="toggle display mode"
+            defaultChecked={mode === ThemeMode.DARK}
             onChange={switchTheme}
             checkedIcon={<Emoji>☀️</Emoji>}
             uncheckedIcon={<Emoji>🌙</Emoji>}

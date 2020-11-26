@@ -12,16 +12,15 @@ type Return = [string, React.Dispatch<React.SetStateAction<string>>, Soft[]];
 
 export function useSearch({ casks, formulas }: Props): Return {
   const [query, setQuery] = useState<string>("");
-  const hasValidQuery = useMemo(() => query?.length > 1, [query]);
 
   const caskResults: Soft[] = useMemo(
-    () => (hasValidQuery ? includesQuery(query, casks) : []),
-    [hasValidQuery, query, casks]
+    () => (query?.length > 1 ? includesQuery(query, casks) : []),
+    [query, casks]
   );
 
   const formulaeResults: Soft[] = useMemo(
-    () => (hasValidQuery ? includesQuery(query, formulas) : []),
-    [hasValidQuery, query, formulas]
+    () => (query?.length > 1 ? includesQuery(query, formulas) : []),
+    [query, formulas]
   );
 
   const sortedResults: Soft[] = useMemo(
@@ -34,7 +33,7 @@ export function useSearch({ casks, formulas }: Props): Return {
 
   const memoizedReturn: Return = useMemo(
     () => [query, setQuery, sortedResults],
-    [query, setQuery, sortedResults]
+    [query, sortedResults]
   );
 
   return memoizedReturn;

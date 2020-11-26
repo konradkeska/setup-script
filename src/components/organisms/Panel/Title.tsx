@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const Title = React.memo(({ text, description }: Props) => (
-  <Heading>
+  <Heading aria-label={`${text} ${description || ""}`}>
     {text} <Description>{description || ""}</Description>
   </Heading>
 ));

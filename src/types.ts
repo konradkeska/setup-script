@@ -51,11 +51,18 @@ export enum SoftType {
   FORMULA = "formula",
 }
 
+export enum BrandColors {
+  LIGHTER = "lighter",
+  DARKER = "darker",
+}
+
 export enum PrimaryColors {
-  PURPLE = "purple",
-  BLUE = "blue",
-  GREEN = "green",
   RED = "red",
+  ORANGE = "orange",
+  YELLOW = "yellow",
+  GREEN = "green",
+  BLUE = "blue",
+  PURPLE = "purple",
 }
 
 export enum FontColors {
@@ -68,6 +75,7 @@ export enum MaterialColors {
   SIDE = "side",
   OVERLAY = "overlay",
   BACKGROUND = "background",
+  BACKDROP = "backdrop",
 }
 
 export enum Paddings {

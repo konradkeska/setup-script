@@ -80,6 +80,11 @@ const Button = Sc.button<Pick<Props<Base>, "index" | "action">>`
       ${theme.colors.primary[getHighlightColor(action)]}`};
     background-color: ${({ theme, action }) =>
       theme.colors.primary[getHighlightColor(action)]};
+    color: ${({ theme }) => theme.colors.font.base};
+
+    span {
+      color: ${({ theme }) => theme.colors.font.base};
+    }
   }
 `;
 

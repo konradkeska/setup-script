@@ -2,11 +2,18 @@
 import "styled-components";
 
 declare module "styled-components" {
+  export interface DefaultBrandColors {
+    lighter: string;
+    darker: string;
+  }
+
   export interface DefaultColorsPrimary {
-    purple: string;
-    blue: string;
-    green: string;
     red: string;
+    orange: string;
+    yellow: string;
+    green: string;
+    blue: string;
+    purple: string;
   }
 
   export interface DefaultColorsFont {
@@ -19,9 +26,11 @@ declare module "styled-components" {
     side: string;
     overlay: string;
     background: string;
+    backdrop: string;
   }
 
   export interface DefaultColors {
+    brand: DefaultBrandColors;
     primary: DefaultColorsPrimary;
     font: DefaultColorsFont;
     material: DefaultColorsMaterial;

@@ -67,8 +67,8 @@ export const Panel = React.memo(
 );
 
 const COLORS_MAP = {
-  [SoftType.CASK]: PrimaryColors.PURPLE,
-  [SoftType.FORMULA]: PrimaryColors.BLUE,
+  [SoftType.CASK]: PrimaryColors.BLUE,
+  [SoftType.FORMULA]: PrimaryColors.YELLOW,
 };
 
 type PanelWrapperProps = Pick<Props<Base>, "width" | "height" | "heading">;

@@ -136,6 +136,7 @@ function App() {
               items={FEATURED_PRESETS}
               bgColor={MaterialColors.SIDE}
               onItemClick={onPresetClick}
+              withItemSeparator
             />
           </View.Sides.Right>
         </View.Sides>
@@ -173,7 +174,8 @@ function App() {
         <View.Footer>
           <Toggle
             id="theme-toggle"
-            defaultChecked={mode === ThemeMode.LIGHT}
+            aria-label="toggle display mode"
+            defaultChecked={mode === ThemeMode.DARK}
             onChange={switchTheme}
             checkedIcon={<Emoji>☀️</Emoji>}
             uncheckedIcon={<Emoji>🌙</Emoji>}

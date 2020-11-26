@@ -14,7 +14,8 @@ export const Link = ({ label, href }: Props) => (
 
 const Anchor = Sc.a`
   font-weight: 600;
+  border: 1px solid transparent;
   &:hover {
-    color: ${({ theme }) => theme.colors.primary.green};
+    color: ${({ theme }) => theme.colors.brand.lighter};
   }
 `;

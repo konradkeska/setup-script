@@ -56,16 +56,14 @@ const Button = Sc.button`
 
   &:hover,
   &:focus {
-    border-top: 1px solid ${({ theme }) => theme.colors.material.background};
-    border-bottom: 1px solid ${({ theme }) => theme.colors.material.background};
     svg {
       fill: ${({ theme }) => theme.colors.font.base};
     }
   }
   &:active {
-    background-color: rgba(104, 117, 245, 0.2);
+    background-color: ${({ theme }) => theme.colors.material.backdrop};
     svg {
-      fill: ${({ theme }) => theme.colors.primary.purple};
+      fill: ${({ theme }) => theme.colors.brand.lighter};
     }
   }
 `;
@@ -79,7 +77,6 @@ const LeftButton = Sc(Button)`
   &:focus {
     border-top-right-radius: 33%;
     border-bottom-right-radius: 33%;
-    border-right: 1px solid ${({ theme }) => theme.colors.material.background};
     border-left: none;
   }
 `;
@@ -93,7 +90,6 @@ const RightButton = Sc(Button)`
   &:focus {
     border-top-left-radius: 33%;
     border-bottom-left-radius: 33%;
-    border-left: 1px solid ${({ theme }) => theme.colors.material.background};
     border-right: none;
   }
 `;

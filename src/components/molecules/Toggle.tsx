@@ -18,7 +18,7 @@ export const Toggle = React.memo(
     ...props
   }: Props) => (
     <ReactToggle
-      icons={{ checked: checkedIcon, unchecked: checkedIcon }}
+      icons={{ checked: checkedIcon, unchecked: uncheckedIcon }}
       {...props}
     />
   )

@@ -11,6 +11,6 @@ export const Input = Sc.input`
   border: 1px solid transparent;
 
   &:focus {
-    border: 1px solid ${({ theme }) => theme.colors.primary.purple};
+    border: 1px solid ${({ theme }) => theme.colors.brand.lighter};
   }
 `;

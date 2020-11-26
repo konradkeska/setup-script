@@ -1,20 +1,27 @@
 {
   "colors": {
+    "brand": {
+      "lighter": "rgb(85, 85, 85)",
+      "darker": "rgb(45, 45, 45)"
+    },
     "primary": {
-      "purple": "rgb(104, 117, 245)",
-      "blue": "rgb(6, 181, 212)",
-      "green": "rgb(35, 206, 107)",
-      "red": "rgb(247, 86, 124)"
+      "red": "rgb(230, 76, 122)",
+      "orange": "rgb(246, 113, 60)",
+      "yellow": "rgb(255, 188, 71)",
+      "green": "rgb(26, 214, 111)",
+      "blue": "rgb(30, 161, 241)",
+      "purple": "rgb(120, 75, 196)"
     },
     "font": {
-      "base": "rgb(34, 34, 34)",
+      "base": "rgb(0, 0, 0)",
       "sub": "rgb(179, 179, 179)"
     },
     "material": {
       "input": "rgb(229, 229, 229)",
       "side": "rgb(235, 235, 235)",
       "overlay": "rgb(242, 242, 242)",
-      "background": "rgb(255, 255, 255)"
+      "background": "rgb(255, 255, 255)",
+      "backdrop": "rgb(211, 211, 211)"
     }
   },
   "paddings": {

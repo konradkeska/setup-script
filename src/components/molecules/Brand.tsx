@@ -4,14 +4,14 @@ import Sc from "styled-components";
 import { ActionButton } from "components/atoms";
 
 export const Brand = () => (
-  <Button disabled>
+  <Button id="brand" disabled>
     <div>S</div>
   </Button>
 );
 
 const Button = Sc(ActionButton)`
   background: ${({ theme }) =>
-    `linear-gradient(to left, ${theme.colors.primary.purple}, ${theme.colors.primary.blue})`};  //#514A9D, #24C6DC
+    `linear-gradient(to left, ${theme.colors.brand.lighter}, ${theme.colors.brand.darker})`};
   border-radius:6px;
   margin-right: ${({ theme }) => `${theme.paddings.xs}px`};
   position: relative;

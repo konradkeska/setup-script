@@ -33,6 +33,7 @@ function App() {
   const [displayMode, switchDisplayMode] = useDisplayMode();
 
   const {
+    details,
     casks,
     addedCasks,
     formulas,
@@ -188,21 +189,19 @@ function App() {
             checkedIcon={<Emoji>☀️</Emoji>}
             uncheckedIcon={<Emoji>🌙</Emoji>}
           />
-          <MinMd>
-            <Code>
-              <Link label="wget" href="https://google.com/" />
-              &nbsp;(1.20.3) Internet file retriever
-            </Code>
-          </MinMd>
-          <MinMd>
-            <Code>1350482 installs (365 days)</Code>
-          </MinMd>
-          <MinMd>
-            <Code>0 conflicts</Code>
-          </MinMd>
+          {details && (
+            <MinMd>
+              <Code>
+                <Link href={details.homepage}>{details.name}</Link>
+                &nbsp;({details.version}) {details.desc}
+              </Code>
+              <Code>{details.installs} installs (365 days)</Code>
+              <Code>{details.conflicts} conflicts</Code>
+            </MinMd>
+          )}
           <Code>
             powered by&nbsp;
-            <Link label="Brew" href="https://formulae.brew.sh/" />
+            <Link href="https://formulae.brew.sh/">Brew</Link>
             &nbsp;🤍
           </Code>
         </View.Footer>

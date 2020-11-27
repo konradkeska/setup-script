@@ -61,8 +61,10 @@ export enum PrimaryColors {
   ORANGE = "orange",
   YELLOW = "yellow",
   GREEN = "green",
+  TEAL = "teal",
   BLUE = "blue",
   PURPLE = "purple",
+  PINK = "pink",
 }
 
 export enum FontColors {
@@ -109,4 +111,141 @@ export enum DisplayMode {
 export enum ThemeMode {
   LIGHT = "light",
   DARK = "dark",
+}
+
+export type Details = {
+  name: string;
+  desc: string;
+  homepage: string;
+  installs: number;
+  version: string;
+  conflicts: number;
+};
+
+export interface CaskDetails {
+  token: string;
+  name: string[];
+  desc: string;
+  homepage: string;
+  url: string;
+  appcast?: any;
+  version: string;
+  sha256: string;
+  artifacts: (string[] | Artifacts2 | string)[];
+  caveats: string;
+  depends_on: Dependson;
+  conflicts_with?: string[];
+  container?: any;
+  auto_updates?: any;
+  analytics: Analytics;
+  generated_date: string;
+}
+
+export interface FormulaDetails {
+  name: string;
+  full_name: string;
+  oldname?: string;
+  aliases: string[];
+  versioned_formulae: string[];
+  desc: string;
+  license: string;
+  homepage: string;
+  versions: Versions;
+  urls: Urls;
+  revision: number;
+  version_scheme: number;
+  bottle: Bottle;
+  keg_only: boolean;
+  bottle_disabled: boolean;
+  options: string[];
+  build_dependencies: string[];
+  dependencies: string[];
+  recommended_dependencies: string[];
+  optional_dependencies: string[];
+  uses_from_macos: string[];
+  requirements: string[];
+  conflicts_with: string[];
+  caveats?: string;
+  installed: Installed[];
+  linked_keg: string;
+  pinned: boolean;
+  outdated: boolean;
+  deprecated: boolean;
+  disabled: boolean;
+  analytics: Analytics;
+  generated_date: string;
+}
+
+interface Analytics {
+  install: Install;
+}
+
+interface Install {
+  "30d": Days;
+  "90d": Days;
+  "365d": Days;
+}
+
+type Days = Record<string, number>;
+
+interface Artifacts2 {
+  delete: string;
+  signal: Signal;
+}
+
+interface Signal {}
+
+interface Installed {
+  version: string;
+  used_options: any[];
+  built_as_bottle: boolean;
+  poured_from_bottle: boolean;
+  runtime_dependencies: Runtimedependency[];
+  installed_as_dependency: boolean;
+  installed_on_request: boolean;
+}
+
+interface Runtimedependency {
+  full_name: string;
+  version: string;
+}
+
+interface Bottle {
+  stable: Stable2;
+}
+
+interface Stable2 {
+  rebuild: number;
+  cellar: string;
+  prefix: string;
+  root_url: string;
+  files: Files;
+}
+
+interface Files {
+  big_sur: Bigsur;
+  catalina: Bigsur;
+  mojave: Bigsur;
+  high_sierra: Bigsur;
+}
+
+interface Bigsur {
+  url: string;
+  sha256: string;
+}
+
+interface Urls {
+  stable: Stable;
+}
+
+interface Stable {
+  url: string;
+  tag?: any;
+  revision?: any;
+}
+
+interface Versions {
+  stable: string;
+  head: string;
+  bottle: boolean;
 }

@@ -81,7 +81,7 @@ const getAriaLabel = (action: Action, heading: string = "records") =>
   `${action === Action.ADD ? "found" : "added"} ${heading}`;
 
 const COLORS_MAP = {
-  [SoftType.CASK]: PrimaryColors.BLUE,
+  [SoftType.CASK]: PrimaryColors.TEAL,
   [SoftType.FORMULA]: PrimaryColors.YELLOW,
 };
 

@@ -33,7 +33,7 @@ export const Sprites = React.memo(() => (
     <symbol id="drag-dots" viewBox="0 0 16 16">
       <title>drag-dots</title>
       <path
-        fill-rule="evenodd"
+        fillRule="evenodd"
         d="M10 13a1 1 0 100-2 1 1 0 000 2zm-4 0a1 1 0 100-2 1 1 0 000 2zm1-5a1 1 0 11-2 0 1 1 0 012 0zm3 1a1 1 0 100-2 1 1 0 000 2zm1-5a1 1 0 11-2 0 1 1 0 012 0zM6 5a1 1 0 100-2 1 1 0 000 2z"
       ></path>
     </symbol>

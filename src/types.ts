@@ -61,8 +61,10 @@ export enum PrimaryColors {
   ORANGE = "orange",
   YELLOW = "yellow",
   GREEN = "green",
+  TEAL = "teal",
   BLUE = "blue",
   PURPLE = "purple",
+  PINK = "pink",
 }
 
 export enum FontColors {

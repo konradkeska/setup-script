@@ -12,8 +12,10 @@ declare module "styled-components" {
     orange: string;
     yellow: string;
     green: string;
+    teal: string;
     blue: string;
     purple: string;
+    pink: string;
   }
 
   export interface DefaultColorsFont {

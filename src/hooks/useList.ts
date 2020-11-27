@@ -7,6 +7,7 @@ import { formatResponse } from "utils";
 type Props = [() => Promise<AxiosResponse<Soft[]>>, SoftType];
 
 type Return = [
+  Soft | null,
   Soft[],
   Soft[],
   (record: Soft) => () => void,
@@ -18,6 +19,7 @@ type Return = [
 export function useList([loader, type]: Props): Return {
   const [list, setList] = useState<Soft[]>([]);
   const [addedList, setAddedList] = useState<Soft[]>([]);
+  const [focusedSoft, setFocusedSoft] = useState<Soft | null>(null);
 
   const loadData = useCallback(async () => {
     const data: AxiosResponse<Soft[]> = await loader();
@@ -34,6 +36,7 @@ export function useList([loader, type]: Props): Return {
         setAddedList([record, ...addedList]);
         setList(list.filter((item) => item.name !== record.name));
       }
+      setFocusedSoft(record);
     },
     [addedList, list]
   );
@@ -42,6 +45,7 @@ export function useList([loader, type]: Props): Return {
     (record: Soft) => () => {
       setAddedList(addedList.filter((item) => item.name !== record.name));
       setList([record, ...list]);
+      setFocusedSoft(record);
     },
     [addedList, list]
   );
@@ -67,8 +71,16 @@ export function useList([loader, type]: Props): Return {
   );
 
   const memoizedReturn: Return = useMemo(
-    () => [list, addedList, addItem, removeItem, addItems, removeItems],
-    [list, addedList, addItem, removeItem, addItems, removeItems]
+    () => [
+      focusedSoft,
+      list,
+      addedList,
+      addItem,
+      removeItem,
+      addItems,
+      removeItems,
+    ],
+    [focusedSoft, list, addedList, addItem, removeItem, addItems, removeItems]
   );
 
   return memoizedReturn;

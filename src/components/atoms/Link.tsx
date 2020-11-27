@@ -2,13 +2,13 @@ import React from "react";
 import Sc from "styled-components";
 
 type Props = {
-  label: string;
+  children: React.ReactNode;
   href: string;
 };
 
-export const Link = ({ label, href }: Props) => (
+export const Link = ({ children, href }: Props) => (
   <Anchor href={href} target="_blank" rel="noopener noreferrer">
-    {label}
+    {children}
   </Anchor>
 );
 

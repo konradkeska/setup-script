@@ -4,9 +4,11 @@ import { loadCasks, loadFormulas } from "api";
 import { Soft, SoftType } from "types";
 
 import { useList } from "./useList";
+import { useDetails } from "./useDetails";
 
 export function useBrewSoft() {
   const [
+    focusedCask,
     casks,
     addedCasks,
     addCask,
@@ -16,6 +18,7 @@ export function useBrewSoft() {
   ] = useList([loadCasks, SoftType.CASK]);
 
   const [
+    focusedFormula,
     formulas,
     addedFormulas,
     addFormula,
@@ -23,6 +26,8 @@ export function useBrewSoft() {
     addFormulas,
     removeFormulas,
   ] = useList([loadFormulas, SoftType.FORMULA]);
+
+  const details = useDetails(focusedFormula, focusedCask);
 
   const onAdd = useCallback(
     (record: Soft) => {
@@ -58,6 +63,7 @@ export function useBrewSoft() {
 
   const memoizedReturn = useMemo(
     () => ({
+      details,
       casks,
       addedCasks,
       formulas,
@@ -66,9 +72,9 @@ export function useBrewSoft() {
       onRemove,
       onMultiAdd,
       onMultiRemove,
-      loadInfo,
     }),
     [
+      details,
       casks,
       addedCasks,
       formulas,

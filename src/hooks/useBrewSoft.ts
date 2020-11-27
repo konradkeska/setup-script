@@ -1,7 +1,8 @@
 import { useCallback, useMemo } from "react";
-import Axios, { AxiosResponse } from "axios";
 
-import { Soft, SoftType } from "../types";
+import { loadCasks, loadFormulas } from "api";
+import { Soft, SoftType } from "types";
+
 import { useList } from "./useList";
 
 export function useBrewSoft() {
@@ -81,23 +82,6 @@ export function useBrewSoft() {
 
   return memoizedReturn;
 }
-
-const BREW_API_HOST = "https://formulae.brew.sh/api/";
-
-const loadCask = (name: string): Promise<AxiosResponse<any>> =>
-  Axios.get(`${BREW_API_HOST}cask/${name}.json`);
-
-const loadFormula = (token: string): Promise<AxiosResponse<any>> =>
-  Axios.get(`${BREW_API_HOST}formula/${token}.json`);
-
-const loadInfo = (identifier: string, type: SoftType) =>
-  type === SoftType.CASK ? loadCask(identifier) : loadFormula(identifier);
-
-const loadCasks = (): Promise<AxiosResponse<Soft[]>> =>
-  Axios.get(`${BREW_API_HOST}cask.json`);
-
-const loadFormulas = (): Promise<AxiosResponse<Soft[]>> =>
-  Axios.get(`${BREW_API_HOST}formula.json`);
 
 type SoftCallbacks<T> = [(arg: T) => () => void, (arg: T) => () => void];
 

@@ -1,13 +1,23 @@
 import React from "react";
 import Sc from "styled-components";
 
-import { ActionButton } from "components/atoms";
+import { ActionButton, Icon } from "components/atoms";
 
-export const Brand = () => (
-  <Button id="brand" disabled>
-    <div>S</div>
-  </Button>
-);
+type Props = {
+  query: string;
+  onQueryReset: () => void;
+};
+
+export const Brand = ({ query, onQueryReset }: Props) =>
+  query ? (
+    <ActionButton aria-label="reset search" onClick={onQueryReset} mr>
+      <Icon name="arrow-left" />
+    </ActionButton>
+  ) : (
+    <Button id="brand" disabled>
+      <div>S</div>
+    </Button>
+  );
 
 const Button = Sc(ActionButton)`
   background: ${({ theme }) =>

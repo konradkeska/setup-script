@@ -63,25 +63,19 @@ function App() {
     setLeftExpanded,
   } = useSides();
 
-  const onMobileDevice = useMediaQuery({ maxWidth: RWD.SM - 1 });
-
-  const onReset = useCallback(() => {
+  const onQueryReset = useCallback(() => {
     setQuery("");
     setLeftExpanded(false);
   }, [setQuery, setLeftExpanded]);
+
+  const onMobileDevice = useMediaQuery({ maxWidth: RWD.SM - 1 });
 
   return (
     <Global theme={theme}>
       <View>
         <View.Header>
           <Row justifyContent="flex-start" w={onMobileDevice ? "70%" : "30%"}>
-            {query ? (
-              <ActionButton aria-label="reset search" onClick={onReset} mr>
-                <Icon name="arrow-left" />
-              </ActionButton>
-            ) : (
-              <Brand />
-            )}
+            <Brand query={query} onQueryReset={onQueryReset} />
             <Search
               id="search-input"
               query={query}

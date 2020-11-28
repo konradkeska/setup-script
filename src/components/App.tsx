@@ -1,9 +1,10 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { useMediaQuery } from "react-responsive";
 
 import {
   useBrewSoft,
   useDisplayMode,
+  useHotkeys,
   usePreset,
   useSearch,
   useSides,
@@ -53,7 +54,9 @@ function App() {
     onMultiRemove,
   });
 
-  const [query, setQuery, searchResults] = useSearch({ casks, formulas });
+  const records = useMemo(() => [...casks, ...formulas], [casks, formulas]);
+
+  const [query, setQuery, searchResults] = useSearch({ records });
 
   const {
     isLeftExpanded,
@@ -67,6 +70,38 @@ function App() {
     setQuery("");
     setLeftExpanded(false);
   }, [setQuery, setLeftExpanded]);
+
+  const switchToEditor = useCallback(
+    () => switchDisplayMode(DisplayMode.EDITOR),
+    [switchDisplayMode]
+  );
+
+  const switchToScript = useCallback(
+    () => switchDisplayMode(DisplayMode.SCRIPT),
+    [switchDisplayMode]
+  );
+
+  useHotkeys(
+    {
+      getHotkeys: () => ({
+        ArrowLeft: toggleLeft,
+        ArrowRight: toggleRight,
+        Escape: onQueryReset,
+      }),
+    },
+    [toggleLeft, toggleRight, onQueryReset]
+  );
+
+  useHotkeys(
+    {
+      getHotkeys: () => ({
+        KeyE: switchToEditor,
+        KeyS: switchToScript,
+      }),
+      modifier: "shiftKey",
+    },
+    [switchDisplayMode]
+  );
 
   const onMobileDevice = useMediaQuery({ maxWidth: RWD.SM - 1 });
 
@@ -86,18 +121,18 @@ function App() {
           <MinSm>
             <Row w="30%">
               <TabButton
-                id="edit-mode-button"
+                id="editor-mode-button"
                 aria-label="switch to edit mode"
-                onClick={switchDisplayMode}
-                active={displayMode === DisplayMode.PICKER}
-                disabled={displayMode === DisplayMode.PICKER}
+                onClick={switchToEditor}
+                active={displayMode === DisplayMode.EDITOR}
+                disabled={displayMode === DisplayMode.EDITOR}
               >
                 <Icon name="tools" />
               </TabButton>
               <TabButton
                 id="script-mode-button"
                 aria-label="switch to script preview mode"
-                onClick={switchDisplayMode}
+                onClick={switchToScript}
                 active={displayMode === DisplayMode.SCRIPT}
                 disabled={displayMode === DisplayMode.SCRIPT}
               >
@@ -144,7 +179,7 @@ function App() {
           </View.Sides.Right>
         </View.Sides>
         <View.Main>
-          {displayMode === DisplayMode.PICKER ? (
+          {displayMode === DisplayMode.EDITOR ? (
             <>
               <Panel
                 id="added-formulas"

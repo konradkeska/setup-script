@@ -58,7 +58,7 @@ export const getSteps = (): ReactourStep[] => [
     content: "Here is how it looks under the hood.",
   },
   {
-    selector: "#edit-mode-button",
+    selector: "#editor-mode-button",
     content: "Aaaand go back to the edit mode.",
     action: (node: HTMLInputElement) => {
       node.dispatchEvent(new Event("click", { bubbles: true }));

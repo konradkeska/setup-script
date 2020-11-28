@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { AxiosResponse } from "axios";
 
-import { Soft, SoftType } from "types";
-import { formatResponse } from "utils";
+import { Soft, SoftApiResponse, SoftType } from "types";
 
 type Props = [() => Promise<AxiosResponse<Soft[]>>, SoftType];
 
@@ -100,3 +99,10 @@ const getListWithout = ([list, itemsToRemove]: [Soft[], Soft[]]) =>
   list.filter(
     (record) => !itemsToRemove.map(({ name }) => name).includes(record.name)
   );
+
+const formatResponse = (records: SoftApiResponse[], type: SoftType): Soft[] =>
+  records.map(({ name, ...record }) => ({
+    ...record,
+    name: typeof name === "string" ? name : name[0],
+    type,
+  }));

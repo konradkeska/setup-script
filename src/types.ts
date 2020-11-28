@@ -104,7 +104,7 @@ export enum Action {
 }
 
 export enum DisplayMode {
-  PICKER = "picker",
+  EDITOR = "editor",
   SCRIPT = "script",
 }
 

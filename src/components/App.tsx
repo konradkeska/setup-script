@@ -1,9 +1,10 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { useMediaQuery } from "react-responsive";
 
 import {
   useBrewSoft,
   useDisplayMode,
+  useHotkeys,
   usePreset,
   useSearch,
   useSides,
@@ -53,7 +54,9 @@ function App() {
     onMultiRemove,
   });
 
-  const [query, setQuery, searchResults] = useSearch({ casks, formulas });
+  const records = useMemo(() => [...casks, ...formulas], [casks, formulas]);
+
+  const [query, setQuery, searchResults] = useSearch({ records });
 
   const {
     isLeftExpanded,
@@ -63,25 +66,51 @@ function App() {
     setLeftExpanded,
   } = useSides();
 
-  const onMobileDevice = useMediaQuery({ maxWidth: RWD.SM - 1 });
-
-  const onReset = useCallback(() => {
+  const onQueryReset = useCallback(() => {
     setQuery("");
     setLeftExpanded(false);
   }, [setQuery, setLeftExpanded]);
+
+  const switchToEditor = useCallback(
+    () => switchDisplayMode(DisplayMode.EDITOR),
+    [switchDisplayMode]
+  );
+
+  const switchToScript = useCallback(
+    () => switchDisplayMode(DisplayMode.SCRIPT),
+    [switchDisplayMode]
+  );
+
+  useHotkeys(
+    {
+      getHotkeys: () => ({
+        ArrowLeft: toggleLeft,
+        ArrowRight: toggleRight,
+        Escape: onQueryReset,
+      }),
+    },
+    [toggleLeft, toggleRight, onQueryReset]
+  );
+
+  useHotkeys(
+    {
+      getHotkeys: () => ({
+        KeyE: switchToEditor,
+        KeyS: switchToScript,
+      }),
+      modifier: "shiftKey",
+    },
+    [switchDisplayMode]
+  );
+
+  const onMobileDevice = useMediaQuery({ maxWidth: RWD.SM - 1 });
 
   return (
     <Global theme={theme}>
       <View>
         <View.Header>
           <Row justifyContent="flex-start" w={onMobileDevice ? "70%" : "30%"}>
-            {query ? (
-              <ActionButton aria-label="reset search" onClick={onReset} mr>
-                <Icon name="arrow-left" />
-              </ActionButton>
-            ) : (
-              <Brand />
-            )}
+            <Brand query={query} onQueryReset={onQueryReset} />
             <Search
               id="search-input"
               query={query}
@@ -92,18 +121,18 @@ function App() {
           <MinSm>
             <Row w="30%">
               <TabButton
-                id="edit-mode-button"
+                id="editor-mode-button"
                 aria-label="switch to edit mode"
-                onClick={switchDisplayMode}
-                active={displayMode === DisplayMode.PICKER}
-                disabled={displayMode === DisplayMode.PICKER}
+                onClick={switchToEditor}
+                active={displayMode === DisplayMode.EDITOR}
+                disabled={displayMode === DisplayMode.EDITOR}
               >
                 <Icon name="tools" />
               </TabButton>
               <TabButton
                 id="script-mode-button"
                 aria-label="switch to script preview mode"
-                onClick={switchDisplayMode}
+                onClick={switchToScript}
                 active={displayMode === DisplayMode.SCRIPT}
                 disabled={displayMode === DisplayMode.SCRIPT}
               >
@@ -150,7 +179,7 @@ function App() {
           </View.Sides.Right>
         </View.Sides>
         <View.Main>
-          {displayMode === DisplayMode.PICKER ? (
+          {displayMode === DisplayMode.EDITOR ? (
             <>
               <Panel
                 id="added-formulas"
@@ -192,17 +221,15 @@ function App() {
           {details && (
             <MinMd>
               <Code>
-                <Link href={details.homepage}>{details.name}</Link>
-                &nbsp;({details.version}) {details.desc}
+                <Link href={details.homepage}>{details.name}</Link>(
+                {details.version}) {details.desc}
               </Code>
               <Code>{details.installs} installs (365 days)</Code>
               <Code>{details.conflicts} conflicts</Code>
             </MinMd>
           )}
           <Code>
-            powered by&nbsp;
-            <Link href="https://formulae.brew.sh/">Brew</Link>
-            &nbsp;🤍
+            powered by <Link href="https://formulae.brew.sh/">Brew</Link> 🤍
           </Code>
         </View.Footer>
       </View>

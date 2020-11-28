@@ -2,21 +2,22 @@ import { useCallback, useMemo, useState } from "react";
 
 import { DisplayMode } from "types";
 
-type Return = [DisplayMode, () => void];
+type Return = [DisplayMode, (mode?: DisplayMode) => void];
 
 export function useDisplayMode(): Return {
   const [displayMode, setDisplayMode] = useState<DisplayMode>(
-    DisplayMode.PICKER
+    DisplayMode.EDITOR
   );
 
+  const defaultMode =
+    displayMode === DisplayMode.EDITOR
+      ? DisplayMode.SCRIPT
+      : DisplayMode.EDITOR;
+
   const switchDisplayMode = useCallback(
-    () =>
-      setDisplayMode(
-        displayMode === DisplayMode.PICKER
-          ? DisplayMode.SCRIPT
-          : DisplayMode.PICKER
-      ),
-    [displayMode]
+    (mode?: DisplayMode) =>
+      mode ? setDisplayMode(mode) : setDisplayMode(defaultMode),
+    [defaultMode]
   );
 
   const memoizedReturn: Return = useMemo(

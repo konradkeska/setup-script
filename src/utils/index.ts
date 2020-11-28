@@ -1,11 +1,4 @@
-export {
-  formatResponse,
-  includesQuery,
-  sort,
-  truncate,
-  toColorString,
-  setNativeValue,
-} from "./helpers";
+export { sort, truncate, toColorString, setNativeValue } from "./helpers";
 export {
   RWD,
   MaxXs,

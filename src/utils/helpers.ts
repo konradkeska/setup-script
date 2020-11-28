@@ -1,29 +1,6 @@
 import { DefaultTheme } from "styled-components";
 
-import {
-  Soft,
-  SoftType,
-  FontColors,
-  MaterialColors,
-  PrimaryColors,
-  SoftApiResponse,
-} from "types";
-
-const formatResponse = (records: SoftApiResponse[], type: SoftType): Soft[] =>
-  records.map(({ name, ...record }) => ({
-    ...record,
-    name: typeof name === "string" ? name : name[0],
-    type,
-  }));
-
-const includesQuery = (query: string, records: Soft[]) =>
-  records.filter(
-    (item: Soft) =>
-      (query?.length > 1 &&
-        (item.name?.toLowerCase().includes(query.toLowerCase()) ||
-          item.token?.toLowerCase().includes(query.toLowerCase()))) ||
-      false
-  );
+import { FontColors, MaterialColors, PrimaryColors } from "types";
 
 const sort = <T>(arr: T[], callback: (a: T, b: T) => number) =>
   [...arr].sort(callback);
@@ -66,11 +43,4 @@ const setNativeValue = (element: HTMLElement, value: string | number) => {
   }
 };
 
-export {
-  formatResponse,
-  includesQuery,
-  sort,
-  truncate,
-  toColorString,
-  setNativeValue,
-};
+export { sort, truncate, toColorString, setNativeValue };

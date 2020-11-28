@@ -13,6 +13,7 @@ export const Link = ({ children, href }: Props) => (
 );
 
 const Anchor = Sc.a`
+  margin: 0 0.33rem;
   font-weight: 600;
   border: 1px solid transparent;
   &:hover {

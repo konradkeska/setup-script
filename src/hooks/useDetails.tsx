@@ -30,11 +30,19 @@ export function useDetails(
       const identifier = getSoftIdentifier(focusedSoft);
 
       if ((focusedSoft.type || SoftType.CASK) === SoftType.FORMULA) {
-        const { data } = await loadFormula(identifier);
-        data && setDetails(receiveDetails(data));
+        try {
+          const { data } = await loadFormula(identifier);
+          data && setDetails(receiveDetails(data));
+        } catch (error) {
+          console.error(error);
+        }
       } else {
-        const { data } = await loadCask(identifier);
-        data && setDetails(receiveDetails(data));
+        try {
+          const { data } = await loadCask(identifier);
+          data && setDetails(receiveDetails(data));
+        } catch (error) {
+          console.error(error);
+        }
       }
     }
   }, [focusedSoft]);

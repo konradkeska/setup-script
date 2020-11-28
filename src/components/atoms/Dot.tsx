@@ -1,9 +1,9 @@
 import Sc from "styled-components";
 
-import { PrimaryColors } from "types";
+import { PrimaryColor } from "theme";
 
 type Props = {
-  color?: PrimaryColors;
+  color?: PrimaryColor;
 };
 
 export const Dot = Sc.span<Props>`

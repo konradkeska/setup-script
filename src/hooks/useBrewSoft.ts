@@ -1,7 +1,6 @@
 import { useCallback, useMemo } from "react";
 
-import { loadCasks, loadFormulas } from "api";
-import { Soft, SoftType } from "types";
+import { loadCasks, loadFormulas, Soft, SoftType } from "api";
 
 import { useList } from "./useList";
 import { useDetails } from "./useDetails";

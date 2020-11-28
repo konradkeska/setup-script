@@ -1,7 +1,9 @@
-import Sc, { DefaultColorsMaterial } from "styled-components";
+import Sc from "styled-components";
+
+import { MaterialColor } from "theme";
 
 type Props = {
-  bgColor: keyof DefaultColorsMaterial;
+  bgColor: MaterialColor;
   border?: boolean;
   heading?: string;
 };

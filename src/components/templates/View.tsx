@@ -5,32 +5,32 @@ import { FOOTER_HEIGHT, HEADER_HEIGHT } from "components/config";
 import { Wrapper } from "components/atoms";
 import { Side } from "components/organisms";
 
-interface ViewProps {
+interface IViewProps {
   children: React.ReactNode;
 }
 
-export const View = ({ children }: ViewProps) => <>{children}</>;
+export const View = ({ children }: IViewProps) => <>{children}</>;
 
-const HeaderContainer = React.memo(({ children }: ViewProps) => (
+const HeaderContainer = React.memo(({ children }: IViewProps) => (
   <Header>
     <Wrapper maxW="100%">{children}</Wrapper>
   </Header>
 ));
 
-const SidesContainer = ({ children }: ViewProps) => <>{children}</>;
+const SidesContainer = ({ children }: IViewProps) => <>{children}</>;
 
-interface SideProps extends ViewProps {
+interface ISideProps extends IViewProps {
   expanded: boolean;
   onClick?: () => void;
 }
 
-const Left = React.memo(({ children, expanded, onClick }: SideProps) => (
+const Left = React.memo(({ children, expanded, onClick }: ISideProps) => (
   <Side expanded={expanded} onClick={onClick} left>
     {children}
   </Side>
 ));
 
-const Right = React.memo(({ children, expanded, onClick }: SideProps) => (
+const Right = React.memo(({ children, expanded, onClick }: ISideProps) => (
   <Side expanded={expanded} onClick={onClick} right>
     {children}
   </Side>
@@ -39,7 +39,7 @@ const Right = React.memo(({ children, expanded, onClick }: SideProps) => (
 SidesContainer.Left = Left;
 SidesContainer.Right = Right;
 
-const MainContainer = React.memo(({ children }: ViewProps) => (
+const MainContainer = React.memo(({ children }: IViewProps) => (
   <Main>
     <Wrapper align="flex-start" p="18px 0px 0px 0px">
       {children}
@@ -47,7 +47,7 @@ const MainContainer = React.memo(({ children }: ViewProps) => (
   </Main>
 ));
 
-const FooterContainer = React.memo(({ children }: ViewProps) => (
+const FooterContainer = React.memo(({ children }: IViewProps) => (
   <Footer>
     <Wrapper maxW="100%">{children}</Wrapper>
   </Footer>

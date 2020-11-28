@@ -5,18 +5,12 @@ import {
   useBrewSoft,
   useDisplayMode,
   useHotkeys,
-  usePreset,
+  useBundle,
   useSearch,
   useSides,
   useTheme,
-} from "hooks";
-import {
-  PrimaryColors,
-  MaterialColors,
-  Action,
   DisplayMode,
-  ThemeMode,
-} from "types";
+} from "hooks";
 import { ActionButton, Code, Emoji, Icon, Link, Row, TabButton } from "./atoms";
 import { Brand, Search, Toggle } from "./molecules";
 import { Panel, Script } from "./organisms";
@@ -28,6 +22,7 @@ import {
   FORMULAS_PANEL_DESCRIPTION,
 } from "./config";
 import { MinMd, MinSm, RWD } from "utils";
+import { Action, MaterialColor, ThemeMode } from "theme";
 
 function App() {
   const [mode, theme, switchTheme] = useTheme();
@@ -45,7 +40,7 @@ function App() {
     onMultiRemove,
   } = useBrewSoft();
 
-  const [onPresetClick, FEATURED_PRESETS] = usePreset({
+  const [onBundleClick, FEATURED_BUNDLES] = useBundle({
     casks,
     formulas,
     addedCasks,
@@ -164,16 +159,16 @@ function App() {
               id="search-results"
               items={searchResults}
               onItemClick={onAdd}
-              bgColor={MaterialColors.SIDE}
+              bgColor={MaterialColor.SIDE}
               withDots
             />
           </View.Sides.Left>
           <View.Sides.Right expanded={isRightExpanded} onClick={toggleRight}>
             <Panel
               id="presets"
-              items={FEATURED_PRESETS}
-              bgColor={MaterialColors.SIDE}
-              onItemClick={onPresetClick}
+              items={FEATURED_BUNDLES}
+              bgColor={MaterialColor.SIDE}
+              onItemClick={onBundleClick}
               withItemSeparator
             />
           </View.Sides.Right>
@@ -187,8 +182,7 @@ function App() {
                 description={FORMULAS_PANEL_DESCRIPTION}
                 items={addedFormulas}
                 onItemClick={onRemove}
-                action={Action.REMOVE}
-                accentColor={PrimaryColors.BLUE}
+                action={Action.ERROR}
                 height="50%"
                 withDots
                 border
@@ -199,7 +193,7 @@ function App() {
                 description={CASKS_PANEL_DESCRIPTION}
                 items={addedCasks}
                 onItemClick={onRemove}
-                action={Action.REMOVE}
+                action={Action.ERROR}
                 height="50%"
                 withDots
                 border

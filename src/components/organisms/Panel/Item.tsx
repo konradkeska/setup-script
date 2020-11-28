@@ -2,24 +2,33 @@ import React from "react";
 
 import Sc from "styled-components";
 
-import { Action, Base, PrimaryColors } from "types";
+import { Soft, SoftType } from "api";
+import { Bundle } from "hooks";
+import { Action, PrimaryColor } from "theme";
 import { truncate, MinXs } from "utils";
 
 import { Code, Dot } from "components/atoms";
 
-interface Props<T> {
+export interface IBase extends Bundle, Soft {
+  name: string;
+  token?: string;
+  type?: SoftType;
+  version?: string;
+}
+
+interface IProps<T> {
   id: string;
   index: number;
   record: T;
   action: Action;
   onClick?: () => void;
-  dotColor?: PrimaryColors;
+  dotColor?: PrimaryColor;
   withDots?: boolean;
   withSeparator?: boolean;
 }
 
 export const ListItem = React.memo(
-  <T extends Base>({
+  <T extends IBase>({
     id,
     index,
     record,
@@ -28,7 +37,7 @@ export const ListItem = React.memo(
     dotColor,
     withDots,
     withSeparator,
-  }: Props<T>) => (
+  }: IProps<T>) => (
     <StyledListItem withSeparator={withSeparator}>
       <Button
         id={id}
@@ -51,7 +60,7 @@ export const ListItem = React.memo(
   )
 );
 
-const StyledListItem = Sc.li<Pick<Props<Base>, "withSeparator">>`
+const StyledListItem = Sc.li<Pick<IProps<IBase>, "withSeparator">>`
   ${({ withSeparator }) => {
     if (withSeparator) {
       return `
@@ -64,7 +73,7 @@ const StyledListItem = Sc.li<Pick<Props<Base>, "withSeparator">>`
   }}
 `;
 
-const Button = Sc.button<Pick<Props<Base>, "index" | "action">>`
+const Button = Sc.button<Pick<IProps<IBase>, "index" | "action">>`
   padding: 6px 10px;
   border: 1px solid transparent;
   display: inline-flex;
@@ -94,5 +103,5 @@ const Button = Sc.button<Pick<Props<Base>, "index" | "action">>`
   }
 `;
 
-const getHighlightColor = (action: Action): PrimaryColors =>
-  action === Action.ADD ? PrimaryColors.GREEN : PrimaryColors.RED;
+const getHighlightColor = (action: Action): PrimaryColor =>
+  action === Action.SUCCESS ? PrimaryColor.GREEN : PrimaryColor.RED;

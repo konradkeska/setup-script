@@ -1,6 +1,6 @@
 import { DefaultTheme } from "styled-components";
 
-import { FontColors, MaterialColors, PrimaryColors } from "types";
+import { FontColor, MaterialColor, PrimaryColor } from "theme";
 
 const sort = <T>(arr: T[], callback: (a: T, b: T) => number) =>
   [...arr].sort(callback);
@@ -8,22 +8,22 @@ const sort = <T>(arr: T[], callback: (a: T, b: T) => number) =>
 const truncate = (value: string, limit = 10) =>
   value.length > limit ? `${value.slice(0, limit - 2)}..` : value;
 
-const isOfTypePrimaryColors = (key: string): key is PrimaryColors =>
-  Object.values(PrimaryColors).includes(key as PrimaryColors);
+const isOfTypePrimaryColor = (key: string): key is PrimaryColor =>
+  Object.values(PrimaryColor).includes(key as PrimaryColor);
 
-const isOfTypeMaterialColors = (key: string): key is MaterialColors =>
-  Object.values(MaterialColors).includes(key as MaterialColors);
+const isOfTypeMaterialColor = (key: string): key is MaterialColor =>
+  Object.values(MaterialColor).includes(key as MaterialColor);
 
-const isOfTypeFontColors = (key: string): key is FontColors =>
-  Object.values(FontColors).includes(key as FontColors);
+const isOfTypeFontColor = (key: string): key is FontColor =>
+  Object.values(FontColor).includes(key as FontColor);
 
 const toColorString = (
-  key: PrimaryColors | FontColors | MaterialColors,
+  key: PrimaryColor | FontColor | MaterialColor,
   theme: DefaultTheme
 ) => {
-  if (isOfTypePrimaryColors(key)) return theme.colors.primary[key];
-  if (isOfTypeMaterialColors(key)) return theme.colors.material[key];
-  if (isOfTypeFontColors(key)) return theme.colors.font[key];
+  if (isOfTypePrimaryColor(key)) return theme.colors.primary[key];
+  if (isOfTypeMaterialColor(key)) return theme.colors.material[key];
+  if (isOfTypeFontColor(key)) return theme.colors.font[key];
   return "unset";
 };
 

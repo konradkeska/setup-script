@@ -2,7 +2,7 @@ import Sc from "styled-components";
 
 import { MAIN_MAX_WIDTH } from "components/config";
 import { toColorString } from "utils";
-import { FontColors } from "types";
+import { FontColor } from "theme";
 
 type Props = {
   maxW?: string;
@@ -11,7 +11,7 @@ type Props = {
   justify?: string;
   direction?: string;
   mt?: string;
-  color?: FontColors;
+  color?: FontColor;
   p?: string;
 };
 

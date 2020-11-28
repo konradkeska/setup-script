@@ -1,1 +1,8 @@
-export { loadCasks, loadFormulas, loadCask, loadFormula } from "./brew";
+export {
+  loadCasks,
+  loadFormulas,
+  loadCask,
+  loadFormula,
+  SoftType,
+} from "./brew";
+export type { Soft, CaskDetails, FormulaDetails } from "./brew";

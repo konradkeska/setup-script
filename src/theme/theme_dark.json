@@ -4,6 +4,16 @@
       "lighter": "rgb(210,210,210)",
       "darker": "rgb(170,170,170)"
     },
+    "action": {
+      "info": "#1f64ee",
+      "infoBg": "#b1cbff",
+      "success": "#51dd88",
+      "successBg": "#9fecbd",
+      "error": "#ff5757",
+      "errorBg": "#fcacac",
+      "warning": "#ffc633",
+      "warningBg": "#ffe399"
+    },
     "primary": {
       "red": "rgb(255, 51, 51)",
       "orange": "rgb(246, 113, 60)",

@@ -165,7 +165,7 @@ function App() {
           </View.Sides.Left>
           <View.Sides.Right expanded={isRightExpanded} onClick={toggleRight}>
             <Panel
-              id="presets"
+              id="bundles"
               items={FEATURED_BUNDLES}
               bgColor={MaterialColor.SIDE}
               onItemClick={onBundleClick}

@@ -11,8 +11,12 @@ export function useList([loader, type]: Props): Return {
   const [focusedSoft, setFocusedSoft] = useState<Soft | null>(null);
 
   const loadData = useCallback(async () => {
-    const data: AxiosResponse<Soft[]> = await loader();
-    setList(formatResponse(data.data, type));
+    try {
+      const data: AxiosResponse<Soft[]> = await loader();
+      setList(formatResponse(data.data, type));
+    } catch (error) {
+      console.error(error);
+    }
   }, [loader, type]);
 
   useEffect(() => {

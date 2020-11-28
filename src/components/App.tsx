@@ -192,17 +192,15 @@ function App() {
           {details && (
             <MinMd>
               <Code>
-                <Link href={details.homepage}>{details.name}</Link>
-                &nbsp;({details.version}) {details.desc}
+                <Link href={details.homepage}>{details.name}</Link>(
+                {details.version}) {details.desc}
               </Code>
               <Code>{details.installs} installs (365 days)</Code>
               <Code>{details.conflicts} conflicts</Code>
             </MinMd>
           )}
           <Code>
-            powered by&nbsp;
-            <Link href="https://formulae.brew.sh/">Brew</Link>
-            &nbsp;🤍
+            powered by <Link href="https://formulae.brew.sh/">Brew</Link> 🤍
           </Code>
         </View.Footer>
       </View>

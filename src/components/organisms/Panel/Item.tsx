@@ -44,7 +44,7 @@ export const ListItem = React.memo(
         index={index}
         action={action}
         onClick={onClick}
-        aria-label={`${action} ${record.name} ${record.type || "preset"}`}
+        aria-label={`${action} ${record.name} ${record.type || "bundle"}`}
       >
         <Code>
           {withDots ? <Dot color={dotColor}>· </Dot> : null}

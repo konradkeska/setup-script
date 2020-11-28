@@ -43,9 +43,9 @@ export function useBundle({
   );
 
   const getSoft = useCallback(
-    (preset: Bundle): string[] => [
-      ...(preset.casks || []),
-      ...(preset.formulas || []),
+    (bundle: Bundle): string[] => [
+      ...(bundle.casks || []),
+      ...(bundle.formulas || []),
     ],
     []
   );
@@ -59,49 +59,49 @@ export function useBundle({
   );
 
   const getAvailableToAdd = useCallback(
-    (preset: Bundle): string[] => {
-      const presetSoft = getSoft(preset);
+    (bundle: Bundle): string[] => {
+      const bundleSoft = getSoft(bundle);
       const addedSoft = getAddedSoft();
-      return presetSoft.filter((entry) => !addedSoft.includes(entry));
+      return bundleSoft.filter((entry) => !addedSoft.includes(entry));
     },
     [getSoft, getAddedSoft]
   );
 
   const getAction = useCallback(
-    (preset: Bundle): Action => {
-      const availableToAddCount = getAvailableToAdd(preset).length;
+    (bundle: Bundle): Action => {
+      const availableToAddCount = getAvailableToAdd(bundle).length;
       return availableToAddCount > 0 ? Action.SUCCESS : Action.ERROR;
     },
     [getAvailableToAdd]
   );
 
   const getActionCallback = useCallback(
-    (presetAction: Action) => {
-      return presetAction === Action.SUCCESS ? onMultiAdd : onMultiRemove;
+    (bundleAction: Action) => {
+      return bundleAction === Action.SUCCESS ? onMultiAdd : onMultiRemove;
     },
     [onMultiAdd, onMultiRemove]
   );
 
-  const getSoftPackagesFromBundle = useCallback(
-    (preset: Bundle): [Soft[], Soft[]] => {
-      const presetCasks = getCasks(preset.casks);
-      const presetFormulas = getFormulas(preset.formulas);
-      return [presetCasks, presetFormulas];
+  const getSoftPackagesFrom = useCallback(
+    (bundle: Bundle): [Soft[], Soft[]] => {
+      const casksBundle = getCasks(bundle.casks);
+      const formulasBundle = getFormulas(bundle.formulas);
+      return [casksBundle, formulasBundle];
     },
     [getCasks, getFormulas]
   );
 
   const onClick = useCallback(
-    (preset: Bundle) => {
-      const presetAction = getAction(preset);
-      const actionCallback = getActionCallback(presetAction);
-      const [presetCasks, presetFormulas] = getSoftPackagesFromBundle(preset);
+    (bundle: Bundle) => {
+      const bundleAction = getAction(bundle);
+      const actionCallback = getActionCallback(bundleAction);
+      const [casksBundle, formulasBundle] = getSoftPackagesFrom(bundle);
       return () => {
-        actionCallback(presetCasks, SoftType.CASK);
-        actionCallback(presetFormulas, SoftType.FORMULA);
+        actionCallback(casksBundle, SoftType.CASK);
+        actionCallback(formulasBundle, SoftType.FORMULA);
       };
     },
-    [getAction, getActionCallback, getSoftPackagesFromBundle]
+    [getAction, getActionCallback, getSoftPackagesFrom]
   );
 
   const memoizedReturn: Return = useMemo(() => [onClick, FEATURED_BUNDLES], [
@@ -111,7 +111,7 @@ export function useBundle({
   return memoizedReturn;
 }
 
-type Return = [(preset: Bundle) => () => void, Bundle[]];
+type Return = [(bundle: Bundle) => () => void, Bundle[]];
 
 const FEATURED_BUNDLES: Bundle[] = [
   {

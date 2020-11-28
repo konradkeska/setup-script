@@ -1,8 +1,9 @@
 import { useCallback, useMemo, useState } from "react";
 
-import { DisplayMode } from "types";
-
-type Return = [DisplayMode, (mode?: DisplayMode) => void];
+export enum DisplayMode {
+  EDITOR = "editor",
+  SCRIPT = "script",
+}
 
 export function useDisplayMode(): Return {
   const [displayMode, setDisplayMode] = useState<DisplayMode>(
@@ -27,3 +28,5 @@ export function useDisplayMode(): Return {
 
   return memoizedReturn;
 }
+
+type Return = [DisplayMode, (mode?: DisplayMode) => void];

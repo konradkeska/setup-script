@@ -1,12 +1,9 @@
 import React from "react";
 import Sc from "styled-components";
 
-import { PrimaryColors } from "types";
-
 type Props = {
   text: string;
   description?: string;
-  accentColor: PrimaryColors;
 };
 
 export const Title = React.memo(({ text, description }: Props) => (

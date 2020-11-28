@@ -1,5 +1,13 @@
 import { useCallback, useMemo } from "react";
-import { Action, Preset, Soft, SoftType } from "types";
+
+import { Soft, SoftType } from "api";
+import { Action } from "theme";
+
+export type Bundle = {
+  name: string;
+  casks?: string[];
+  formulas?: string[];
+};
 
 type Props = {
   casks: Soft[];
@@ -10,9 +18,7 @@ type Props = {
   onMultiRemove: (records: Soft[], type: SoftType) => void;
 };
 
-type Return = [(preset: Preset) => () => void, Preset[]];
-
-export function usePreset({
+export function useBundle({
   casks,
   formulas,
   addedCasks,
@@ -37,7 +43,7 @@ export function usePreset({
   );
 
   const getSoft = useCallback(
-    (preset: Preset): string[] => [
+    (preset: Bundle): string[] => [
       ...(preset.casks || []),
       ...(preset.formulas || []),
     ],
@@ -53,7 +59,7 @@ export function usePreset({
   );
 
   const getAvailableToAdd = useCallback(
-    (preset: Preset): string[] => {
+    (preset: Bundle): string[] => {
       const presetSoft = getSoft(preset);
       const addedSoft = getAddedSoft();
       return presetSoft.filter((entry) => !addedSoft.includes(entry));
@@ -62,22 +68,22 @@ export function usePreset({
   );
 
   const getAction = useCallback(
-    (preset: Preset): Action => {
+    (preset: Bundle): Action => {
       const availableToAddCount = getAvailableToAdd(preset).length;
-      return availableToAddCount > 0 ? Action.ADD : Action.REMOVE;
+      return availableToAddCount > 0 ? Action.SUCCESS : Action.ERROR;
     },
     [getAvailableToAdd]
   );
 
   const getActionCallback = useCallback(
     (presetAction: Action) => {
-      return presetAction === Action.ADD ? onMultiAdd : onMultiRemove;
+      return presetAction === Action.SUCCESS ? onMultiAdd : onMultiRemove;
     },
     [onMultiAdd, onMultiRemove]
   );
 
-  const getSoftPackagesFromPreset = useCallback(
-    (preset: Preset): [Soft[], Soft[]] => {
+  const getSoftPackagesFromBundle = useCallback(
+    (preset: Bundle): [Soft[], Soft[]] => {
       const presetCasks = getCasks(preset.casks);
       const presetFormulas = getFormulas(preset.formulas);
       return [presetCasks, presetFormulas];
@@ -86,28 +92,30 @@ export function usePreset({
   );
 
   const onClick = useCallback(
-    (preset: Preset) => {
+    (preset: Bundle) => {
       const presetAction = getAction(preset);
       const actionCallback = getActionCallback(presetAction);
-      const [presetCasks, presetFormulas] = getSoftPackagesFromPreset(preset);
+      const [presetCasks, presetFormulas] = getSoftPackagesFromBundle(preset);
       return () => {
         actionCallback(presetCasks, SoftType.CASK);
         actionCallback(presetFormulas, SoftType.FORMULA);
       };
     },
-    [getAction, getActionCallback, getSoftPackagesFromPreset]
+    [getAction, getActionCallback, getSoftPackagesFromBundle]
   );
 
-  const memoizedReturn: Return = useMemo(() => [onClick, FEATURED_PRESETS], [
+  const memoizedReturn: Return = useMemo(() => [onClick, FEATURED_BUNDLES], [
     onClick,
   ]);
 
   return memoizedReturn;
 }
 
-const FEATURED_PRESETS: Preset[] = [
+type Return = [(preset: Bundle) => () => void, Bundle[]];
+
+const FEATURED_BUNDLES: Bundle[] = [
   {
-    name: "Base Essentials",
+    name: "Base bundle",
     casks: [
       "alfred",
       "appcleaner",
@@ -121,12 +129,12 @@ const FEATURED_PRESETS: Preset[] = [
     formulas: [],
   },
   {
-    name: "Social Essentials",
+    name: "Social bundle",
     casks: ["slack", "discord", "rocket"],
     formulas: [],
   },
   {
-    name: "Dev Essentials",
+    name: "Dev bundle",
     casks: [
       "gitkraken",
       "insomnia",
@@ -147,12 +155,12 @@ const FEATURED_PRESETS: Preset[] = [
     ],
   },
   {
-    name: "JavaScript Essentials",
+    name: "JS bundle",
     casks: [],
     formulas: ["node", "yarn", "nvm"],
   },
   {
-    name: "Java Essentials",
+    name: "Java bundle",
     casks: [],
     formulas: ["openjdk"],
   },

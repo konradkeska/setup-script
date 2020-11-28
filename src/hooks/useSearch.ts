@@ -1,14 +1,12 @@
 import { useState, useMemo } from "react";
 
-import { Soft } from "types";
+import { Soft } from "api";
 import { sort } from "utils";
 
 type Props = {
   records: Soft[];
   sortFunc?: (a: Soft, b: Soft) => number;
 };
-
-type Return = [string, React.Dispatch<React.SetStateAction<string>>, Soft[]];
 
 export function useSearch({ records, sortFunc = byName }: Props): Return {
   const [query, setQuery] = useState<string>("");
@@ -30,6 +28,8 @@ export function useSearch({ records, sortFunc = byName }: Props): Return {
 
   return memoizedReturn;
 }
+
+type Return = [string, React.Dispatch<React.SetStateAction<string>>, Soft[]];
 
 const hasQueryMatch = (query: string, value?: string) =>
   value?.toLowerCase().includes(query.toLowerCase()) || false;

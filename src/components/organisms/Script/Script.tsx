@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Soft } from "types";
+import { Soft } from "api";
 import {
   CASKS_PANEL_HEADING,
   CASKS_PANEL_DESCRIPTION,

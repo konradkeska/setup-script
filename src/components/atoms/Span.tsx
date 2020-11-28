@@ -1,11 +1,11 @@
 import Sc from "styled-components";
 
-import { FontColors, MaterialColors, PrimaryColors } from "types";
+import { FontColor, MaterialColor, PrimaryColor } from "theme";
 import { toColorString } from "utils";
 
 type Props = {
-  color?: PrimaryColors | FontColors;
-  bgColor?: PrimaryColors | MaterialColors;
+  color?: PrimaryColor | FontColor;
+  bgColor?: PrimaryColor | MaterialColor;
   radius?: string;
   p?: boolean;
   ml?: boolean;

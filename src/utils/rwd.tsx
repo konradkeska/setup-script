@@ -1,21 +1,13 @@
 import React from "react";
 import MediaQuery from "react-responsive";
 
-interface IBreakpoints {
-  XS: number;
-  SM: number;
-  MD: number;
-  LG: number;
-  XL: number;
+enum RWD {
+  XS = 576,
+  SM = 768,
+  MD = 992,
+  LG = 1200,
+  XL = 1600,
 }
-
-const RWD: IBreakpoints = {
-  XS: 576,
-  SM: 768,
-  MD: 992,
-  LG: 1200,
-  XL: 1600,
-};
 
 const MaxXs: <T>(props: T) => JSX.Element = (props) => (
   <MediaQuery {...props} maxWidth={RWD.XS - 1} />

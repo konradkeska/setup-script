@@ -3,10 +3,10 @@ import { DefaultTheme, ThemeProvider } from "styled-components";
 
 import { Sprites, UsageTour, GlobalStyle } from "components/global";
 
-interface Props {
+type Props = {
   children: React.ReactNode;
   theme: DefaultTheme;
-}
+};
 
 const Global = React.memo(({ children, theme }: Props) => (
   <ThemeProvider theme={theme}>

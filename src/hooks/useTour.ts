@@ -1,13 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
 
-type Return = {
-  isTourOpen: boolean;
-  wasUserGuided: boolean;
-  cancelTour: () => void;
-  startTour: () => void;
-  onRequestClose: () => void;
-};
-
 export function useTour(): Return {
   const [wasUserGuided, setWasUserGuided] = useState(getInitWasUserGuided());
   const [isTourOpen, setIsTourOpen] = useState(false);
@@ -27,7 +19,7 @@ export function useTour(): Return {
     setGuided();
   }, [setGuided]);
 
-  const memoizedReturn = useMemo(
+  const memoizedReturn: Return = useMemo(
     () => ({
       isTourOpen,
       wasUserGuided,
@@ -40,6 +32,14 @@ export function useTour(): Return {
 
   return memoizedReturn;
 }
+
+type Return = {
+  isTourOpen: boolean;
+  wasUserGuided: boolean;
+  cancelTour: () => void;
+  startTour: () => void;
+  onRequestClose: () => void;
+};
 
 const getInitWasUserGuided = (): boolean =>
   window.localStorage.getItem("wasGuided") === "true" || false;

@@ -1,12 +1,14 @@
 import React from "react";
 import Sc from "styled-components";
 
-import { Base, PrimaryColors, MaterialColors, SoftType, Action } from "types";
+import { SoftType } from "api";
+import { Action, MaterialColor, PrimaryColor } from "theme";
+
 import { List } from "./List";
-import { ListItem } from "./Item";
+import { ListItem, IBase } from "./Item";
 import { Title } from "./Title";
 
-interface Props<T> {
+interface IProps<T> {
   items: T[];
   id?: string;
   heading?: string;
@@ -14,8 +16,7 @@ interface Props<T> {
   count?: number;
   withDots?: boolean;
   withItemSeparator?: boolean;
-  accentColor?: PrimaryColors;
-  bgColor?: MaterialColors;
+  bgColor?: MaterialColor;
   border?: boolean;
   action?: Action;
   width?: string;
@@ -24,7 +25,7 @@ interface Props<T> {
 }
 
 export const Panel = React.memo(
-  <T extends Base>({
+  <T extends IBase>({
     heading,
     description,
     items,
@@ -32,26 +33,19 @@ export const Panel = React.memo(
     id,
     withDots = false,
     withItemSeparator = false,
-    accentColor = PrimaryColors.PURPLE,
-    bgColor = MaterialColors.OVERLAY,
+    bgColor = MaterialColor.OVERLAY,
     border = false,
-    action = Action.ADD,
+    action = Action.SUCCESS,
     width = "100%",
     height = "100%",
-  }: Props<T>) => (
+  }: IProps<T>) => (
     <PanelWrapper
       aria-label={getAriaLabel(action, heading)}
       heading={heading}
       width={width}
       height={height}
     >
-      {heading && (
-        <Title
-          text={heading}
-          description={description}
-          accentColor={accentColor}
-        />
-      )}
+      {heading && <Title text={heading} description={description} />}
       <List
         aria-label={`${heading || "records"} list`}
         id={id}
@@ -78,14 +72,14 @@ export const Panel = React.memo(
 );
 
 const getAriaLabel = (action: Action, heading: string = "records") =>
-  `${action === Action.ADD ? "found" : "added"} ${heading}`;
+  `${action === Action.SUCCESS ? "found" : "added"} ${heading}`;
 
 const COLORS_MAP = {
-  [SoftType.CASK]: PrimaryColors.TEAL,
-  [SoftType.FORMULA]: PrimaryColors.YELLOW,
+  [SoftType.CASK]: PrimaryColor.TEAL,
+  [SoftType.FORMULA]: PrimaryColor.YELLOW,
 };
 
-type PanelWrapperProps = Pick<Props<Base>, "width" | "height" | "heading">;
+type PanelWrapperProps = Pick<IProps<IBase>, "width" | "height" | "heading">;
 
 const PanelWrapper = Sc.div<PanelWrapperProps>`
   width: ${({ width }) => width};

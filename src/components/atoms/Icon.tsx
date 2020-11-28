@@ -1,18 +1,18 @@
 import React from "react";
 import Sc from "styled-components";
 
-import { FontColors, MaterialColors, PrimaryColors } from "types";
+import { FontColor, MaterialColor, PrimaryColor } from "theme";
 import { toColorString } from "utils";
 
 type Props = {
   name: string;
   size?: number;
-  fillColor?: FontColors | PrimaryColors | MaterialColors;
-  hoverFillColor?: FontColors | PrimaryColors | MaterialColors;
+  fillColor?: FontColor | PrimaryColor | MaterialColor;
+  hoverFillColor?: FontColor | PrimaryColor | MaterialColor;
 };
 
 export const Icon = React.memo(
-  ({ name, size = 20, fillColor = FontColors.SUB, hoverFillColor }: Props) => (
+  ({ name, size = 20, fillColor = FontColor.SUB, hoverFillColor }: Props) => (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -28,8 +28,8 @@ export const Icon = React.memo(
 
 type SvgProps = {
   size: number;
-  fillColor: FontColors | PrimaryColors | MaterialColors;
-  hoverFillColor?: FontColors | PrimaryColors | MaterialColors;
+  fillColor: FontColor | PrimaryColor | MaterialColor;
+  hoverFillColor?: FontColor | PrimaryColor | MaterialColor;
 };
 
 const Svg = Sc.svg<SvgProps>`

@@ -1,12 +1,7 @@
 import { useMemo, useState, useCallback } from "react";
 import { DefaultTheme, Themes } from "styled-components";
 
-import { ThemeMode } from "types";
-
-import dark from "themes/dark.json";
-import light from "themes/light.json";
-
-type Return = [ThemeMode, DefaultTheme, () => void];
+import { dark, light, ThemeMode } from "theme";
 
 export function useTheme(): Return {
   const initialTheme: ThemeMode =
@@ -32,6 +27,8 @@ export function useTheme(): Return {
 
   return memoizedReturn;
 }
+
+type Return = [ThemeMode, DefaultTheme, () => void];
 
 const DEFAULT_THEME: ThemeMode = ThemeMode.DARK;
 const THEMES: Themes = { dark, light };

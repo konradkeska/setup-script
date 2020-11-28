@@ -1,19 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { AxiosResponse } from "axios";
 
-import { Soft, SoftApiResponse, SoftType } from "types";
+import { Soft, SoftType } from "api";
 
 type Props = [() => Promise<AxiosResponse<Soft[]>>, SoftType];
-
-type Return = [
-  Soft | null,
-  Soft[],
-  Soft[],
-  (record: Soft) => () => void,
-  (record: Soft) => () => void,
-  (records: Soft[]) => () => void,
-  (records: Soft[]) => () => void
-];
 
 export function useList([loader, type]: Props): Return {
   const [list, setList] = useState<Soft[]>([]);
@@ -85,6 +75,16 @@ export function useList([loader, type]: Props): Return {
   return memoizedReturn;
 }
 
+type Return = [
+  Soft | null,
+  Soft[],
+  Soft[],
+  (record: Soft) => () => void,
+  (record: Soft) => () => void,
+  (records: Soft[]) => () => void,
+  (records: Soft[]) => () => void
+];
+
 const getAddable = ([itemsToAdd, addedItems]: [Soft[], Soft[]]) =>
   itemsToAdd.filter(
     (record) => !addedItems.map(({ name }) => name).includes(record.name)
@@ -106,3 +106,7 @@ const formatResponse = (records: SoftApiResponse[], type: SoftType): Soft[] =>
     name: typeof name === "string" ? name : name[0],
     type,
   }));
+
+type SoftApiResponse = Omit<Soft, "name" | "type"> & {
+  name: string | string[];
+};

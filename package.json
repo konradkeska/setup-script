@@ -2,7 +2,7 @@
   "name": "setup-script",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://konradkeska.github.io/",
+  "homepage": "https://konradkeska.github.io/setup-script/",
   "dependencies": {
     "@sentry/react": "^5.27.6",
     "@sentry/tracing": "^5.27.6",

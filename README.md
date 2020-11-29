@@ -13,7 +13,7 @@
 
 ![setup-script UI preview](https://user-images.githubusercontent.com/29062983/100010376-78ea4a80-2dd0-11eb-9fe5-72ade4b88d99.png)
 
-### [LIVE DEMO](https://konradkeska.github.io/)
+### [LIVE DEMO](https://konradkeska.github.io/setup-script/)
 
 ## About
 

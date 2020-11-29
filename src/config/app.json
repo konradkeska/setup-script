@@ -1,0 +1,12 @@
+{
+  "CASKS_PANEL_DESCRIPTION": "(Software)",
+  "CASKS_PANEL_HEADING": "Casks",
+  "FOOTER_HEIGHT": 32,
+  "FORMULAS_PANEL_DESCRIPTION": "(Command Line Software)",
+  "FORMULAS_PANEL_HEADING": "Formulas",
+  "HEADER_HEIGHT": 58,
+  "MAIN_MAX_WIDTH": 680,
+  "PANEL_ITEM_HEIGHT": 32,
+  "FIREBASE_API_HOST": "https://setup-script.firebaseio.com/",
+  "BREW_API_HOST": "https://formulae.brew.sh/api/"
+}

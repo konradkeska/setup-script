@@ -1,9 +1,20 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { AxiosResponse } from "axios";
 
-import { Soft, SoftType } from "api";
+import { Soft, SoftType } from "types";
+import { toSoft, toAddableItems, toListWithout, toRemovableItems } from "utils";
 
 type Props = [() => Promise<AxiosResponse<Soft[]>>, SoftType];
+
+type Return = [
+  Soft | null,
+  Soft[],
+  Soft[],
+  (record: Soft) => () => void,
+  (record: Soft) => () => void,
+  (records: Soft[]) => () => void,
+  (records: Soft[]) => () => void
+];
 
 export function useList([loader, type]: Props): Return {
   const [list, setList] = useState<Soft[]>([]);
@@ -13,7 +24,7 @@ export function useList([loader, type]: Props): Return {
   const loadData = useCallback(async () => {
     try {
       const data: AxiosResponse<Soft[]> = await loader();
-      setList(formatResponse(data.data, type));
+      setList(toSoft(data.data, type));
     } catch (error) {
       console.error(error);
     }
@@ -36,8 +47,10 @@ export function useList([loader, type]: Props): Return {
 
   const removeItem = useCallback(
     (record: Soft) => () => {
-      setAddedList(addedList.filter((item) => item.name !== record.name));
-      setList([record, ...list]);
+      if (!list.find((item) => item.name === record.name)) {
+        setAddedList(addedList.filter((item) => item.name !== record.name));
+        setList([record, ...list]);
+      }
       setFocusedSoft(record);
     },
     [addedList, list]
@@ -45,8 +58,8 @@ export function useList([loader, type]: Props): Return {
 
   const addItems = useCallback(
     (records: Soft[]) => () => {
-      const addableItems = getAddable([records, addedList]);
-      const listWithoutItems = getListWithout([list, addableItems]);
+      const addableItems = toAddableItems([records, addedList]);
+      const listWithoutItems = toListWithout([addableItems, list]);
       setAddedList([...addableItems, ...addedList]);
       setList(listWithoutItems);
     },
@@ -55,8 +68,8 @@ export function useList([loader, type]: Props): Return {
 
   const removeItems = useCallback(
     (records: Soft[]) => () => {
-      const removableItems = getRemovable([records, addedList]);
-      const addedListWithoutItems = getListWithout([addedList, removableItems]);
+      const removableItems = toRemovableItems([records, addedList]);
+      const addedListWithoutItems = toListWithout([addedList, removableItems]);
       setAddedList(addedListWithoutItems);
       setList([...removableItems, ...list]);
     },
@@ -78,39 +91,3 @@ export function useList([loader, type]: Props): Return {
 
   return memoizedReturn;
 }
-
-type Return = [
-  Soft | null,
-  Soft[],
-  Soft[],
-  (record: Soft) => () => void,
-  (record: Soft) => () => void,
-  (records: Soft[]) => () => void,
-  (records: Soft[]) => () => void
-];
-
-const getAddable = ([itemsToAdd, addedItems]: [Soft[], Soft[]]) =>
-  itemsToAdd.filter(
-    (record) => !addedItems.map(({ name }) => name).includes(record.name)
-  );
-
-const getRemovable = ([itemsToRemove, addedItems]: [Soft[], Soft[]]) =>
-  addedItems.filter((record) =>
-    itemsToRemove.map(({ name }) => name).includes(record.name)
-  );
-
-const getListWithout = ([list, itemsToRemove]: [Soft[], Soft[]]) =>
-  list.filter(
-    (record) => !itemsToRemove.map(({ name }) => name).includes(record.name)
-  );
-
-const formatResponse = (records: SoftApiResponse[], type: SoftType): Soft[] =>
-  records.map(({ name, ...record }) => ({
-    ...record,
-    name: typeof name === "string" ? name : name[0],
-    type,
-  }));
-
-type SoftApiResponse = Omit<Soft, "name" | "type"> & {
-  name: string | string[];
-};

@@ -1,6 +1,6 @@
 import Sc from "styled-components";
 
-import { MaterialColor } from "theme";
+import { MaterialColor } from "types";
 
 type Props = {
   bgColor: MaterialColor;

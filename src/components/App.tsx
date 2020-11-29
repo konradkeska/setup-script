@@ -1,32 +1,28 @@
 import React, { useCallback, useMemo } from "react";
 import { useMediaQuery } from "react-responsive";
 
+import { MinMd, MinSm, RWD } from "utils";
 import {
   useBrewSoft,
   useDisplayMode,
   useHotkeys,
-  useBundle,
   useSearch,
   useSides,
   useTheme,
-  DisplayMode,
 } from "hooks";
-import { ActionButton, Code, Emoji, Icon, Link, Row, TabButton } from "./atoms";
-import { Brand, Search, Toggle } from "./molecules";
+import { Action, MaterialColor } from "types";
+import { DisplayMode } from "types";
+
+import { APP, FEATURED_BUNDLES } from "config";
+
+import { Button, Code, Icon, Link, Row, Tab } from "./atoms";
+import { Brand, Search } from "./molecules";
 import { Panel, Script } from "./organisms";
-import { Global, View } from "./templates";
-import {
-  CASKS_PANEL_HEADING,
-  CASKS_PANEL_DESCRIPTION,
-  FORMULAS_PANEL_HEADING,
-  FORMULAS_PANEL_DESCRIPTION,
-} from "./config";
-import { MinMd, MinSm, RWD } from "utils";
-import { Action, MaterialColor, ThemeMode } from "theme";
+import { View } from "./templates";
 
 function App() {
   const [mode, theme, switchTheme] = useTheme();
-  const [displayMode, switchDisplayMode] = useDisplayMode();
+  const [displayMode, switchToEditor, switchToScript] = useDisplayMode();
 
   const {
     details,
@@ -36,18 +32,9 @@ function App() {
     addedFormulas,
     onAdd,
     onRemove,
-    onMultiAdd,
-    onMultiRemove,
+    handleBundleLoad,
+    handleBundleSave,
   } = useBrewSoft();
-
-  const [onBundleClick, FEATURED_BUNDLES] = useBundle({
-    casks,
-    formulas,
-    addedCasks,
-    addedFormulas,
-    onMultiAdd,
-    onMultiRemove,
-  });
 
   const records = useMemo(() => [...casks, ...formulas], [casks, formulas]);
 
@@ -65,16 +52,6 @@ function App() {
     setQuery("");
     setLeftExpanded(false);
   }, [setQuery, setLeftExpanded]);
-
-  const switchToEditor = useCallback(
-    () => switchDisplayMode(DisplayMode.EDITOR),
-    [switchDisplayMode]
-  );
-
-  const switchToScript = useCallback(
-    () => switchDisplayMode(DisplayMode.SCRIPT),
-    [switchDisplayMode]
-  );
 
   useHotkeys(
     {
@@ -95,139 +72,123 @@ function App() {
       }),
       modifier: "shiftKey",
     },
-    [switchDisplayMode]
+    [switchToEditor, switchToScript]
   );
 
   const onMobileDevice = useMediaQuery({ maxWidth: RWD.SM - 1 });
 
   return (
-    <Global theme={theme}>
-      <View>
-        <View.Header>
-          <Row justifyContent="flex-start" w={onMobileDevice ? "70%" : "30%"}>
-            <Brand query={query} onQueryReset={onQueryReset} />
-            <Search
-              id="search-input"
-              query={query}
-              setQuery={setQuery}
-              setLeftExpanded={setLeftExpanded}
-            />
-          </Row>
-          <MinSm>
-            <Row w="30%">
-              <TabButton
-                id="editor-mode-button"
-                aria-label="switch to edit mode"
-                onClick={switchToEditor}
-                active={displayMode === DisplayMode.EDITOR}
-                disabled={displayMode === DisplayMode.EDITOR}
-              >
-                <Icon name="tools" />
-              </TabButton>
-              <TabButton
-                id="script-mode-button"
-                aria-label="switch to script preview mode"
-                onClick={switchToScript}
-                active={displayMode === DisplayMode.SCRIPT}
-                disabled={displayMode === DisplayMode.SCRIPT}
-              >
-                <Icon name="code" />
-              </TabButton>
-            </Row>
-          </MinSm>
-          <Row justifyContent="flex-end" w="30%">
-            <ActionButton
-              id="save-button"
-              aria-label="save script"
-              onClick={() => console.log("save")}
-              mr
-            >
-              <Icon name="save" />
-            </ActionButton>
-            <ActionButton
-              id="download-button"
-              aria-label="download script"
-              onClick={() => console.log("download")}
-            >
-              <Icon name="download" />
-            </ActionButton>
-          </Row>
-        </View.Header>
-        <View.Sides>
-          <View.Sides.Left expanded={isLeftExpanded} onClick={toggleLeft}>
-            <Panel
-              id="search-results"
-              items={searchResults}
-              onItemClick={onAdd}
-              bgColor={MaterialColor.SIDE}
-              withDots
-            />
-          </View.Sides.Left>
-          <View.Sides.Right expanded={isRightExpanded} onClick={toggleRight}>
-            <Panel
-              id="bundles"
-              items={FEATURED_BUNDLES}
-              bgColor={MaterialColor.SIDE}
-              onItemClick={onBundleClick}
-              withItemSeparator
-            />
-          </View.Sides.Right>
-        </View.Sides>
-        <View.Main>
-          {displayMode === DisplayMode.EDITOR ? (
-            <>
-              <Panel
-                id="added-formulas"
-                heading={FORMULAS_PANEL_HEADING}
-                description={FORMULAS_PANEL_DESCRIPTION}
-                items={addedFormulas}
-                onItemClick={onRemove}
-                action={Action.ERROR}
-                height="50%"
-                withDots
-                border
-              />
-              <Panel
-                id="added-casks"
-                heading={CASKS_PANEL_HEADING}
-                description={CASKS_PANEL_DESCRIPTION}
-                items={addedCasks}
-                onItemClick={onRemove}
-                action={Action.ERROR}
-                height="50%"
-                withDots
-                border
-              />
-            </>
-          ) : (
-            <Script casks={addedCasks} formulas={addedFormulas} />
-          )}
-        </View.Main>
-        <View.Footer>
-          <Toggle
-            id="theme-toggle"
-            aria-label="toggle display mode"
-            defaultChecked={mode === ThemeMode.DARK}
-            onChange={switchTheme}
-            checkedIcon={<Emoji>☀️</Emoji>}
-            uncheckedIcon={<Emoji>🌙</Emoji>}
+    <View theme={theme}>
+      <View.Header>
+        <Row justifyContent="flex-start" w={onMobileDevice ? "70%" : "30%"}>
+          <Brand query={query} onQueryReset={onQueryReset} />
+          <Search
+            id="search-input"
+            query={query}
+            setQuery={setQuery}
+            setLeftExpanded={setLeftExpanded}
           />
-          {details && (
-            <MinMd>
-              <Code>
-                <Link href={details.homepage}>{details.name}</Link>(
-                {details.version}) {details.desc}
-              </Code>
-              <Code>{details.installs} installs (365 days)</Code>
-              <Code>{details.conflicts} conflicts</Code>
-            </MinMd>
-          )}
-          <Code>
-            powered by <Link href="https://formulae.brew.sh/">Brew</Link> 🤍
-          </Code>
-        </View.Footer>
-      </View>
-    </Global>
+        </Row>
+        <MinSm>
+          <Row w="30%">
+            <Tab
+              id="editor-mode-button"
+              aria-label="switch to edit mode"
+              onClick={switchToEditor}
+              active={displayMode === DisplayMode.EDITOR}
+              disabled={displayMode === DisplayMode.EDITOR}
+            >
+              <Icon name="tools" />
+            </Tab>
+            <Tab
+              id="script-mode-button"
+              aria-label="switch to script preview mode"
+              onClick={switchToScript}
+              active={displayMode === DisplayMode.SCRIPT}
+              disabled={displayMode === DisplayMode.SCRIPT}
+            >
+              <Icon name="code" />
+            </Tab>
+          </Row>
+        </MinSm>
+        <Row justifyContent="flex-end" w="30%">
+          <Button
+            id="save-button"
+            aria-label="save script"
+            disabled={!addedCasks.length || !addedFormulas.length}
+            onClick={handleBundleSave}
+            mr
+          >
+            <Icon name="save" />
+          </Button>
+          <Button id="download-button" aria-label="download script" disabled>
+            <Icon name="download" />
+          </Button>
+        </Row>
+      </View.Header>
+      <View.Sides>
+        <View.Sides.Left expanded={isLeftExpanded} onClick={toggleLeft}>
+          <Panel
+            id="search-results"
+            items={searchResults}
+            onItemClick={onAdd}
+            bgColor={MaterialColor.SIDE}
+            withDots
+          />
+        </View.Sides.Left>
+        <View.Sides.Right expanded={isRightExpanded} onClick={toggleRight}>
+          <Panel
+            id="bundles"
+            items={FEATURED_BUNDLES}
+            bgColor={MaterialColor.SIDE}
+            onItemClick={handleBundleLoad}
+            withItemSeparator
+          />
+        </View.Sides.Right>
+      </View.Sides>
+      <View.Main>
+        {displayMode === DisplayMode.EDITOR ? (
+          <>
+            <Panel
+              id="added-formulas"
+              heading={APP.FORMULAS_PANEL_HEADING}
+              description={APP.FORMULAS_PANEL_DESCRIPTION}
+              items={addedFormulas}
+              onItemClick={onRemove}
+              action={Action.ERROR}
+              height="50%"
+              withDots
+              border
+            />
+            <Panel
+              id="added-casks"
+              heading={APP.CASKS_PANEL_HEADING}
+              description={APP.CASKS_PANEL_DESCRIPTION}
+              items={addedCasks}
+              onItemClick={onRemove}
+              action={Action.ERROR}
+              height="50%"
+              withDots
+              border
+            />
+          </>
+        ) : (
+          <Script casks={addedCasks} formulas={addedFormulas} />
+        )}
+      </View.Main>
+      <View.Footer mode={mode} switchTheme={switchTheme}>
+        {details && (
+          <MinMd>
+            <Code>
+              <Link href={details.homepage}>{details.name}</Link>(
+              {details.version}) {details.desc}
+            </Code>
+            <Code>{details.installs} installs (365 days)</Code>
+            <Code>{details.conflicts} conflicts</Code>
+          </MinMd>
+        )}
+      </View.Footer>
+    </View>
   );
 }
 

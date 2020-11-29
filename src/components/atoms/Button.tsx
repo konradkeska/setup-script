@@ -1,6 +1,6 @@
 import Sc from "styled-components";
 
-export const ActionButton = Sc.button<{ active?: boolean; mr?: boolean }>`
+export const Button = Sc.button<{ active?: boolean; mr?: boolean }>`
   width: 40px;
   height: 40px;
   line-height: 0;
@@ -8,7 +8,7 @@ export const ActionButton = Sc.button<{ active?: boolean; mr?: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.material.input};
+  background-color: ${({ theme }) => theme.colors.material.inactive};
   color: ${({ theme }) => theme.colors.font.base};
   margin-right: ${({ theme, mr }) => (mr ? `${theme.paddings.xs}px` : "unset")};
 
@@ -24,8 +24,25 @@ export const ActionButton = Sc.button<{ active?: boolean; mr?: boolean }>`
     }
   }}
 
+  &:disabled {
+    background-color: ${({ theme }) => theme.colors.material.inactive};
+    color: ${({ theme }) => theme.colors.font.sub};
+    svg {
+      fill: ${({ theme }) => theme.colors.font.sub};
+    }
+    &:hover,
+    &:active {
+      cursor: default;
+      background-color: ${({ theme }) => theme.colors.material.inactive};
+      svg {
+        fill: ${({ theme }) => theme.colors.font.sub};
+      }
+    }
+  }
+
   &:hover {
     cursor: pointer;
+    background-color: ${({ theme }) => theme.colors.material.input};
     svg {
       fill: ${({ theme }) => theme.colors.font.base};
     }

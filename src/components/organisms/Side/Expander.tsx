@@ -50,12 +50,13 @@ const Button = Sc.button`
   cursor: pointer;
 
   color: ${({ theme }) => theme.colors.font.base};
-  background-color: ${({ theme }) => theme.colors.material.side};
+  background-color: ${({ theme }) => theme.colors.material.inactive};
   border-top: 1px solid ${({ theme }) => theme.colors.material.background};
   border-bottom: 1px solid ${({ theme }) => theme.colors.material.background};
 
   &:hover,
   &:focus {
+    background-color: ${({ theme }) => theme.colors.material.input};
     svg {
       fill: ${({ theme }) => theme.colors.font.base};
     }

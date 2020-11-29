@@ -1,32 +1,17 @@
-import { useCallback, useMemo, useState } from "react";
+import { useState } from "react";
 
-export enum DisplayMode {
-  EDITOR = "editor",
-  SCRIPT = "script",
-}
+import { DisplayMode } from "types";
 
 export function useDisplayMode(): Return {
   const [displayMode, setDisplayMode] = useState<DisplayMode>(
     DisplayMode.EDITOR
   );
 
-  const defaultMode =
-    displayMode === DisplayMode.EDITOR
-      ? DisplayMode.SCRIPT
-      : DisplayMode.EDITOR;
+  const switchToEditor = () => setDisplayMode(DisplayMode.EDITOR);
 
-  const switchDisplayMode = useCallback(
-    (mode?: DisplayMode) =>
-      mode ? setDisplayMode(mode) : setDisplayMode(defaultMode),
-    [defaultMode]
-  );
+  const switchToScript = () => setDisplayMode(DisplayMode.SCRIPT);
 
-  const memoizedReturn: Return = useMemo(
-    () => [displayMode, switchDisplayMode],
-    [displayMode, switchDisplayMode]
-  );
-
-  return memoizedReturn;
+  return [displayMode, switchToEditor, switchToScript];
 }
 
-type Return = [DisplayMode, (mode?: DisplayMode) => void];
+type Return = [DisplayMode, () => void, () => void];

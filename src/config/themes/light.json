@@ -29,6 +29,7 @@
       "sub": "rgb(179, 179, 179)"
     },
     "material": {
+      "inactive": "rgb(223, 223, 223)",
       "input": "rgb(229, 229, 229)",
       "side": "rgb(235, 235, 235)",
       "overlay": "rgb(242, 242, 242)",

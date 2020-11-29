@@ -1,6 +1,6 @@
 import Sc from "styled-components";
 
-import { FOOTER_HEIGHT, HEADER_HEIGHT } from "components/config";
+import { APP } from "config";
 import { RWD } from "utils";
 
 type Props = {
@@ -15,8 +15,8 @@ export const Wrapper = Sc.aside<Props>`
   display: flex;
   flex-direction: row;
   z-index: 4;
-  padding-top: ${HEADER_HEIGHT}px;
-  padding-bottom: ${FOOTER_HEIGHT}px;
+  padding-top: ${APP.HEADER_HEIGHT}px;
+  padding-bottom: ${APP.FOOTER_HEIGHT}px;
   right: ${({ right, expanded }) =>
     getCoord({ side: right, width: `-350px`, expanded })};
   left: ${({ left, expanded }) =>

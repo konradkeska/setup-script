@@ -1,6 +1,6 @@
 import "styled-components";
 
-import { IColors, IPadding, IRadius, IShadow } from "theme";
+import { IColors, IPadding, IRadius, IShadow } from "types";
 
 declare module "styled-components" {
   export interface DefaultTheme {

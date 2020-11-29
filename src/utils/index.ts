@@ -1,4 +1,23 @@
-export { sort, truncate, toColorString, setNativeValue } from "./helpers";
+export {
+  sort,
+  truncate,
+  setNativeValue,
+  getActiveBundleId,
+  getWasUserGuided,
+} from "./helpers";
+
+export {
+  toColorString,
+  toMatchingRecords,
+  toSoft,
+  toAddableItems,
+  toListWithout,
+  toRemovableItems,
+  toDetails,
+  toSoftId,
+  toSoftType,
+} from "./mappers";
+
 export {
   RWD,
   MaxXs,

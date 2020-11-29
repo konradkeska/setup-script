@@ -2,9 +2,9 @@ import React from "react";
 
 import Sc from "styled-components";
 
-import { Soft, SoftType } from "api";
-import { Bundle } from "hooks";
-import { Action, PrimaryColor } from "theme";
+import { Soft, SoftType } from "types";
+import { Action, PrimaryColor } from "types";
+import { Bundle } from "types";
 import { truncate, MinXs } from "utils";
 
 import { Code, Dot } from "components/atoms";

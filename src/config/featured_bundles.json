@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Base bundle",
+    "casks": [
+      "alfred",
+      "appcleaner",
+      "google-chrome",
+      "rectangle",
+      "spotify",
+      "the-unarchiver",
+      "vlc",
+      "transmission"
+    ],
+    "formulas": []
+  },
+  {
+    "name": "Social bundle",
+    "casks": ["slack", "discord", "rocket"],
+    "formulas": []
+  },
+  {
+    "name": "Dev bundle",
+    "casks": [
+      "gitkraken",
+      "insomnia",
+      "visual-studio-code",
+      "iterm2",
+      "cyberduck"
+    ],
+    "formulas": [
+      "git",
+      "zsh",
+      "zsh-autosuggestions",
+      "zsh-syntax-highlighting",
+      "zsh-completions",
+      "zsh-history-substring-search",
+      "wget",
+      "tree",
+      "openssl@1.1"
+    ]
+  },
+  {
+    "name": "JS bundle",
+    "casks": [],
+    "formulas": ["node", "yarn", "nvm"]
+  },
+  {
+    "name": "Java bundle",
+    "casks": [],
+    "formulas": ["openjdk"]
+  }
+]

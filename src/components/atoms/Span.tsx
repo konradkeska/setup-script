@@ -1,6 +1,6 @@
 import Sc from "styled-components";
 
-import { FontColor, MaterialColor, PrimaryColor } from "theme";
+import { FontColor, MaterialColor, PrimaryColor } from "types";
 import { toColorString } from "utils";
 
 type Props = {

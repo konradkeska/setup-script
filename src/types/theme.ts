@@ -1,3 +1,8 @@
+export enum Theme {
+  LIGHT = "light",
+  DARK = "dark",
+}
+
 export enum Action {
   INFO = "info",
   SUCCESS = "success",
@@ -38,6 +43,7 @@ export enum FontColor {
 }
 
 export enum MaterialColor {
+  INACTIVE = "inactive",
   INPUT = "input",
   SIDE = "side",
   OVERLAY = "overlay",
@@ -64,19 +70,16 @@ export enum Radius {
   MD = "md",
 }
 
-export enum ThemeMode {
-  LIGHT = "light",
-  DARK = "dark",
-}
-
-export interface IActionColor extends Record<ActionColor, string> {}
-export interface IBrandColor extends Record<BrandColor, string> {}
-export interface IPrimaryColor extends Record<PrimaryColor, string> {}
-export interface IFontColor extends Record<FontColor, string> {}
-export interface IMaterialColor extends Record<MaterialColor, string> {}
 export interface IPadding extends Record<Padding, number> {}
 export interface IShadow extends Record<Shadow, string> {}
 export interface IRadius extends Record<Radius, number> {}
+
+interface IActionColor extends Record<ActionColor, string> {}
+interface IBrandColor extends Record<BrandColor, string> {}
+interface IPrimaryColor extends Record<PrimaryColor, string> {}
+interface IFontColor extends Record<FontColor, string> {}
+interface IMaterialColor extends Record<MaterialColor, string> {}
+
 export interface IColors {
   action: IActionColor;
   brand: IBrandColor;

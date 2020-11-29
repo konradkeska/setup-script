@@ -1,6 +1,6 @@
 import Sc from "styled-components";
 
-import { PrimaryColor } from "theme";
+import { PrimaryColor } from "types";
 
 type Props = {
   color?: PrimaryColor;

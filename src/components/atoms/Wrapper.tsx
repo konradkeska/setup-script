@@ -1,8 +1,8 @@
 import Sc from "styled-components";
 
-import { MAIN_MAX_WIDTH } from "components/config";
+import { APP } from "config";
 import { toColorString } from "utils";
-import { FontColor } from "theme";
+import { FontColor } from "types";
 
 type Props = {
   maxW?: string;
@@ -24,7 +24,7 @@ export const Wrapper = Sc.div<Props>`
   width: ${({ w }) => w || "100%"};
   padding: ${({ theme, p }) => p || `0px ${theme.paddings.sm}px`};
   margin: 0 auto;
-  max-width: ${({ maxW }) => maxW || `${MAIN_MAX_WIDTH}px`};
+  max-width: ${({ maxW }) => maxW || `${APP.MAIN_MAX_WIDTH}px`};
   margin-top: ${({ mt }) => mt || "unset"};
   height: 100%;
   transition: margin 500ms;

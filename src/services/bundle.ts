@@ -29,7 +29,7 @@ const loadBundle = async (id: string) => {
 const addBundle = async (bundle: Bundle) => {
   try {
     const { data } = await postBundle(bundle);
-    window.location.pathname = `/${data.name}`;
+    window.location.pathname = `/setup-script/${data.name}`;
   } catch (error) {
     console.error(error);
   }

@@ -1,8 +1,8 @@
 import React from "react";
 import Sc from "styled-components";
 
-import { SoftType } from "api";
-import { Action, MaterialColor, PrimaryColor } from "theme";
+import { SoftType } from "types";
+import { Action, MaterialColor, PrimaryColor } from "types";
 
 import { List } from "./List";
 import { ListItem, IBase } from "./Item";

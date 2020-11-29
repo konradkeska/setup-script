@@ -1,7 +1,7 @@
 import React from "react";
 import Sc from "styled-components";
 
-import { ActionButton, Icon } from "components/atoms";
+import { Button, Icon } from "components/atoms";
 
 type Props = {
   query: string;
@@ -10,16 +10,16 @@ type Props = {
 
 export const Brand = ({ query, onQueryReset }: Props) =>
   query ? (
-    <ActionButton aria-label="reset search" onClick={onQueryReset} mr>
+    <Button aria-label="reset search" onClick={onQueryReset} mr>
       <Icon name="arrow-left" />
-    </ActionButton>
-  ) : (
-    <Button id="brand" disabled>
-      <div>S</div>
     </Button>
+  ) : (
+    <Logo id="brand" disabled>
+      <div>S</div>
+    </Logo>
   );
 
-const Button = Sc(ActionButton)`
+const Logo = Sc(Button)`
   background: ${({ theme }) =>
     `linear-gradient(to left, ${theme.colors.brand.lighter}, ${theme.colors.brand.darker})`};
   border-radius:6px;

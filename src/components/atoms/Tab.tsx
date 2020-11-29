@@ -1,6 +1,6 @@
 import Sc from "styled-components";
 
-export const TabButton = Sc.button<{ active?: boolean }>`
+export const Tab = Sc.button<{ active?: boolean }>`
   width: 96.6666px;
   height: 58px;
   line-height: 0;

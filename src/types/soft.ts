@@ -1,28 +1,9 @@
-import Axios, { AxiosResponse } from "axios";
-
-const BREW_API_HOST = "https://formulae.brew.sh/api/";
-
-const loadCasks = (): Promise<AxiosResponse<Soft[]>> =>
-  Axios.get(`${BREW_API_HOST}cask.json`);
-
-const loadFormulas = (): Promise<AxiosResponse<Soft[]>> =>
-  Axios.get(`${BREW_API_HOST}formula.json`);
-
-const loadCask = (name: string): Promise<AxiosResponse<CaskDetails>> =>
-  Axios.get(`${BREW_API_HOST}cask/${name}.json`);
-
-const loadFormula = (token: string): Promise<AxiosResponse<FormulaDetails>> =>
-  Axios.get(`${BREW_API_HOST}formula/${token}.json`);
-
-export { loadCasks, loadFormulas, loadCask, loadFormula, SoftType };
-export type { Soft, CaskDetails, FormulaDetails };
-
-enum SoftType {
+export enum SoftType {
   CASK = "cask",
   FORMULA = "formula",
 }
 
-type Soft = {
+export type Soft = {
   artifacts?: string[];
   depends_on?: Dependson;
   homepage?: string | string[];
@@ -40,7 +21,26 @@ type Soft = {
   desc?: string;
 };
 
-type CaskDetails = {
+export type SoftApiResponse = Omit<Soft, "name" | "type"> & {
+  name: string | string[];
+};
+
+export type Details = {
+  name: string;
+  desc: string;
+  homepage: string;
+  installs: number;
+  version: string;
+  conflicts: number;
+};
+
+export type Bundle = {
+  name: string;
+  casks?: string[];
+  formulas?: string[];
+};
+
+export type CaskDetails = {
   token: string;
   name: string[];
   desc: string;
@@ -59,7 +59,7 @@ type CaskDetails = {
   generated_date: string;
 };
 
-type FormulaDetails = {
+export type FormulaDetails = {
   name: string;
   full_name: string;
   oldname?: string;

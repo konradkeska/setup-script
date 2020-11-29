@@ -1,7 +1,7 @@
 import React from "react";
 import Sc from "styled-components";
 
-import { FOOTER_HEIGHT } from "components/config";
+import { APP } from "config";
 import { Span, Wrapper } from "../atoms";
 
 type Props = {
@@ -30,7 +30,7 @@ export const Bar = React.memo(
 );
 
 const Aside = Sc.aside`
-  bottom: ${FOOTER_HEIGHT}px;
+  bottom: ${APP.FOOTER_HEIGHT}px;
   border-top: ${({ theme }) => theme.colors.material.side};
   background-color: ${({ theme }) => theme.colors.material.overlay};
   width: 100%;

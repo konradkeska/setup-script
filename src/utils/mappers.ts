@@ -33,8 +33,7 @@ const hasQueryMatch = (query: string, value?: string) =>
   value?.toLowerCase().includes(query.toLowerCase()) || false;
 
 const hasIdentifierMatch = (query: string, item: Soft) =>
-  query.length > 1 &&
-  (hasQueryMatch(query, item.name) || hasQueryMatch(query, item.token));
+  query.length > 1 && hasQueryMatch(query, toSoftId(item));
 
 const toMatchingRecords = (query: string, records: Soft[]) =>
   query.length > 1
@@ -57,18 +56,16 @@ const toSoftId = (soft: Soft) => {
 };
 
 const toAddableItems = ([itemsToAdd, list]: [Soft[], Soft[]]) =>
-  itemsToAdd.filter(
-    (record) => !list.map(({ name }) => name).includes(record.name)
-  );
+  itemsToAdd.filter((record) => !list.map(toSoftId).includes(toSoftId(record)));
 
 const toRemovableItems = ([itemsToRemove, list]: [Soft[], Soft[]]) =>
   list.filter((record) =>
-    itemsToRemove.map(({ name }) => name).includes(record.name)
+    itemsToRemove.map(toSoftId).includes(toSoftId(record))
   );
 
 const toListWithout = ([itemsToRemove, list]: [Soft[], Soft[]]) =>
   list.filter(
-    (record) => !itemsToRemove.map(({ name }) => name).includes(record.name)
+    (record) => !itemsToRemove.map(toSoftId).includes(toSoftId(record))
   );
 
 const toDetails = (response: CaskDetails | FormulaDetails): Details => ({

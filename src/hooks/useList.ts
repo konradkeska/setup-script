@@ -2,7 +2,13 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { AxiosResponse } from "axios";
 
 import { Soft, SoftType } from "types";
-import { toSoft, toAddableItems, toListWithout, toRemovableItems } from "utils";
+import {
+  toSoft,
+  toAddableItems,
+  toListWithout,
+  toRemovableItems,
+  toSoftId,
+} from "utils";
 
 type Props = [() => Promise<AxiosResponse<Soft[]>>, SoftType];
 
@@ -36,9 +42,9 @@ export function useList([loader, type]: Props): Return {
 
   const addItem = useCallback(
     (record: Soft) => () => {
-      if (!addedList.find((item) => item.name === record.name)) {
+      if (!addedList.find((item) => toSoftId(item) === toSoftId(record))) {
         setAddedList([record, ...addedList]);
-        setList(list.filter((item) => item.name !== record.name));
+        setList(list.filter((item) => toSoftId(item) !== toSoftId(record)));
       }
       setFocusedSoft(record);
     },
@@ -47,8 +53,10 @@ export function useList([loader, type]: Props): Return {
 
   const removeItem = useCallback(
     (record: Soft) => () => {
-      if (!list.find((item) => item.name === record.name)) {
-        setAddedList(addedList.filter((item) => item.name !== record.name));
+      if (!list.find((item) => toSoftId(item) === toSoftId(record))) {
+        setAddedList(
+          addedList.filter((item) => toSoftId(item) !== toSoftId(record))
+        );
         setList([record, ...list]);
       }
       setFocusedSoft(record);

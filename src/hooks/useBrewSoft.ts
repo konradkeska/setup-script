@@ -10,18 +10,9 @@ import { useList } from "./useList";
 import { useDetails } from "./useDetails";
 
 export function useBrewSoft() {
-  const [wasLoaded, setWasLoaded] = useState(false);
+  const [isBundleLoaded, setBundleLoaded] = useState(false);
+  const [isBrewDataLoaded, setBrewDataLoaded] = useState(false);
   const [initBundle, setInitBundle] = useState<Bundle | null>(null);
-
-  const [
-    focusedCask,
-    casks,
-    addedCasks,
-    addCask,
-    removeCask,
-    addCasks,
-    removeCasks,
-  ] = useList([getCasks, SoftType.CASK]);
 
   const [
     focusedFormula,
@@ -32,6 +23,16 @@ export function useBrewSoft() {
     addFormulas,
     removeFormulas,
   ] = useList([getFormulas, SoftType.FORMULA]);
+
+  const [
+    focusedCask,
+    casks,
+    addedCasks,
+    addCask,
+    removeCask,
+    addCasks,
+    removeCasks,
+  ] = useList([getCasks, SoftType.CASK]);
 
   const details = useDetails(focusedFormula, focusedCask);
 
@@ -156,19 +157,27 @@ export function useBrewSoft() {
   const loadData = useCallback(async () => {
     const activeBundleId = getActiveBundleId();
     const initBundle = await loadBundle(activeBundleId);
-    if (initBundle) setInitBundle(initBundle);
+    if (initBundle) {
+      setInitBundle(initBundle);
+    }
   }, []);
+
+  useEffect(() => {
+    if (formulas.length && casks.length) {
+      setBrewDataLoaded(true);
+    }
+  }, [formulas, casks]);
 
   useEffect(() => {
     loadData();
   }, [loadData]);
 
   useEffect(() => {
-    if (initBundle && !wasLoaded) {
+    if (initBundle && isBrewDataLoaded && !isBundleLoaded) {
       handleBundleLoad(initBundle)();
-      setWasLoaded(true);
+      setBundleLoaded(true);
     }
-  }, [initBundle, handleBundleLoad, wasLoaded]);
+  }, [initBundle, isBrewDataLoaded, handleBundleLoad, isBundleLoaded]);
 
   const memoizedReturn = useMemo(
     () => ({

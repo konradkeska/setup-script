@@ -1,8 +1,8 @@
 import React from "react";
 import Sc from "styled-components";
 
-import { SoftType } from "types";
-import { Action, MaterialColor, PrimaryColor } from "types";
+import { SoftType, Action, MaterialColor, PrimaryColor } from "types";
+import { toSoftId } from "utils";
 
 import { List } from "./List";
 import { ListItem, IBase } from "./Item";
@@ -55,7 +55,7 @@ export const Panel = React.memo(
       >
         {items.map((record, index) => (
           <ListItem
-            id={record.token || record.name}
+            id={toSoftId(record)}
             key={index}
             index={index}
             record={record}

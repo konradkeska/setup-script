@@ -22,7 +22,8 @@ const setNativeValue = (element: HTMLElement, value: string | number) => {
 
 const getActiveBundleId = () => {
   const { pathname } = window.location;
-  return pathname.slice(13, pathname.length);
+  console.log(pathname.slice(14, pathname.length));
+  return pathname.slice(14, pathname.length);
 };
 
 const getWasUserGuided = (): boolean =>

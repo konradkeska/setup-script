@@ -17,6 +17,7 @@ export interface IBase extends Bundle, Soft {
 }
 
 interface IProps<T> {
+  style: React.CSSProperties;
   id: string;
   index: number;
   record: T;
@@ -29,6 +30,7 @@ interface IProps<T> {
 
 export const ListItem = React.memo(
   <T extends IBase>({
+    style,
     id,
     index,
     record,
@@ -38,7 +40,7 @@ export const ListItem = React.memo(
     withDots,
     withSeparator,
   }: IProps<T>) => (
-    <StyledListItem withSeparator={withSeparator}>
+    <StyledListItem style={style} withSeparator={withSeparator}>
       <Button
         id={id}
         index={index}

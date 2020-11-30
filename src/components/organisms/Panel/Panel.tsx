@@ -1,6 +1,9 @@
 import React from "react";
 import Sc from "styled-components";
+import { ListChildComponentProps } from "react-window";
+import AutoSizer from "react-virtualized-auto-sizer";
 
+import { APP } from "config";
 import { SoftType, Action, MaterialColor, PrimaryColor } from "types";
 import { toSoftId } from "utils";
 
@@ -19,8 +22,8 @@ interface IProps<T> {
   bgColor?: MaterialColor;
   border?: boolean;
   action?: Action;
-  width?: string;
-  height?: string;
+  panelWidth?: string;
+  panelHeight?: string;
   onItemClick?: (record: T) => () => void;
 }
 
@@ -36,37 +39,48 @@ export const Panel = React.memo(
     bgColor = MaterialColor.OVERLAY,
     border = false,
     action = Action.SUCCESS,
-    width = "100%",
-    height = "100%",
+    panelWidth = "100%",
+    panelHeight = "100%",
   }: IProps<T>) => (
     <PanelWrapper
       aria-label={getAriaLabel(action, heading)}
       heading={heading}
-      width={width}
-      height={height}
+      panelWidth={panelWidth}
+      panelHeight={panelHeight}
     >
       {heading && <Title text={heading} description={description} />}
-      <List
-        aria-label={`${heading || "records"} list`}
-        id={id}
-        heading={heading}
-        border={border}
-        bgColor={bgColor}
-      >
-        {items.map((record, index) => (
-          <ListItem
-            id={toSoftId(record)}
-            key={index}
-            index={index}
-            record={record}
-            action={action}
-            onClick={onItemClick?.(record)}
-            dotColor={record?.type ? COLORS_MAP[record.type] : undefined}
-            withDots={withDots}
-            withSeparator={withItemSeparator}
-          />
-        ))}
-      </List>
+      <AutoSizer>
+        {({ height, width }) => (
+          <List
+            id={id}
+            innerElementType="ul"
+            height={height - (heading ? APP.PANEL_ITEM_HEIGHT : 0)}
+            itemCount={items.length}
+            itemSize={APP.PANEL_ITEM_HEIGHT}
+            width={width}
+            heading={heading}
+            border={border}
+            bgColor={bgColor}
+          >
+            {({ index, style }: ListChildComponentProps) => (
+              <ListItem
+                style={style}
+                id={toSoftId(items[index])}
+                key={index}
+                index={index}
+                record={items[index]}
+                action={action}
+                onClick={onItemClick?.(items[index])}
+                dotColor={
+                  items[index].type ? COLORS_MAP[items[index].type!] : undefined
+                }
+                withDots={withDots}
+                withSeparator={withItemSeparator}
+              />
+            )}
+          </List>
+        )}
+      </AutoSizer>
     </PanelWrapper>
   )
 );
@@ -79,11 +93,14 @@ const COLORS_MAP = {
   [SoftType.FORMULA]: PrimaryColor.YELLOW,
 };
 
-type PanelWrapperProps = Pick<IProps<IBase>, "width" | "height" | "heading">;
+type PanelWrapperProps = Pick<
+  IProps<IBase>,
+  "panelWidth" | "panelHeight" | "heading"
+>;
 
 const PanelWrapper = Sc.div<PanelWrapperProps>`
-  width: ${({ width }) => width};
-  height: ${({ height }) => height};
+  width: ${({ panelWidth }) => panelWidth};
+  height: ${({ panelHeight }) => panelHeight};
   padding: ${({ theme: { paddings }, heading }) =>
     heading ? `0px ${paddings.sm}px ${paddings.sm}px ${paddings.sm}px` : "0px"};
 `;

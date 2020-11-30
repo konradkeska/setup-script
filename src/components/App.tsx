@@ -115,7 +115,7 @@ function App() {
           <Button
             id="save-button"
             aria-label="save script"
-            disabled={!addedCasks.length || !addedFormulas.length}
+            disabled={!addedCasks.length && !addedFormulas.length}
             onClick={handleBundleSave}
             mr
           >
@@ -156,7 +156,7 @@ function App() {
               items={addedFormulas}
               onItemClick={onRemove}
               action={Action.ERROR}
-              height="50%"
+              panelHeight="50%"
               withDots
               border
             />
@@ -167,7 +167,7 @@ function App() {
               items={addedCasks}
               onItemClick={onRemove}
               action={Action.ERROR}
-              height="50%"
+              panelHeight="50%"
               withDots
               border
             />

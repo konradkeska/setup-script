@@ -1,18 +1,18 @@
 import Sc from "styled-components";
+import { FixedSizeList, FixedSizeListProps } from "react-window";
 
 import { MaterialColor } from "types";
 
-type Props = {
+interface IProps extends FixedSizeListProps {
+  id?: string;
   bgColor: MaterialColor;
   border?: boolean;
   heading?: string;
-};
+}
 
-export const List = Sc.ul<Props>`
+export const List = Sc(FixedSizeList)<IProps>`
   margin: 0px;
   padding: 0px;
-  overflow-y: auto;
-  height: ${({ heading }) => (heading ? "calc(100% - (16px + 15px))" : "100%")};
   background-color: ${({ theme, bgColor }) => theme.colors.material[bgColor]};
   border: ${({ border }) => (border ? "1px solid transparent" : "none")};
 

@@ -26,6 +26,6 @@ const getActiveBundleId = () => {
 };
 
 const getWasUserGuided = (): boolean =>
-  window.localStorage.getItem("wasGuided") === "true" || false;
+  window.localStorage.getItem("wasGuided") === "true";
 
 export { sort, truncate, setNativeValue, getActiveBundleId, getWasUserGuided };

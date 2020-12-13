@@ -42,7 +42,4 @@ const Container = Sc.footer`
   backdrop-filter: blur(5px);
   background-color: ${({ theme }) => theme.colors.material.overlay};
   color: ${({ theme }) => theme.colors.font.base};
-  box-shadow: ${({ theme }) => theme.shadows.footer};
-  border-bottom: ${({ theme }) => `1px solid ${theme.colors.material.overlay}`};
-  border-top: ${({ theme }) => `1px solid ${theme.colors.material.input}`};
 `;

@@ -41,7 +41,6 @@ const Aside = Sc.aside`
   align-items: center;
   z-index: 5;
   color: ${({ theme }) => theme.colors.font.base};
-  box-shadow: ${({ theme }) => theme.shadows.footer};
 `;
 
 const ConfirmButton = Sc.button`

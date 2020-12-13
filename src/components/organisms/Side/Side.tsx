@@ -22,13 +22,23 @@ export const Side = React.memo(
       screenWidth={screenWidth}
     >
       {right && (
-        <Expander onClick={onClick} pointed="right" expanded={expanded} />
+        <Expander
+          id="expander-right"
+          onClick={onClick}
+          pointed="right"
+          expanded={expanded}
+        />
       )}
       <Content left={left} right={right}>
         {children}
       </Content>
       {left && (
-        <Expander onClick={onClick} pointed="left" expanded={expanded} />
+        <Expander
+          id="expander-left"
+          onClick={onClick}
+          pointed="left"
+          expanded={expanded}
+        />
       )}
     </Wrapper>
   )

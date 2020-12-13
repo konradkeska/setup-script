@@ -9,6 +9,7 @@ interface IProps {
 interface ISideProps extends IProps {
   children: React.ReactNode;
   expanded: boolean;
+  id?: string;
   onClick?: () => void;
 }
 

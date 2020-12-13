@@ -47,6 +47,7 @@ export const Panel = React.memo(
       heading={heading}
       panelWidth={panelWidth}
       panelHeight={panelHeight}
+      id={id}
     >
       {heading && <Title text={heading} description={description} />}
       <AutoSizer>

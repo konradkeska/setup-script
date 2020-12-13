@@ -1,4 +1,4 @@
-![setup-script logo](https://user-images.githubusercontent.com/29062983/100010558-b9e25f00-2dd0-11eb-93bf-f7a3934fba16.png)
+![setup-script logo](https://raw.githubusercontent.com/konradkeska/setup-script/master/public/apple-touch-icon.png)
 
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=konradkeska_setup-script&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=konradkeska_setup-script)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkonradkeska%2Fsetup-script.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkonradkeska%2Fsetup-script?ref=badge_shield)
@@ -8,12 +8,6 @@
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
-
-## Preview
-
-![setup-script UI preview](https://user-images.githubusercontent.com/29062983/100010376-78ea4a80-2dd0-11eb-9fe5-72ade4b88d99.png)
-
-### [LIVE DEMO](https://konradkeska.github.io/setup-script/)
 
 ## About
 
@@ -26,6 +20,10 @@ Super-charge your macOS setup today!
 - generate and download `.sh` setup script based on options you pick
 - save and share your results with friends or work colleagues
 - collaborate with others on the creation of perfect setup
+
+## Live demo
+
+### [Click here](https://konradkeska.github.io/setup-script/)
 
 ## Contributors ✨
 

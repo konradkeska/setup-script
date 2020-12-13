@@ -6,23 +6,25 @@ import { Icon } from "components/atoms";
 type Props = {
   expanded: boolean;
   pointed: "left" | "right";
+  id?: string;
   onClick?: () => void;
 };
 
-export const Expander = React.memo(({ onClick, pointed, expanded }: Props) =>
-  pointed === "left" ? (
-    <LeftWrapper>
-      <LeftButton onClick={onClick}>
-        {expanded ? <Icon name="angle-left" /> : <Icon name="angle-right" />}
-      </LeftButton>
-    </LeftWrapper>
-  ) : (
-    <RightWrapper>
-      <RightButton onClick={onClick}>
-        {expanded ? <Icon name="angle-right" /> : <Icon name="angle-left" />}
-      </RightButton>
-    </RightWrapper>
-  )
+export const Expander = React.memo(
+  ({ expanded, pointed, id, onClick }: Props) =>
+    pointed === "left" ? (
+      <LeftWrapper>
+        <LeftButton id={id} onClick={onClick}>
+          {expanded ? <Icon name="angle-left" /> : <Icon name="angle-right" />}
+        </LeftButton>
+      </LeftWrapper>
+    ) : (
+      <RightWrapper>
+        <RightButton id={id} onClick={onClick}>
+          {expanded ? <Icon name="angle-right" /> : <Icon name="angle-left" />}
+        </RightButton>
+      </RightWrapper>
+    )
 );
 
 const Wrapper = Sc.div`

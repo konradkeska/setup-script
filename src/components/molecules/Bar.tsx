@@ -32,7 +32,7 @@ export const Bar = React.memo(
 const Aside = Sc.aside`
   bottom: ${APP.FOOTER_HEIGHT}px;
   border-top: ${({ theme }) => theme.colors.material.side};
-  background-color: ${({ theme }) => theme.colors.material.overlay};
+  background-color: ${({ theme }) => theme.colors.material.inactive};
   width: 100%;
   padding: ${({ theme }) => `${theme.paddings.xs}px 0px`};
   position: fixed;

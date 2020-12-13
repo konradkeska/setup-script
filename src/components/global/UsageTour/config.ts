@@ -49,7 +49,7 @@ export const getSteps = (): ReactourStep[] => [
   {
     selector: "#script-mode-button",
     content: "You can go into script mode.",
-    action: (node: HTMLInputElement) => {
+    action: (node: HTMLButtonElement) => {
       node.dispatchEvent(new Event("click", { bubbles: true }));
     },
   },
@@ -60,7 +60,22 @@ export const getSteps = (): ReactourStep[] => [
   {
     selector: "#editor-mode-button",
     content: "Aaaand go back to the edit mode.",
-    action: (node: HTMLInputElement) => {
+    action: (node: HTMLButtonElement) => {
+      node.dispatchEvent(new Event("click", { bubbles: true }));
+    },
+  },
+  {
+    selector: "#expander-right",
+    content: "There is also bundles section.",
+    action: (node: HTMLButtonElement) => {
+      node.dispatchEvent(new Event("click", { bubbles: true }));
+    },
+  },
+  {
+    selector: "#bundles",
+    content:
+      "I have prepared some, but there are not many now... I am open to PR's. 😄",
+    action: (node: HTMLButtonElement) => {
       node.dispatchEvent(new Event("click", { bubbles: true }));
     },
   },
@@ -72,7 +87,7 @@ export const getSteps = (): ReactourStep[] => [
   {
     selector: "#save-button",
     content:
-      "Or.. this button if you feel like sharing your work with someone.",
+      "Or.. this button if you feel like sharing your work with someone or saving it for future purpose.",
   },
   {
     selector: "#root",

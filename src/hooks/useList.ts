@@ -77,7 +77,7 @@ export function useList([loader, type]: Props): Return {
   const removeItems = useCallback(
     (records: Soft[]) => () => {
       const removableItems = toRemovableItems([records, addedList]);
-      const addedListWithoutItems = toListWithout([addedList, removableItems]);
+      const addedListWithoutItems = toListWithout([removableItems, addedList]);
       setAddedList(addedListWithoutItems);
       setList([...removableItems, ...list]);
     },

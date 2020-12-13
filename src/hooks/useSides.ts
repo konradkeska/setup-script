@@ -9,25 +9,25 @@ export function useSides() {
 
   const isMobileResolution = useMediaQuery({ maxWidth: RWD.SM - 1 });
 
-  const collapseRightIsNeeded = useMemo(
+  const isCollapseRightNeeded = useMemo(
     () => isMobileResolution && isRightExpanded && !isLeftExpanded,
     [isMobileResolution, isRightExpanded, isLeftExpanded]
   );
 
-  const collapseLeftIsNeeded = useMemo(
+  const isCollapseLeftNeeded = useMemo(
     () => isMobileResolution && isLeftExpanded && !isRightExpanded,
     [isMobileResolution, isLeftExpanded, isRightExpanded]
   );
 
   const toggleLeft = useCallback(() => {
-    if (collapseRightIsNeeded) setRightExpanded(false);
+    if (isCollapseRightNeeded) setRightExpanded(false);
     setLeftExpanded(!isLeftExpanded);
-  }, [collapseRightIsNeeded, isLeftExpanded]);
+  }, [isCollapseRightNeeded, isLeftExpanded]);
 
   const toggleRight = useCallback(() => {
-    if (collapseLeftIsNeeded) setLeftExpanded(false);
+    if (isCollapseLeftNeeded) setLeftExpanded(false);
     setRightExpanded(!isRightExpanded);
-  }, [collapseLeftIsNeeded, isRightExpanded]);
+  }, [isCollapseLeftNeeded, isRightExpanded]);
 
   const memoizedReturn = useMemo(
     () => ({

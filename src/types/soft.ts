@@ -1,9 +1,16 @@
+import { DeepReadonly } from "ts-essentials";
+
 export enum SoftType {
   CASK = "cask",
   FORMULA = "formula",
 }
 
-export type Soft = {
+export enum Preview {
+  EDITOR = "editor",
+  SCRIPT = "script",
+}
+
+export type Soft = DeepReadonly<{
   artifacts?: string[];
   depends_on?: Dependson;
   homepage?: string | string[];
@@ -19,28 +26,28 @@ export type Soft = {
   conflicts_with?: Conflictswith;
   container?: string;
   desc?: string;
-};
+}>;
 
 export type SoftApiResponse = Omit<Soft, "name" | "type"> & {
   name: string | string[];
 };
 
-export type Details = {
+export type Details = DeepReadonly<{
   name: string;
   desc: string;
   homepage: string;
   installs: number;
   version: string;
   conflicts: number;
-};
+}>;
 
-export type Bundle = {
+export type Bundle = DeepReadonly<{
   name: string;
   casks?: string[];
   formulas?: string[];
-};
+}>;
 
-export type CaskDetails = {
+export type CaskDetails = DeepReadonly<{
   token: string;
   name: string[];
   desc: string;
@@ -57,9 +64,9 @@ export type CaskDetails = {
   auto_updates?: boolean;
   analytics: Analytics;
   generated_date: string;
-};
+}>;
 
-export type FormulaDetails = {
+export type FormulaDetails = DeepReadonly<{
   name: string;
   full_name: string;
   oldname?: string;
@@ -92,7 +99,7 @@ export type FormulaDetails = {
   disabled: boolean;
   analytics: Analytics;
   generated_date: string;
-};
+}>;
 
 type Dependson = {
   macos?: Macos;

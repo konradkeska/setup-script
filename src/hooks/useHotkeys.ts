@@ -6,10 +6,12 @@ type Hotkeys = {
   event?: "keydown" | "keypress" | "keyup";
 };
 
-export function useHotkeys(
-  { getHotkeys, modifier, event = "keydown" }: Hotkeys,
-  dependencies: unknown[]
-) {
+type Props = [hotkeys: Hotkeys, dependencies: unknown[]];
+
+export function useHotkeys([
+  { getHotkeys, modifier, event = "keydown" },
+  dependencies,
+]: Props) {
   const hotkeys = useMemo(getHotkeys, [getHotkeys, ...dependencies]);
 
   const onCallback = useCallback(

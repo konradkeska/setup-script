@@ -8,7 +8,13 @@ type Props = {
   sortFunc?: (a: Soft, b: Soft) => number;
 };
 
-export function useSearch({ records, sortFunc = byName }: Props): Return {
+type Return = [
+  query: string,
+  setQuery: React.Dispatch<React.SetStateAction<string>>,
+  sortedResults: Soft[]
+];
+
+export function useSearch({ records, sortFunc = byNameAsc }: Props): Return {
   const [query, setQuery] = useState("");
 
   const results = toMatchingRecords(query, records);
@@ -23,7 +29,5 @@ export function useSearch({ records, sortFunc = byName }: Props): Return {
   return memoizedReturn;
 }
 
-type Return = [string, React.Dispatch<React.SetStateAction<string>>, Soft[]];
-
-const byName = (a: Soft, b: Soft) =>
+const byNameAsc = (a: Soft, b: Soft) =>
   a.name.localeCompare(b.name, "en", { sensitivity: "base" });

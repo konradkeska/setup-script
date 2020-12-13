@@ -1,5 +1,5 @@
 export { useBrewSoft } from "./useBrewSoft";
-export { useDisplayMode } from "./useDisplayMode";
+export { usePreview } from "./usePreview";
 export { useHotkeys } from "./useHotkeys";
 export { useSearch } from "./useSearch";
 export { useSides } from "./useSides";

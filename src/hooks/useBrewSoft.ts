@@ -38,14 +38,14 @@ export function useBrewSoft() {
 
   const onAdd = useCallback(
     (record: Soft) => {
-      return getCallbackMap([addCask, addFormula])[toSoftType(record)](record);
+      return callbackMap([addCask, addFormula])[toSoftType(record)](record);
     },
     [addCask, addFormula]
   );
 
   const onRemove = useCallback(
     (record: Soft) => {
-      return getCallbackMap([removeCask, removeFormula])[toSoftType(record)](
+      return callbackMap([removeCask, removeFormula])[toSoftType(record)](
         record
       );
     },
@@ -54,20 +54,20 @@ export function useBrewSoft() {
 
   const onMultiAdd = useCallback(
     (records: Soft[], type: SoftType) => {
-      return getCallbackMap([addCasks, addFormulas])[type](records)();
+      return callbackMap([addCasks, addFormulas])[type](records)();
     },
     [addCasks, addFormulas]
   );
 
   const onMultiRemove = useCallback(
     (records: Soft[], type: SoftType) => {
-      return getCallbackMap([removeCasks, removeFormulas])[type](records)();
+      return callbackMap([removeCasks, removeFormulas])[type](records)();
     },
     [removeCasks, removeFormulas]
   );
 
   const getAllCasks = useCallback(
-    (tokens?: string[]): Soft[] => {
+    (tokens?: readonly string[]): Soft[] => {
       return [...casks, ...addedCasks].filter(({ token, name }: Soft) =>
         tokens?.includes(token || name || "")
       );
@@ -76,7 +76,7 @@ export function useBrewSoft() {
   );
 
   const getAllFormulas = useCallback(
-    (names?: string[]): Soft[] => {
+    (names?: readonly string[]): Soft[] => {
       return [...formulas, ...addedFormulas].filter(({ name }: Soft) =>
         names?.includes(name || "")
       );
@@ -117,7 +117,7 @@ export function useBrewSoft() {
   );
 
   const getSoftPackagesFrom = useCallback(
-    (bundle: Bundle): [Soft[], Soft[]] => {
+    (bundle: Bundle): [casksBundle: Soft[], formulasBundle: Soft[]] => {
       const casksBundle = getAllCasks(bundle.casks);
       const formulasBundle = getAllFormulas(bundle.formulas);
       return [casksBundle, formulasBundle];
@@ -207,10 +207,11 @@ export function useBrewSoft() {
   return memoizedReturn;
 }
 
-const getCallbackMap = <T>([caskCallback, formulaCallback]: [
+const callbackMap = <T>([caskCallback, formulaCallback]: [
   (arg: T) => () => void,
   (arg: T) => () => void
-]) => ({
-  [SoftType.CASK]: caskCallback,
-  [SoftType.FORMULA]: formulaCallback,
-});
+]) =>
+  ({
+    [SoftType.CASK]: caskCallback,
+    [SoftType.FORMULA]: formulaCallback,
+  } as const);

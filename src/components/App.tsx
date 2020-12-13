@@ -4,14 +4,14 @@ import { useMediaQuery } from "react-responsive";
 import { MinMd, MinSm, RWD } from "utils";
 import {
   useBrewSoft,
-  useDisplayMode,
+  usePreview,
   useHotkeys,
   useSearch,
   useSides,
   useTheme,
 } from "hooks";
 import { Action, MaterialColor } from "types";
-import { DisplayMode } from "types";
+import { Preview } from "types";
 
 import { APP, FEATURED_BUNDLES } from "config";
 
@@ -22,7 +22,7 @@ import { View } from "./templates";
 
 function App() {
   const [mode, theme, switchTheme] = useTheme();
-  const [displayMode, switchToEditor, switchToScript] = useDisplayMode();
+  const [preview, toggleEditor, toggleScript] = usePreview();
 
   const {
     details,
@@ -53,7 +53,7 @@ function App() {
     setLeftExpanded(false);
   }, [setQuery, setLeftExpanded]);
 
-  useHotkeys(
+  useHotkeys([
     {
       getHotkeys: () => ({
         ArrowLeft: toggleLeft,
@@ -61,19 +61,19 @@ function App() {
         Escape: onQueryReset,
       }),
     },
-    [toggleLeft, toggleRight, onQueryReset]
-  );
+    [toggleLeft, toggleRight, onQueryReset],
+  ]);
 
-  useHotkeys(
+  useHotkeys([
     {
       getHotkeys: () => ({
-        KeyE: switchToEditor,
-        KeyS: switchToScript,
+        KeyE: toggleEditor,
+        KeyS: toggleScript,
       }),
       modifier: "shiftKey",
     },
-    [switchToEditor, switchToScript]
-  );
+    [toggleEditor, toggleScript],
+  ]);
 
   const onMobileDevice = useMediaQuery({ maxWidth: RWD.SM - 1 });
 
@@ -94,18 +94,18 @@ function App() {
             <Tab
               id="editor-mode-button"
               aria-label="switch to edit mode"
-              onClick={switchToEditor}
-              active={displayMode === DisplayMode.EDITOR}
-              disabled={displayMode === DisplayMode.EDITOR}
+              onClick={toggleEditor}
+              active={preview === Preview.EDITOR}
+              disabled={preview === Preview.EDITOR}
             >
               <Icon name="tools" />
             </Tab>
             <Tab
               id="script-mode-button"
               aria-label="switch to script preview mode"
-              onClick={switchToScript}
-              active={displayMode === DisplayMode.SCRIPT}
-              disabled={displayMode === DisplayMode.SCRIPT}
+              onClick={toggleScript}
+              active={preview === Preview.SCRIPT}
+              disabled={preview === Preview.SCRIPT}
             >
               <Icon name="code" />
             </Tab>
@@ -147,7 +147,7 @@ function App() {
         </View.Sides.Right>
       </View.Sides>
       <View.Main>
-        {displayMode === DisplayMode.EDITOR ? (
+        {preview === Preview.EDITOR ? (
           <>
             <Panel
               id="added-formulas"

@@ -60,6 +60,8 @@
     "@types/react-virtualized-auto-sizer": "^1.0.0",
     "@types/react-window": "^1.8.2",
     "@types/reactour": "^1.17.1",
-    "@types/styled-components": "^5.1.4"
+    "@types/styled-components": "^5.1.4",
+    "ts-essentials": "^7.0.1",
+    "ts-toolbelt": "^8.0.7"
   }
 }

@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import { getWasUserGuided } from "utils";
 
 type Return = {
@@ -28,16 +28,11 @@ export function useTour(): Return {
     setGuided();
   }, [setGuided]);
 
-  const memoizedReturn: Return = useMemo(
-    () => ({
-      isTourOpen,
-      wasUserGuided,
-      cancelTour: setGuided,
-      startTour,
-      onRequestClose,
-    }),
-    [isTourOpen, wasUserGuided, setGuided, startTour, onRequestClose]
-  );
-
-  return memoizedReturn;
+  return {
+    isTourOpen,
+    wasUserGuided,
+    cancelTour: setGuided,
+    startTour,
+    onRequestClose,
+  };
 }

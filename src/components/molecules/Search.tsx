@@ -18,14 +18,14 @@ export const Search = React.memo(
       if (query.length < 1) searchInputRef.current?.focus();
     }, [query]);
 
-    useHotkeys(
+    useHotkeys([
       {
         getHotkeys: () => ({
           Backspace: () => searchInputRef.current?.focus(),
         }),
       },
-      [searchInputRef]
-    );
+      [searchInputRef],
+    ]);
 
     const onQueryChange = useCallback(
       (e: React.ChangeEvent<HTMLInputElement>) => {

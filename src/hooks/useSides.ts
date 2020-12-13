@@ -7,14 +7,14 @@ export function useSides() {
   const [isLeftExpanded, setLeftExpanded] = useState(false);
   const [isRightExpanded, setRightExpanded] = useState(false);
 
-  const isMobileResolution: boolean = useMediaQuery({ maxWidth: RWD.SM - 1 });
+  const isMobileResolution = useMediaQuery({ maxWidth: RWD.SM - 1 });
 
-  const collapseRightIsNeeded: boolean = useMemo(
+  const collapseRightIsNeeded = useMemo(
     () => isMobileResolution && isRightExpanded && !isLeftExpanded,
     [isMobileResolution, isRightExpanded, isLeftExpanded]
   );
 
-  const collapseLeftIsNeeded: boolean = useMemo(
+  const collapseLeftIsNeeded = useMemo(
     () => isMobileResolution && isLeftExpanded && !isRightExpanded,
     [isMobileResolution, isLeftExpanded, isRightExpanded]
   );

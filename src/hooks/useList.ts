@@ -13,13 +13,13 @@ import {
 type Props = [() => Promise<AxiosResponse<Soft[]>>, SoftType];
 
 type Return = [
-  Soft | null,
-  Soft[],
-  Soft[],
-  (record: Soft) => () => void,
-  (record: Soft) => () => void,
-  (records: Soft[]) => () => void,
-  (records: Soft[]) => () => void
+  focusedSoft: Soft | null,
+  list: Soft[],
+  addedList: Soft[],
+  addItem: (record: Soft) => () => void,
+  removeItem: (record: Soft) => () => void,
+  addItems: (records: Soft[]) => () => void,
+  removeItems: (records: Soft[]) => () => void
 ];
 
 export function useList([loader, type]: Props): Return {

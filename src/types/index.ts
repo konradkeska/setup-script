@@ -1,6 +1,4 @@
-export { DisplayMode } from "./config";
-
-export { SoftType } from "./soft";
+export { SoftType, Preview } from "./soft";
 export type {
   Soft,
   SoftApiResponse,

@@ -6,7 +6,11 @@ import { THEMES } from "config";
 
 const DEFAULT_THEME: Theme = Theme.DARK;
 
-type Return = [Theme, DefaultTheme, () => void];
+type Return = [
+  initialTheme: Theme,
+  currentTheme: DefaultTheme,
+  switchTheme: () => void
+];
 
 export function useTheme(): Return {
   const initialTheme: Theme =

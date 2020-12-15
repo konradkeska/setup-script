@@ -1,10 +1,10 @@
 import React from "react";
+import Sc from "styled-components";
 
 import { Soft } from "types";
 import { APP } from "config";
 
-import { Wrapper } from "./Wrapper";
-import { Preview } from "./Preview";
+import { Code } from "components/atoms";
 
 type Props = {
   casks: Soft[];
@@ -62,3 +62,29 @@ const BrewRecord = React.memo(({ token }: BrewRecordProps) => (
     <br />
   </span>
 ));
+
+export const Wrapper = Sc.div`
+  width: 100%;
+  height: 100%;
+  padding: ${({ theme }) =>
+    `0px ${theme.paddings.sm}px ${theme.paddings.md}px ${theme.paddings.sm}px`};
+  overflow-x: auto;
+`;
+
+export const Preview = Sc(Code)`
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+  border-radius: 4px;
+  background-color: ${({ theme }) => theme.colors.material.input};
+  border: ${({ theme }) => `1px solid ${theme.colors.material.overlay}`};
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow-y: auto;
+
+  &:hover {
+    user-select: unset;
+  }
+`;

@@ -16,8 +16,8 @@ import { Preview } from "types";
 import { APP, FEATURED_BUNDLES } from "config";
 
 import { Button, Code, Icon, Link, Row, Tab } from "./atoms";
-import { Brand, Search } from "./molecules";
-import { Panel, Script } from "./organisms";
+import { Brand, Search, Script } from "./molecules";
+import { Panel } from "./organisms";
 import { View } from "./templates";
 
 function App() {

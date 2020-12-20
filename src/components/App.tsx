@@ -116,8 +116,7 @@ function App() {
             id="save-button"
             aria-label="save script"
             onClick={handleBundleSave}
-            // disabled={!addedCasks.length && !addedFormulas.length}
-            disabled
+            disabled={!addedCasks.length && !addedFormulas.length}
             mr
           >
             <Icon name="save" />

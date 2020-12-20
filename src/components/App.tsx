@@ -1,7 +1,8 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { useMediaQuery } from "react-responsive";
+import ReactGA from "react-ga";
 
-import { MinMd, MinSm, RWD } from "utils";
+import { getActiveBundleId, MinMd, MinSm, RWD } from "utils";
 import {
   useBrewSoft,
   usePreview,
@@ -76,6 +77,12 @@ function App() {
   ]);
 
   const onMobileDevice = useMediaQuery({ maxWidth: RWD.SM - 1 });
+
+  useEffect(() => {
+    const page = getActiveBundleId() ? "Details" : "Creator";
+    ReactGA.set({ page });
+    ReactGA.pageview(page);
+  }, []);
 
   return (
     <View theme={theme}>

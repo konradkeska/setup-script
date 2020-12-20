@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import ReactGA from "react-ga";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 import FullStory from "react-fullstory";
@@ -8,6 +9,8 @@ import "firebase/analytics";
 
 import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
+
+ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_API_KEY!);
 
 Sentry.init({
   dsn: process.env.SENTRY_DSN,

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { History } from "history";
 
 import { Bundle } from "types";
 import { APP } from "config";
@@ -26,10 +27,10 @@ const loadBundle = async (id: string) => {
   }
 };
 
-const addBundle = async (bundle: Bundle) => {
+const addBundle = async (bundle: Bundle, history: History) => {
   try {
     const { data } = await postBundle(bundle);
-    window.location.pathname = `/${data.name}`;
+    history.push(`/${data.name}`);
   } catch (error) {
     console.error(error);
   }

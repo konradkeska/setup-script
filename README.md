@@ -2,6 +2,7 @@
 
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=konradkeska_setup-script&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=konradkeska_setup-script)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkonradkeska%2Fsetup-script.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkonradkeska%2Fsetup-script?ref=badge_shield)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/365d9e14-74f6-4ab4-b9e6-8121f80f829e/deploy-status)](https://app.netlify.com/sites/fervent-khorana-9f68bb/deploys)
 [![Cypress.io](https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg)](https://www.cypress.io/)
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/konradkeska/setup-script/blob/master/LICENSE)
 
@@ -21,9 +22,9 @@ Super-charge your macOS setup today!
 - save and share your results with friends or work colleagues
 - collaborate with others on the creation of perfect setup
 
-## Live demo
+## Live
 
-### [Click here](https://konradkeska.github.io/setup-script/)
+### [Click here](https://www.setup-script.com/)
 
 ## Contributors ✨
 

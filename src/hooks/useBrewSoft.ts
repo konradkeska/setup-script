@@ -159,12 +159,12 @@ export function useBrewSoft() {
   );
 
   const loadData = useCallback(async () => {
-    const activeBundleId = params?.id;
-    const initBundle = activeBundleId && (await loadBundle(activeBundleId));
-    if (initBundle) {
-      setInitBundle(initBundle);
+    const bundle = params?.id && (await loadBundle(params.id));
+    if (bundle) {
+      setInitBundle(bundle);
     }
-  }, [params?.id]);
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     if (formulas.length && casks.length) {

@@ -11,7 +11,7 @@ import {
   useSides,
   useTheme,
 } from "hooks";
-import { Action, MaterialColor } from "types";
+import { Action, FontColor, MaterialColor } from "types";
 import { Preview } from "types";
 
 import { APP, FEATURED_BUNDLES } from "config";

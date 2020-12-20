@@ -1,4 +1,7 @@
-const sort = <T>(arr: T[], callback: (a: T, b: T) => number) =>
+import React from "react";
+import { Link } from "components/atoms";
+
+const sort = <T,>(arr: T[], callback: (a: T, b: T) => number) =>
   [...arr].sort(callback);
 
 const truncate = (value: string, limit = 10) =>
@@ -23,4 +26,26 @@ const setNativeValue = (element: HTMLElement, value: string | number) => {
 const getWasUserGuided = (): boolean =>
   window.localStorage.getItem("wasGuided") === "true";
 
-export { sort, truncate, setNativeValue, getWasUserGuided };
+const getBundleCreatedToast = (id: string) => (
+  <div>
+    <p>You can access / share your bundle with this link (current URL):</p>
+    <Link href={`https://www.setup-script.com/${id}`} withoutMargin>
+      https://www.setup-script.com/{id}
+    </Link>
+    <p>
+      <b>IMPORTANT:</b> Save it somewhere! If you lose it you won't be able to
+      retrieve it.
+    </p>
+    <p>
+      <b>NOTICE:</b> Everyone with access to the link can modify it.
+    </p>
+  </div>
+);
+
+export {
+  sort,
+  truncate,
+  setNativeValue,
+  getWasUserGuided,
+  getBundleCreatedToast,
+};

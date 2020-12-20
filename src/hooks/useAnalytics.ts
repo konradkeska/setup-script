@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import ReactGA from "react-ga";
-import { useLocation, useParams } from "react-router-dom";
 
 export function useAnalytics() {
   const [initialized, setInitialized] = useState(false);
   const location = useLocation();
-  const params = useParams<{ id?: string }>();
 
   useEffect(() => {
     ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID!);
@@ -14,9 +13,8 @@ export function useAnalytics() {
 
   useEffect(() => {
     if (initialized) {
-      const page = params?.id ? "Details" : "Creator";
-      ReactGA.set({ page });
-      ReactGA.pageview(page);
+      ReactGA.set({ page: location.pathname });
+      ReactGA.pageview(location.pathname);
     }
-  }, [initialized, location, params?.id]);
+  }, [initialized, location]);
 }

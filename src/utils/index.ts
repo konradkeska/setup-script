@@ -1,4 +1,10 @@
-export { sort, truncate, setNativeValue, getWasUserGuided } from "./helpers";
+export {
+  sort,
+  truncate,
+  setNativeValue,
+  getWasUserGuided,
+  getBundleCreatedToast,
+} from "./helpers";
 
 export {
   toColorString,

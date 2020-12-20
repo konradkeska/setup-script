@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import * as Sentry from "@sentry/react";
+import Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
+import FullStory from "react-fullstory";
 import firebase from "firebase/app";
 import "firebase/analytics";
 
 import App from "./components/App";
-// import reportWebVitals from "./reportWebVitals";
+import reportWebVitals from "./reportWebVitals";
 
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
@@ -27,9 +28,12 @@ firebase.initializeApp({
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <>
+      <FullStory org={process.env.REACT_APP_FULLSTORY_ORG_ID!} />
+      <App />
+    </>
   </React.StrictMode>,
   document.getElementById("root")
 );
 
-// reportWebVitals();
+reportWebVitals();

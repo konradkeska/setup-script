@@ -13,7 +13,7 @@ import reportWebVitals from "./reportWebVitals";
 ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_API_KEY!);
 
 Sentry.init({
-  dsn: process.env.SENTRY_DSN,
+  dsn: process.env.REACT_APP_SENTRY_DSN,
   integrations: [new Integrations.BrowserTracing()],
   tracesSampleRate: 1.0,
 });

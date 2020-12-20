@@ -1,3 +1,4 @@
+export { useAnalytics } from "./useAnalytics";
 export { useBrewSoft } from "./useBrewSoft";
 export { usePreview } from "./usePreview";
 export { useHotkeys } from "./useHotkeys";

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
-import ReactGA from "react-ga";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 import FullStory from "react-fullstory";
@@ -9,8 +10,6 @@ import "firebase/analytics";
 
 import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
-
-ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_API_KEY!);
 
 Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN,
@@ -31,10 +30,15 @@ firebase.initializeApp({
 
 ReactDOM.render(
   <React.StrictMode>
-    <>
+    <BrowserRouter>
       <FullStory org={process.env.REACT_APP_FULLSTORY_ORG_ID!} />
-      <App />
-    </>
+      <Suspense fallback={null}>
+        <Switch>
+          <Route exact={true} path="/" component={App} />
+          <Route path="/:id" component={App} />
+        </Switch>
+      </Suspense>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );

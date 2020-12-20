@@ -1,15 +1,19 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useHistory, useParams } from "react-router-dom";
 
 import { getCasks, getFormulas } from "services/brew";
 import { addBundle, updateBundle, loadBundle } from "services/bundle";
 import { Action } from "types";
 import { Soft, SoftType, Bundle } from "types";
-import { getActiveBundleId, toSoftId, toSoftType } from "utils";
+import { toSoftId, toSoftType } from "utils";
 
 import { useList } from "./useList";
 import { useDetails } from "./useDetails";
 
 export function useBrewSoft() {
+  const history = useHistory();
+  const params = useParams<{ id?: string }>();
+
   const [isBundleLoaded, setBundleLoaded] = useState(false);
   const [isBrewDataLoaded, setBrewDataLoaded] = useState(false);
   const [initBundle, setInitBundle] = useState<Bundle | null>(null);
@@ -135,11 +139,11 @@ export function useBrewSoft() {
   );
 
   const handleBundleSave = useCallback(() => {
-    const activeBundleId = getActiveBundleId();
+    const activeBundleId = params?.id;
     return activeBundleId
       ? updateBundle(activeBundleId, activeBundleBody)
-      : addBundle(activeBundleBody);
-  }, [activeBundleBody]);
+      : addBundle(activeBundleBody, history);
+  }, [activeBundleBody, history, params?.id]);
 
   const handleBundleLoad = useCallback(
     (bundle: Bundle) => {
@@ -155,12 +159,12 @@ export function useBrewSoft() {
   );
 
   const loadData = useCallback(async () => {
-    const activeBundleId = getActiveBundleId();
-    const initBundle = await loadBundle(activeBundleId);
+    const activeBundleId = params?.id;
+    const initBundle = activeBundleId && (await loadBundle(activeBundleId));
     if (initBundle) {
       setInitBundle(initBundle);
     }
-  }, []);
+  }, [params?.id]);
 
   useEffect(() => {
     if (formulas.length && casks.length) {
